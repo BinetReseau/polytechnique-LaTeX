@@ -1,0 +1,251 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{polytechnique}[2015/01/29 v1.0, standard scientific documents layout for Ecole polytechnique.]
+
+%=======================================================================================
+%Petit historique de la creation du package
+%=======================================================================================
+%Le binet TypographiX a ete refonde par la promotion 2013 durant son tronc commun, et parmi
+%ses projets se trouvait celui de faciliter la vie des eleves pour rediger leurs rapports
+%en tout genre. Ainsi est venue l'idee d'un package polytechnique qui donnerait une mise en
+%page adaptee a la nouvelle charte graphique de l'X cles en main. La maquette des pages et 
+%surtout de la page de couverture a ete faire par une Mme Gaela Riou, infographiste de la 
+%DIRCOM de l'X. L'auteur de ce package est Denis MERIGOUX et il a ete code fin janvier 2015.
+
+%=======================================================================================
+%Declaration des options.
+%Le code qui s'y trouve est execute plus tard (toutes les commandes ont deja ete definies)
+%=======================================================================================
+\DeclareOption{a4paper}{%Passe l'option a4paper declaree au package geometry pour action
+	\PassOptionsToPackage{a4paper}{geometry}
+}
+\DeclareOption{redsections}{%Si activee, modifie le formatage des titres de section et sous-sections.
+	\AtEndOfPackage{%Voir la documentation du package titlesec pour plus d'explications
+		\titleformat{\section}[block]{\color{rougepoly}\LARGE\scshape\filcenter}{}{0em}{}[
+			\vspace*{-0.5\baselineskip}\includegraphics{\polyfiletlongrouge}
+		]
+		\titleformat{\subsection}[hang]{\color{bleuclairpoly}\Large\scshape}{}{0em}{
+			\raisebox{0.15\baselineskip}{\includegraphics{\polyfiletcourtbleuclair}}
+		}[]
+	}
+}
+\DeclareOption{shorttitle}{%Option activee par defaut, titre avec logo vertical sur 1/2 page
+	\AtBeginDocument{
+		\renewcommand*{\maketitle}{
+			\thispagestyle{plain}
+			\vspace*{\distancetitrelogo}
+			%Bloc de gauche (auteurs)
+			\noindent
+			\begin{minipage}[b]{\largeurminipage}\polyauthorsave\end{minipage}%La minipage permet les sauts de ligne pour avoir plusieurs auteurs
+			\hspace*{\fill}
+			%Centre (logo)
+			\includegraphics[width=\largeurlogovert]{\polylogovert}\hspace*{\fill}
+			%Bloc de droite (date)
+			\begin{minipage}[b]{\largeurminipage}\flushright\polydatesave\end{minipage}%Idem ci-dessus
+			\\[\separationlogotrait]
+			%Deux filets horizontaux, le titre et le sous-titre sont au milieu
+			\begin{center}
+				\textcolor{bleupoly}{\rule{\textwidth}{\epaisseurtrait}}
+				\\\color{bleupoly}\Huge\scshape\MakeUppercaseWithNewline{\polytitresave}%Le titre
+				\ifthenelse{\boolean{subtitle}}{%Si il y a un sous-titre
+					\\[\separationlignestitre]
+					\Large\upshape\polysoustitresave\\\normalsize
+				}{%S'il n'y en a pas
+					\\\normalsize
+				}
+				\textcolor{bleupoly}{\rule{\textwidth}{\epaisseurtrait}}
+			\end{center}
+			\vspace*{\distancetitrecorps}
+		}
+}
+}
+\DeclareOption{coverpage}{%Option qui active une page de garde où le titre prend toute la page
+	\AtBeginDocument{
+		\renewcommand*{\maketitle}{
+			%On met les armes de l'Ecole en arriere-plan
+			\noindent\makebox[\textwidth][c]{%
+  			\raisebox{-\totalheight}[0pt][0pt]{%
+    		\includegraphics[height=\hauteurlogopage]{\polyarmes}}}%
+			\vspace*{0.125\textheight}
+			\begin{center}
+				%Le titre
+				\Huge\sffamily\bfseries\color{bleupoly}\MakeUppercaseWithNewline{\polytitresave}\\
+				\vspace*{0.2\textheight}
+				%Le sous-titre
+				\LARGE\polysoustitresave\\
+				\vspace*{0.15\textheight}
+				%La date
+				\large\mdseries\polydatesave\\[-0.5\baselineskip]
+				\includegraphics{\polyfiletcourtbleu}\\
+				%Les auteurs
+				\rmfamily\polyauthorsave\\[\fill]
+				%Le(s) logo(s) en bas de la page
+				$\;$\polylogosup{}
+				\vspace*{-0.5\margebas}%On rabote la marge basse habituelle
+			\end{center}
+			\thispagestyle{empty}
+			\clearpage
+			\setcounter{page}{1}
+		}
+	}
+}
+\DeclareOption*{%Toute autre option sera donnee en argument au package geometry (si differentes tailles de papier)
+	\PassOptionsToPackage{\CurrentOption}{geometry}
+}
+\ExecuteOptions{a4paper,shorttitle}%Par defaut, papier A4 et petit titre
+\ProcessOptions\relax
+
+%=======================================================================================
+%Packages requis
+%=======================================================================================
+\RequirePackage{ifthen}%Pour la structure conditionnelle
+\RequirePackage{ifpdf}%Pour detecter le mode de compilation
+\RequirePackage[pagestyles]{titlesec}%Pour les en-tetes - pieds de page
+\RequirePackage{graphicx}%Pour les logos inseres
+\RequirePackage{geometry}%Pour les marges
+\RequirePackage{calc}%Pour faire des operations sur les longueurs
+\RequirePackage{color}%Pour mettre les elements en bleu
+
+%=======================================================================================
+%Couleurs
+%Les valeurs RGB proviennent de la charte graphique de l'X (2014)
+%=======================================================================================
+\definecolor{bleupoly}{RGB}{0,62,92}
+\definecolor{rougepoly}{RGB}{169,32,33}
+\definecolor{bleuclairpoly}{RGB}{0,104,128}
+
+%=======================================================================================
+%Inclusion des logos
+%Chaque chemin vers un logo est defini par une commande speciale
+%=======================================================================================
+\ifpdf%Si la compilation se fait avec pdflatex
+	\newcommand{\polyfiletlongrouge}{filetlongrouge.pdf}
+	\newcommand{\polyfiletcourtbleuclair}{filetcourtbleuclair.pdf}
+	\newcommand{\polyfiletcourtbleu}{filetcourtbleu.pdf}
+	\newcommand{\polylogovert}{logovert.pdf}
+	\newcommand{\polylogohori}{logohori.pdf}
+	\newcommand{\polyarmes}{armes.pdf}
+\else%Si la compilation se fait avec latex, xetex ou autres
+	\newcommand{\polyfiletlongrouge}{filetlongrouge.eps}
+	\newcommand{\polyfiletcourtbleuclair}{filetcourtbleuclair.eps}
+	\newcommand{\polyfiletcourtbleu}{filetcourtbleu.eps}
+	\newcommand{\polylogovert}{logovert.eps}
+	\newcommand{\polylogohori}{logohori.eps}
+	\newcommand{\polyarmes}{armes.eps}
+\fi
+
+%=======================================================================================
+%Longeurs
+%Celles-ci sont definies manuellement, le design de la page a ete fait par la Dircom
+%=======================================================================================
+%Marges
+\newlength{\margehaut}\setlength{\margehaut}{40mm}
+\newlength{\hauteurentete}\setlength{\hauteurentete}{27mm}
+\newlength{\separationentete}\setlength{\separationentete}{12mm}
+\newlength{\margecote}\setlength{\margecote}{20mm}
+\newlength{\margebas}\setlength{\margebas}{35mm}
+\newlength{\separationpied}\setlength{\separationpied}{17.5mm}
+%Taille des logos
+\newlength{\hauteurlogohori}\setlength{\hauteurlogohori}{15mm}
+\newlength{\hauteurlogovert}\setlength{\hauteurlogovert}{40mm}
+%Disposition de la page de titre
+\newlength{\separationtitre}\setlength{\separationtitre}{15mm}
+\newlength{\epaisseurtrait}\setlength{\epaisseurtrait}{1pt}
+\newlength{\separationlignestitre}\setlength{\separationlignestitre}{3mm}
+\newlength{\separationtitrecorps}\setlength{\separationtitrecorps}{15mm}
+\newlength{\hauteurlogopage}\setlength{\hauteurlogopage}{0.6\textheight}%La hauteur de l'image armes.pdf est fausse, 1.5cm doit donner a peu pres 10 cm (bug ?)
+%En-tetes
+\newlength{\separationentetelogo}\setlength{\separationentetelogo}{20mm}
+
+%=======================================================================================
+%Longueurs (suite)
+%Celles-là sont déduites des longueurs definies au dessus.
+%=======================================================================================
+%Taille des logos
+\newlength{\largeurlogohori}\setlength{\largeurlogohori}{\hauteurlogohori*\real{1.859}}%1.859 est le ration hauteur/largeur du logo vertical de l'X.
+\newlength{\largeurlogovert}\setlength{\largeurlogovert}{\hauteurlogovert/\real{1.361}}%1.361 est le ration hauteur/largeur du logo vertical de l'X.
+%Disposition des titres
+\newlength{\distancetitrelogo}\setlength{\distancetitrelogo}{\separationtitre-\margehaut}%Hauteur reglee pour qu'il y ait 10mm entre le haut de la page et le haut du logo.
+\newlength{\separationlogotrait}\setlength{\separationlogotrait}{-\baselineskip*2+10mm}
+\newlength{\largeurminipage}\setlength{\largeurminipage}{(\textwidth-\largeurlogovert)/\real{2}}
+%En-têtes
+\newlength{\largeurtitreentete}\setlength{\largeurtitreentete}{\textwidth-\largeurlogohori-\separationentetelogo}
+\newlength{\decalageverticalentete}\setlength{\decalageverticalentete}{\hauteurlogohori/\real{2}}
+\newlength{\distancetitrecorps}\setlength{\distancetitrecorps}{\separationtitrecorps-\baselineskip*2}
+
+%=======================================================================================
+%Marges, entetes et pieds de page
+%On utilise les package geometry et titlesec pour les regler
+%=======================================================================================
+\geometry{%Definit la geometrie de la page
+	%Toutes les commandes en dessous sont des longueurs definies auparavant
+	top=\margehaut,headheight=\hauteurentete,headsep=\separationentete,
+	left=\margecote,right=\margecote,
+	bottom=\margebas,footskip=\separationpied
+}
+\newcommand{\entetes}{%Comme l'en-tete contient le titre, on les active uniquement quand le titre est defini d'ou cette forme de commande
+	\newpagestyle{polytechnique}{%On definit un nouveau style d'en-tetes
+	\sethead{\includegraphics[height=\hauteurlogohori]{\polylogohori}}% left
+	        {}% center
+	        {\raisebox{\decalageverticalentete}{\begin{minipage}[t]{\largeurtitreentete}\scshape\flushright\textcolor{bleupoly}{\polytitresave}\end{minipage}}}% right
+	\setfoot{}% left
+ 	        {\textcolor{bleupoly}{\shortstack[c]{\rule{4mm}{0.3mm}\\\thepage}}}% center, \shorstack c'est pour mettre le tiret au dessus du numero de page
+ 	        {}% right
+	}
+	\pagestyle{polytechnique}
+}
+\renewpagestyle{plain}{
+	\sethead{}% left
+	        {}% center
+	        {}% right
+	\setfoot{}% left
+	        {\textcolor{bleupoly}{\shortstack[c]{\rule{4mm}{0.3mm}\\\thepage}}}% center, \shorstack c'est pour mettre le tiret au dessus du numero de page
+	        {}% right
+}
+\pagestyle{plain}
+
+%=======================================================================================
+%Commandes relatives a la page de titre
+%Grace a elles, on peut faire \titre{Machin} au lieu de \renewcommand{\polytitre}{machin}
+%=======================================================================================
+%Sous-titre
+\newboolean{subtitle}\setboolean{subtitle}{false}%Pour detecter si il existe un sous-titre, au debut on met le booleen a false
+\newcommand{\polysoustitresave}{}%A voir comme une variable dans laquelle on stocke une valeur
+\newcommand*{\subtitle}[1]{
+	\renewcommand*{\polysoustitresave}{#1}
+	\setboolean{subtitle}{true}%Puis on le met a true quand on definit un sous-titre
+}
+%Titre
+\newcommand{\polytitresave}{}%A voir comme une variable dans laquelle on stocke une valeur
+\renewcommand*{\title}[1]{
+	\renewcommand*{\polytitresave}{#1}
+	\entetes%Comme les en-tete dependent du titre, on les definit une fois qu'on connait le titre
+}
+%Auteurs
+\newcommand{\polyauthorsave}{}%A voir comme une variable dans laquelle on stocke une valeur
+\renewcommand*{\author}[1]{
+	\renewcommand*{\polyauthorsave}{#1}
+}
+%Date
+\newcommand{\polydatesave}{\today}%A voir comme une variable dans laquelle on stocke une valeur. \today est la date du jour dans la langue qu'il faut si babel est active
+\renewcommand*{\date}[1]{
+	\renewcommand*{\polydatesave}{#1}
+}
+%Logo(s) de bas de page pour l'option coverpage
+\newcommand{\polylogosup}{\includegraphics[height=\hauteurlogovert]{\polylogovert}}%Variable de stockage initialisee par defaut au logo de l'X vertical
+\newcommand{\logo}[1]{%Si l'utilisateur definit un logo personnalise avec \logo{truc}
+	\renewcommand{\polylogosup}{%On redefinit la variable
+	\includegraphics[height=1.5\hauteurlogohori]{\polylogohori}%Avec le logo horizontal de l'X
+		\hspace{0.05\textwidth}
+		\includegraphics[height=\hauteurlogovert,
+			width=1.5\largeurlogohori,
+			keepaspectratio]{#1}%Et le logo personnalise pas trop gros
+	}
+}
+%Divers
+\newcommand{\MakeUppercaseWithNewline}[1]{%Permet de mettre plusieurs lignes en majuscules (pour le titre)
+  	\begingroup
+    	\let\SavedOrgNewline\\%
+    	\DeclareRobustCommand{\\}{\SavedOrgNewline}%
+    	\MakeUppercase{#1}%
+	\endgroup
+}
