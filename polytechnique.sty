@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{polytechnique}[2015/02/01 v1.2, standard scientific documents layout for Ecole polytechnique.]
+\ProvidesPackage{polytechnique}[2015/02/03 v1.2.1, standard scientific documents layout for Ecole polytechnique.]
 
 %=======================================================================================
 %Petit historique de la creation du package
@@ -37,12 +37,12 @@
 			\vspace*{\distancetitrelogo}
 			%Bloc de gauche (auteurs)
 			\noindent
-			\begin{minipage}[b]{\largeurminipage}\polyauthorsave\end{minipage}%La minipage permet les sauts de ligne pour avoir plusieurs auteurs
+			\begin{minipage}[b]{\largeurminipage}\hspace{0cm}\polyauthorsave\end{minipage}%La minipage permet les sauts de ligne pour avoir plusieurs auteurs,e \hspace{0cm} sert a ne pas faire une minipage vide si \polyauthorsave={}
 			\hspace*{\fill}
 			%Centre (logo)
 			\includegraphics[width=\largeurlogovert]{\polylogovert}\hspace*{\fill}
 			%Bloc de droite (date)
-			\begin{minipage}[b]{\largeurminipage}\flushright\polydatesave\end{minipage}%Idem ci-dessus
+			\begin{minipage}[b]{\largeurminipage}\flushright\hspace{0cm}\polydatesave\end{minipage}%Idem ci-dessus, le \hspace{0cm} sert a ne pas faire une minipage vide si \polydatesave={}
 			\\[\separationlogotrait]
 			%Deux filets horizontaux, le titre et le sous-titre sont au milieu
 			\begin{center}
@@ -73,13 +73,14 @@
 				\Huge\sffamily\bfseries\color{bleu303}\MakeUppercaseWithNewline{\polytitresave}\\
 				\vspace*{0.2\textheight}
 				%Le sous-titre
-				\LARGE\polysoustitresave\\
+				\LARGE\hspace{0cm}\polysoustitresave%Le \hspace{0cm} est la pour occuper la place, si la ligne disparaît la mise en page est modifiee
+				\\
 				\vspace*{0.15\textheight}
 				%La date
-				\Large\mdseries\polydatesave\\
+				\Large\mdseries\hspace{0cm}\polydatesave\\%Le \hspace{0cm} est la pour occuper la place, si la ligne disparaît la mise en page est modifiee
 				\includegraphics{\polyfiletcourtbleu}\\[0.4\baselineskip]
 				%Les auteurs
-				\rmfamily\polyauthorsave\\[\fill]
+				\rmfamily\hspace{0cm}\polyauthorsave\\[\fill]%Le \hspace{0cm} est la pour occuper la place, si la ligne disparaît la mise en page est modifiee
 				%Le(s) logo(s) en bas de la page
 				$\;$\polylogosup{}
 				\vspace*{-0.5\margebas}%On rabote la marge basse habituelle
