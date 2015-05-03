@@ -499,7 +499,7 @@ LaTeX version 1999/12/01 or later.
 %    \begin{macrocode}
 \RequirePackage{graphicx}
 %    \end{macrocode}
-%\item[ifthen] Pour l'utilisation de la commande |\ifthenelse|\marg{condition}\marg{vrai}\marg{faux}.
+%\item[ifthen] Pour l'utilisation de la commande |\ifthenelse| \marg{condition} \marg{vrai} \marg{faux}.
 %    \begin{macrocode}
 \RequirePackage{ifthen}
 %    \end{macrocode}
@@ -532,14 +532,16 @@ LaTeX version 1999/12/01 or later.
 %    \begin{macrocode}
 \ifpdf
     \newcommand{\polyfiletlongrouge}{ressources/filetlongrouge.pdf}
-    \newcommand{\polyfiletcourtbleuclair}{ressources/filetcourtbleuclair.pdf}
+    \newcommand{\polyfiletcourtbleuclair}
+        {ressources/filetcourtbleuclair.pdf}
     \newcommand{\polyfiletcourtbleu}{ressources/filetcourtbleu.pdf}
     \newcommand{\polylogovert}{ressources/logovert.pdf}
     \newcommand{\polylogohori}{ressources/logohori.pdf}
     \newcommand{\polyarmes}{ressources/armes.pdf}
 \else
     \newcommand{\polyfiletlongrouge}{ressources/filetlongrouge.eps}
-    \newcommand{\polyfiletcourtbleuclair}{ressources/filetcourtbleuclair.eps}
+    \newcommand{\polyfiletcourtbleuclair}
+        {ressources/filetcourtbleuclair.eps}
     \newcommand{\polyfiletcourtbleu}{ressources/filetcourtbleu.eps}
     \newcommand{\polylogovert}{ressources/logovert.eps}
     \newcommand{\polylogohori}{ressources/logohori.eps}
@@ -715,14 +717,16 @@ LaTeX version 1999/12/01 or later.
 %Largeur des minipage contenant les auteurs et la date sur la page de titre.
 %    \begin{macrocode}
 \newlength{\largeurminipage}
-\setlength{\largeurminipage}{(\textwidth-\largeurlogovert)/\real{2}}
+\setlength{\largeurminipage}
+    {(\textwidth-\largeurlogovert)/\real{2}}
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\distancetitrecorps}
 %Argument d'un |\vspace| réglé pour que la distance verticale entre le deuxième filet et le haut de la première ligne du texte soit bien |\separationtitrecorps|.
 %    \begin{macrocode}
 \newlength{\distancetitrecorps}
-\setlength{\distancetitrecorps}{\separationtitrecorps-\baselineskip*2}
+\setlength{\distancetitrecorps}
+    {\separationtitrecorps-\baselineskip*2}
 %    \end{macrocode}
 %\end{macro}
 %\paragraph{En-têtes et pieds de page}
@@ -738,7 +742,8 @@ LaTeX version 1999/12/01 or later.
 %Longeur ajustée pour que le titre ou la ligne d'en-tête intérieur soit alignée verticalement avec le « École polytechnique » du logo horizontal qui lui fait face. Le 2.6 remplit cette fonction.
 %    \begin{macrocode}
 \newlength{\decalageverticalentete}
-\setlength{\decalageverticalentete}{\hauteurlogohori/\real{2.6}}
+\setlength{\decalageverticalentete}
+    {\hauteurlogohori/\real{2.6}}
 %    \end{macrocode}
 %\end{macro}
 %
@@ -747,7 +752,8 @@ LaTeX version 1999/12/01 or later.
 %On utilise les package |geometry| et |titlesec| pour les régler à l'aide des longueurs définies auparavant.  Les marges gauches et droites sont définies par les options |oneside| et |twoside|.
 %    \begin{macrocode}
 \geometry{
-    top=\margehaut,headheight=\hauteurentete,headsep=\separationentete,
+    top=\margehaut,headheight=\hauteurentete,
+    headsep=\separationentete,
     bottom=\margebas,footskip=\separationpied
 }
 %    \end{macrocode}

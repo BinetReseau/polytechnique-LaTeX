@@ -9,7 +9,6 @@ del *.ilg
 del *.ind
 del *.log
 del *.toc
-pause
 kpsewhich article.cls> temp.txt
 set /p installdir=<temp.txt
 set installdir=%installdir:~0,-16%
