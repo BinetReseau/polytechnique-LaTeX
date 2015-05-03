@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{polytechnique}[2015/01/29 v1.1, standard scientific documents layout for Ecole polytechnique.]
+\ProvidesPackage{polytechnique}[2015/02/01 v1.2, standard scientific documents layout for Ecole polytechnique.]
 
 %=======================================================================================
 %Petit historique de la creation du package
@@ -149,7 +149,6 @@
 \newlength{\separationpied}\setlength{\separationpied}{17.5mm}
 %Taille des logos
 \newlength{\hauteurlogohori}\setlength{\hauteurlogohori}{15mm}
-\newlength{\hauteurlogovert}\setlength{\hauteurlogovert}{40mm}
 %Disposition de la page de titre
 \newlength{\separationtitre}\setlength{\separationtitre}{15mm}
 \newlength{\epaisseurtrait}\setlength{\epaisseurtrait}{1pt}
@@ -164,8 +163,9 @@
 %Celles-là sont déduites des longueurs definies au dessus.
 %=======================================================================================
 %Taille des logos
+\newlength{\largeurlogovert}\setlength{\largeurlogovert}{\paperwidth/\real{7}}%Selon la charte graphique, la largeur est y/7 où y est la largeur de la page.
+\newlength{\hauteurlogovert}\setlength{\hauteurlogovert}{\largeurlogovert*\real{1.361}}%1.361 est le ration hauteur/largeur du logo vertical de l'X.
 \newlength{\largeurlogohori}\setlength{\largeurlogohori}{\hauteurlogohori*\real{1.859}}%1.859 est le ration hauteur/largeur du logo vertical de l'X.
-\newlength{\largeurlogovert}\setlength{\largeurlogovert}{\hauteurlogovert/\real{1.361}}%1.361 est le ration hauteur/largeur du logo vertical de l'X.
 %Disposition des titres
 \newlength{\distancetitrelogo}\setlength{\distancetitrelogo}{\separationtitre-\margehaut}%Hauteur reglee pour qu'il y ait 10mm entre le haut de la page et le haut du logo.
 \newlength{\separationlogotrait}\setlength{\separationlogotrait}{-\baselineskip*2+10mm}
