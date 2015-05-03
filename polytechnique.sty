@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{polytechnique}[2015/01/29 v1.0, standard scientific documents layout for Ecole polytechnique.]
+\ProvidesPackage{polytechnique}[2015/01/29 v1.1, standard scientific documents layout for Ecole polytechnique.]
 
 %=======================================================================================
 %Petit historique de la creation du package
@@ -18,14 +18,16 @@
 \DeclareOption{a4paper}{%Passe l'option a4paper declaree au package geometry pour action
 	\PassOptionsToPackage{a4paper}{geometry}
 }
-\DeclareOption{redsections}{%Si activee, modifie le formatage des titres de section et sous-sections.
+\DeclareOption{fancysections}{%Si activee, modifie le formatage des titres de section et sous-sections.
 	\AtEndOfPackage{%Voir la documentation du package titlesec pour plus d'explications
-		\titleformat{\section}[block]{\color{rougepoly}\LARGE\scshape\filcenter}{}{0em}{}[
+		\titleformat{\chapter}[display]{\Huge\bfseries\sffamily}{\LARGE\chaptertitlename{} \thechapter}{0em}{}[]
+		\titleformat{\section}[display]{\color{rouge485}\LARGE\bfseries\sffamily\filcenter}{\thesection}{0em}{\MakeUppercase}[
 			\vspace*{-0.5\baselineskip}\includegraphics{\polyfiletlongrouge}
 		]
-		\titleformat{\subsection}[hang]{\color{bleuclairpoly}\Large\scshape}{}{0em}{
-			\raisebox{0.15\baselineskip}{\includegraphics{\polyfiletcourtbleuclair}}
-		}[]
+		\titleformat{\subsection}[hang]{\color{bleu315}\Large\scshape}{\thesubsection}{0.5em}{}[
+		\vspace*{-0.3\baselineskip}\includegraphics{\polyfiletcourtbleuclair}
+		]
+		\titleformat{\subsubsection}[block]{\color{bleu303}\large\scshape}{\thesubsubsection}{0.5em}{\textbullet{} }[]
 	}
 }
 \DeclareOption{shorttitle}{%Option activee par defaut, titre avec logo vertical sur 1/2 page
@@ -44,15 +46,15 @@
 			\\[\separationlogotrait]
 			%Deux filets horizontaux, le titre et le sous-titre sont au milieu
 			\begin{center}
-				\textcolor{bleupoly}{\rule{\textwidth}{\epaisseurtrait}}
-				\\\color{bleupoly}\Huge\scshape\MakeUppercaseWithNewline{\polytitresave}%Le titre
+				\textcolor{bleu303}{\rule{\textwidth}{\epaisseurtrait}}
+				\\\color{bleu303}\Huge\scshape\MakeUppercaseWithNewline{\polytitresave}%Le titre
 				\ifthenelse{\boolean{subtitle}}{%Si il y a un sous-titre
 					\\[\separationlignestitre]
 					\Large\upshape\polysoustitresave\\\normalsize
 				}{%S'il n'y en a pas
 					\\\normalsize
 				}
-				\textcolor{bleupoly}{\rule{\textwidth}{\epaisseurtrait}}
+				\textcolor{bleu303}{\rule{\textwidth}{\epaisseurtrait}}
 			\end{center}
 			\vspace*{\distancetitrecorps}
 		}
@@ -68,14 +70,14 @@
 			\vspace*{0.125\textheight}
 			\begin{center}
 				%Le titre
-				\Huge\sffamily\bfseries\color{bleupoly}\MakeUppercaseWithNewline{\polytitresave}\\
+				\Huge\sffamily\bfseries\color{bleu303}\MakeUppercaseWithNewline{\polytitresave}\\
 				\vspace*{0.2\textheight}
 				%Le sous-titre
 				\LARGE\polysoustitresave\\
 				\vspace*{0.15\textheight}
 				%La date
-				\large\mdseries\polydatesave\\[-0.5\baselineskip]
-				\includegraphics{\polyfiletcourtbleu}\\
+				\Large\mdseries\polydatesave\\
+				\includegraphics{\polyfiletcourtbleu}\\[0.4\baselineskip]
 				%Les auteurs
 				\rmfamily\polyauthorsave\\[\fill]
 				%Le(s) logo(s) en bas de la page
@@ -104,14 +106,15 @@
 \RequirePackage{geometry}%Pour les marges
 \RequirePackage{calc}%Pour faire des operations sur les longueurs
 \RequirePackage{color}%Pour mettre les elements en bleu
+\RequirePackage{lmodern}%On fixe la police une fois pour toutes
 
 %=======================================================================================
 %Couleurs
 %Les valeurs RGB proviennent de la charte graphique de l'X (2014)
 %=======================================================================================
-\definecolor{bleupoly}{RGB}{0,62,92}
-\definecolor{rougepoly}{RGB}{169,32,33}
-\definecolor{bleuclairpoly}{RGB}{0,104,128}
+\definecolor{bleu303}{RGB}{0,62,92}
+\definecolor{rouge485}{RGB}{213,43,30}
+\definecolor{bleu315}{RGB}{0,104,128}
 
 %=======================================================================================
 %Inclusion des logos
@@ -169,7 +172,7 @@
 \newlength{\largeurminipage}\setlength{\largeurminipage}{(\textwidth-\largeurlogovert)/\real{2}}
 %En-têtes
 \newlength{\largeurtitreentete}\setlength{\largeurtitreentete}{\textwidth-\largeurlogohori-\separationentetelogo}
-\newlength{\decalageverticalentete}\setlength{\decalageverticalentete}{\hauteurlogohori/\real{2}}
+\newlength{\decalageverticalentete}\setlength{\decalageverticalentete}{\hauteurlogohori/\real{2.6}}%2.6 pour que le titre soit aligne sur le "polytechnique" du logo à gauche
 \newlength{\distancetitrecorps}\setlength{\distancetitrecorps}{\separationtitrecorps-\baselineskip*2}
 
 %=======================================================================================
@@ -186,9 +189,9 @@
 	\newpagestyle{polytechnique}{%On definit un nouveau style d'en-tetes
 	\sethead{\includegraphics[height=\hauteurlogohori]{\polylogohori}}% left
 	        {}% center
-	        {\raisebox{\decalageverticalentete}{\begin{minipage}[t]{\largeurtitreentete}\scshape\flushright\textcolor{bleupoly}{\polytitresave}\end{minipage}}}% right
+	        {\raisebox{\decalageverticalentete}{\begin{minipage}[b]{\largeurtitreentete}\scshape\flushright\textcolor{bleu303}{\polytitresave}\end{minipage}}}% right
 	\setfoot{}% left
- 	        {\textcolor{bleupoly}{\shortstack[c]{\rule{4mm}{0.3mm}\\\thepage}}}% center, \shorstack c'est pour mettre le tiret au dessus du numero de page
+ 	        {\textcolor{bleu303}{\shortstack[c]{\rule{4mm}{0.3mm}\\\thepage}}}% center, \shorstack c'est pour mettre le tiret au dessus du numero de page
  	        {}% right
 	}
 	\pagestyle{polytechnique}
@@ -198,7 +201,7 @@
 	        {}% center
 	        {}% right
 	\setfoot{}% left
-	        {\textcolor{bleupoly}{\shortstack[c]{\rule{4mm}{0.3mm}\\\thepage}}}% center, \shorstack c'est pour mettre le tiret au dessus du numero de page
+	        {\textcolor{bleu303}{\shortstack[c]{\rule{4mm}{0.3mm}\\\thepage}}}% center, \shorstack c'est pour mettre le tiret au dessus du numero de page
 	        {}% right
 }
 \pagestyle{plain}
