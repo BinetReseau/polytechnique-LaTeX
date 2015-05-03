@@ -1,0 +1,955 @@
+% \iffalse meta-comment
+%
+% For explanation on this file, see http://texdoc.net/texmf-dist/doc/latex/dtxtut/dtxtut.pdf
+%
+% Copyright (C) 2015 i by Denis Merigoux
+%
+% This file may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either
+% version 1.2 of this license or (at your option) any later
+% version. The latest version of this license is in:
+%
+% http://www.latex-project.org/lppl.txt
+%
+% and version 1.2 or later is part of all distributions of
+% LaTeX version 1999/12/01 or later.
+%
+% \fi
+%
+% \iffalse
+%<package>\NeedsTeXFormat{LaTeX2e}
+%<package>\ProvidesPackage{polytechnique}
+%<package> [2015/04/29 v1.3.0, standard scientific documents layout for Ecole polytechnique (Palaiseau,France).]
+%
+%<*batchfile>
+\begingroup
+\input docstrip.tex
+\keepsilent
+\usedir{tex/latex/polytechnique}
+
+\preamble
+This is a generated file.
+
+Copyright (C) 2015 by Denis Merigoux
+
+This file may be distributed and/or modified under the
+conditions of the LaTeX Project Public License, either
+version 1.2 of this license or (at your option) any later
+version. The latest version of this license is in:
+
+http://www.latex-project.org/lppl.txt
+
+and version 1.2 or later is part of all distributions of
+LaTeX version 1999/12/01 or later.
+\endpreamble
+
+\askforoverwritefalse
+\generate{\file{polytechnique.sty}{\from{polytechnique.dtx}{package}}}
+
+\obeyspaces
+
+\endgroup
+%</batchfile>
+%%\CharacterTable
+%% {Upper-case \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%% Lower-case \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%% Digits \0\1\2\3\4\5\6\7\8\9
+%% Exclamation \! Double quote \" Hash (number) \#
+%% Dollar \$ Percent \% Ampersand \&
+%% Acute accent \' Left paren \( Right paren \)
+%% Asterisk \* Plus \+ Comma \,
+%% Minus \- Point \. Solidus \/
+%% Colon \: Semicolon \; Less than \<
+%% Equals \= Greater than \> Question mark \?
+%% Commercial at \@ Left bracket \[ Backslash \\
+%% Right bracket \] Circumflex \^ Underscore \_
+%% Grave accent \` Left brace \{ Vertical bar \|
+%% Right brace \} Tilde \~}
+%%
+%<*driver>
+\documentclass[a4paper,11pt]{ltxdoc}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[pagenumber,fancysections,sectionmark]{polytechnique}
+\makeatletter
+\renewcommand{\index@prologue}{\section*{Index}%Redéfinit le texte avant l'index
+                %Commande issue de tex/latex/base/doc.sty
+                Les nombre en italique se réfèrent à la page où l'entrée correspondante est documentée ; les nombres soulignés se réfèrent à la ligne de code où l'entrée correspondante est définie. Enfin, les autres nombres correspondent aux lignes de code où l'entrée correspondante est utilisée.
+                 }
+\makeatother
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+\DocInput{polytechnique.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+%\changes{v1.3.0}{2015/04/29}{Ajout des options oneside, twoside, sectionmark, chaptermark, markboth, pagenumber}
+%\changes{v1.2.2}{2015/02/18}{Recadrage du logo horizontal}
+%\changes{v1.2.1}{2015/02/16}{Correction du bug title vide ou author vide}
+%\changes{v1.2.0}{2015/01/25}{Dimensionnement des logos conforme à la charte graphique}
+%\changes{v1.1.0}{2015/01/20}{Ajout formatage chapter et subsubsection avec l'option fancysections}
+%\changes{v1.0.0}{2015/01/15}{Version initiale}
+% \GetFileInfo{polytechnique.sty}
+%
+%\DoNotIndex{\#,\$,\%,\&,\@,\\,\{,\},\^,\_,\~,\ }
+%\DoNotIndex{\@ne}
+%\DoNotIndex{\advance,\begingroup,\catcode,\closein}
+%\DoNotIndex{\closeout,\day,\def,\edef,\else,\empty,\endgroup}
+%\DoNotIndex{\newcommand,\renewcommand,\newlength,
+%    \setlength,\RequirePackage,\PassOptionsToPackage}
+%
+%
+%\title{Le package \textsf{polytechnique}}
+%\subtitle{\fileversion{} datée du \filedate.}
+%\author{Denis Merigoux}
+%
+%\maketitle
+%
+%Le but du package est d'offrir un moyen efficace et rapide aux élèves de mettre en forme leurs documents \LaTeX{} destinés à être rendus à l'administration de l'École ou aux professeurs : rapports de stage, rapports de MODAL, devoirs à la maison, etc. La DIRCOM a établi la maquette en accord avec la charte graphique donc le package peut aussi être utilisé pour produire des documents diffusés à l'extérieur de l'École.
+%
+%En pratique, package redéfinit les marges et les en-têtes du document, ainsi que la commande |\maketitle| (voir plus bas). La compilation peut être faite avec \texttt{pdflatex} ou \texttt{latex}, les logos et images étant fournies en \texttt{.eps} et \texttt{.pdf}. Attention donc à ne pas utiliser les package \texttt{geometry} ou \texttt{fancyhdr} en parallèle avec ce package.
+%
+%Le package impose également la police du document par le package \texttt{lmodern}, version vectorielle de la police \emph{Computer Modern Roman} par défaut de \LaTeX.
+%
+%\renewcommand{\contentsname}{Sommaire}
+%\tableofcontents
+%\clearpage
+%\newgeometry{
+%    top=\margehaut,headheight=\hauteurentete,headsep=\separationentete,
+%    bottom=\margebas,footskip=\separationpied,left=\margecote,right=\margecote,includemp
+%}
+%\section{Utilisation}
+%
+%Pour utiliser le package, il suffit d'inclure dans le préambule de son document la ligne :
+%\begin{verbatim}
+%    \usepackage{polytechnique}
+%\end{verbatim}
+%
+%Il faut également définir dans le préambule les métadonnées du document, avec deux nouveaux champs optionnels |\subtitle| et |\logo| :
+%\begin{itemize}
+%\item \DescribeMacro{\subtitle}|\subtitle|\marg{sous-titre} où \meta{sous-titre} peut être sur plusieurs lignes séparées par des |\\| ;
+%\item \DescribeMacro{\logo}|\logo|\marg{chemin} où \meta{chemin} est le chemin relatif vers le fichier d'un logo supplémentaire (entreprise, laboratoire, etc.) ; si le logo est dans le même dossier que le |.tex|, \meta{chemin} est le nom du fichier.
+%\end{itemize}
+%Il est recommandé de recadrer au mieux l'image du logo pour qu'elle prenne les meilleures dimensions possibles sur la page. Le deuxième logo n'apparaîtra que si l'option |titlepage| est activée.
+%Cela donne dans son préambule :
+%\begin{verbatim}
+%    \title{Le titre}
+%    \subtitle{Le sous-titre (optionnel, enlever cette ligne sinon)}
+%    \author{L'auteur Prénom \textsc{Nom}
+%         (si plusieurs séparer par des \\)}
+%    \date{La date, enlever la ligne pour avoir la date du jour}
+%    %\logo{Chemin relatif vers le logo}
+%\end{verbatim}
+%
+%Puis rajouter après |\begin{document}| la commande |\maketitle|. Les champs |\title|, |\subtitle|, |\author| et |\date| peuvent être sur plusieurs lignes, c'est par exemple utile pour une liste d'auteurs. On passera alors à la ligne avec la commande |\\|.
+%
+%Si un des champs est trop grand verticalement et nuit à la mise en page globale, on pourra réduire la taille des caractères à l'aide de |\large|, |\Large| ou |\normalsize| par exemple. On pourra aussi utiliser un tableau gagner en place horizontalement.
+%
+%\clearpage
+%\section{Options}
+%
+%\subsection{Options globales}
+%
+%Ces options peuvent être indiquées directement dans la déclaration de la classe du document, suivant la syntaxe habituelle : |\documentclass|\oarg{options globales}\marg{classe du document}. \meta{options globales} est une liste d'options séparées par des virgules, selon la syntaxe habituelle. Par exemple :
+%\begin{verbatim}
+%    \documenclass[titlepage,11pt,a4paper]{article}
+%\end{verbatim}
+%
+%Voici la liste des options globales qui sont reprises par le package :
+%\begin{description}
+%\item[oneside]  C'est le comportement par défaut, les en-têtes et les marges seront les mêmes pour toutes les pages.
+%\item[twoside]  Rend la marge intérieur plus grande que la marge extérieure et transforme les en-têtes gauche/droite en en-têtes intérieurs/extérieurs.
+%\item[notitlepage]  Comportement par défaut pour la classe |article|. |\maketitle| produit son résultat sur un quart de page environ.
+%\item[titlepage]  Comportement par défaut pour les classes |report| et |book|. 
+%\item[a4paper]  Signifie à \LaTeX{} que le format de la feuille est A4. À inclure systématiquement pour éviter les mauvaises surprises.
+%\end{description}
+%
+%\subsection{Options spécifiques}
+%
+%Ces options sont à appeler directement avec le package avec la syntaxe :
+%\begin{center}
+%|\usepackage|\oarg{options}|{polytechnique}|
+%\end{center}
+%En voici la liste :
+%\begin{description}
+%\item[fancysections]  Redéfinit les commandes |\chapter|, |\section|, |\subsection| et |\subsubsection| avec un style conforme à la charte graphique de l'École. Donne un aspect moins formel au document.
+%\item[pagenumber]  Change la numérotation des pages dans le pied de page. Si l'option est activée, elle deviendra \meta{page en cours}/\meta{nombre total de pages}.
+%\item[sectionmark]  Affiche en en-tête intérieur le titre de la section courante plutôt que le titre du document.
+%\item[chaptermark]  Idem que l'option précédente avec le titre du chapitre courant. Ne peut être utilisé avec la classe |article|.
+%\item[markboth]  Pensé pour les longs documents : affiche le titre de la section courante sur l'en-tête intérieur des pages paires et le titre du chapitre courant sur l'en-tête des pages impaires.
+%\end{description}
+%
+%\StopEventually{
+%    \clearpage
+%    \restoregeometry
+%    \PrintIndex
+%}
+%\clearpage
+%\section{Code source}
+%
+%\subsection{Déclaration des options}
+%Le code de ces options est exécuté à la fin du package grâce à la commande |\AtEndOfPackage|. Les commandes utilisées dans le code seront donc définies par la suite mais portent des noms explicites.
+%
+%\paragraph{a4paper}
+%Passe l'option |a4paper| declarée au package |geometry| pour action. L'option est aussi reconnue depuis les options passées a |\documentclass|.
+%    \begin{macrocode}
+\DeclareOption{a4paper}{
+    \PassOptionsToPackage{a4paper}{geometry}
+}
+%    \end{macrocode}
+%
+%\paragraph{fancysections}
+%Si activée, modifie le formatage des titres dans le document. Les commandes utilisées sont issues du package |titlesec|, se reporter à la documentation pour plus d'explications. 
+%    \begin{macrocode}
+\DeclareOption{fancysections}{
+    \AtEndOfPackage{
+    \titleformat{\chapter}
+        [display]
+        {\Huge\bfseries\sffamily}
+        {\LARGE\chaptertitlename{} \thechapter}
+        {0em}
+        {}
+        []
+    \titleformat{\section}
+        [display]
+        {\color{rouge485}\LARGE\bfseries\sffamily\filcenter}
+        {\thesection}{0em}
+        {\MakeUppercase}
+        [\vspace*{-0.5\baselineskip}%
+            \includegraphics{\polyfiletlongrouge}]
+    \titleformat{\subsection}
+        [hang]
+        {\color{bleu315}\Large\scshape}
+        {\thesubsection}
+        {0.5em}
+        {}
+        [\vspace*{-0.3\baselineskip}%
+            \includegraphics{\polyfiletcourtbleuclair}]
+	\titleformat{\subsubsection}
+	    [block]
+	    {\color{bleu303}\large\scshape}
+	    {\thesubsubsection}
+	    {0.5em}
+	    {\textbullet{} }
+	    []
+    }
+}
+%    \end{macrocode}
+%
+%\paragraph{notitlepage}
+%Cette option activée par défaut produit un titre avec logo vertical de l'X, auteur et date sur la première lignes, puis le titre et le sous-titre entre filets horizontaux. L'option est aussi reconnues depuis les options globales passées à |\documentclass|.
+%    \begin{macrocode}
+\DeclareOption{notitlepage}{
+    \AtBeginDocument{
+        \renewcommand*{\maketitle}{
+            \thispagestyle{plain}
+            \vspace*{\distancetitrelogo}
+%    \end{macrocode}
+% D'abord le bloc de gauche avec le nom des auteurs.
+%    \begin{macrocode}
+            \noindent
+            \begin{minipage}[b]{\largeurminipage}
+                \hspace{0cm}\polyauthorsave
+            \end{minipage}
+%    \end{macrocode}
+%La |minipage| permet les sauts de ligne pour avoir plusieurs auteurs, et |\hspace{0cm}| sert a ne pas faire une minipage vide si |\polyauthorsave={}|.
+%    \begin{macrocode}
+            \hspace*{\fill}
+%    \end{macrocode}
+%Les blocs sont séparés par des ressorts horizontaux. Vient ensuite le bloc central avec le logo de l'X.
+%    \begin{macrocode}
+            \includegraphics[width=\largeurlogovert]{\polylogovert}
+            \hspace*{\fill}
+%    \end{macrocode}
+%Et pour conclure la première ligne le bloc de droite qui contient la |\date|.
+%    \begin{macrocode}
+            \begin{minipage}[b]{\largeurminipage}
+                \flushright\hspace{0cm}\polydatesave
+            \end{minipage}
+%    \end{macrocode}
+%Le |\hspace{0cm}| sert a ne pas faire une minipage vide si |\polydatesave={}|.
+%    \begin{macrocode}
+            \\[\separationlogotrait]
+%    \end{macrocode}
+%Deux filets horizontaux, le titre et le sous-titre sont au milieu.
+%    \begin{macrocode}
+            \begin{center}
+                \textcolor{bleu303}{\rule{\textwidth}{\epaisseurtrait}}
+                \\
+                \color{bleu303}\Huge\scshape
+                \MakeUppercaseWithNewline{\polytitresave}
+%    \end{macrocode}
+%La ligne qui précède affiche le titre. La commande |\MakeUpperCaseWithNewLine| sera définie par la suite.
+%    \begin{macrocode}
+                \ifthenelse{\boolean{subtitle}}{
+%    \end{macrocode}
+%Le booléen |subtitle| est vrai si et seulement si le champ |\subtitle| a été initialisé. La clause qui suit s'exécute si il y a un sous-titre.
+%    \begin{macrocode}   
+                    \\[\separationlignestitre]
+                    \Large\upshape\polysoustitresave\\\normalsize
+                }{
+%    \end{macrocode}
+%Et maintenant, s'il n'y en a pas.
+%    \begin{macrocode}
+                    \\
+                    \normalsize
+                }
+                \textcolor{bleu303}{\rule{\textwidth}{\epaisseurtrait}}
+            \end{center}
+            \vspace*{\distancetitrecorps}
+        }
+    }
+}
+%    \end{macrocode}
+%
+%\paragraph{titlepage}
+%Option qui active une page de garde où le titre prend toute la page. L'option est aussi reconnue depuis les options passées a |\documentclass|. La page de garde comporte :
+%\begin{itemize}
+%\item les armes de l'École en arrière-plan ;
+%\item le titre en capitales bleues ;
+%\item le sous-titre sans empattements en bleu également ;
+%\item la date, suivie d'un filet séparateur ;
+%\item les auteurs ;
+%\item le logo horizontal de l'X et en option un autre logo.
+%\end{itemize}
+%    \begin{macrocode}
+\DeclareOption{titlepage}{
+    \AtBeginDocument{
+        \renewcommand*{\maketitle}{
+%    \end{macrocode}
+%On met d'abord les armes de l'École en arrière-plan. On créé pour cela une boîte à laquelle on donne des dimensions virtuelles nulles pour ne pas empiéter sur les autres éléments. L'image se trouve dans cette boîte.
+%    \begin{macrocode}
+            \noindent\makebox[\textwidth][c]{%
+              \raisebox{-\totalheight}[0pt][0pt]{%
+            \includegraphics[height=\hauteurlogopage]{\polyarmes}}}
+%    \end{macrocode}
+%On passe maintenant au titre, séparé par un espace vertical du haut de la page. La commande |\MakeUpperCaseWithNewLine| permet de mettre plusieurs lignes à la suite en capitales.
+%    \begin{macrocode}
+            \vspace*{0.125\textheight}
+            \begin{center}
+                \Huge\sffamily\bfseries\color{bleu303}
+                \MakeUppercaseWithNewline{\polytitresave}\\
+%    \end{macrocode}
+%Ensuite, le sous-titre. Le |\hspace{0cm}| est là pour occuper la place, sa présence est indispensable pour gérer le cas où |\polysoustitresave={}|.
+%    \begin{macrocode}
+                \vspace*{0.2\textheight}
+                \LARGE\hspace{0cm}\polysoustitresave\\
+%    \end{macrocode}
+%Ce qui suit est la date, idem pour le |\hspace{0cm}|.
+%    \begin{macrocode}
+                \vspace*{0.15\textheight}
+                \Large\mdseries\hspace{0cm}\polydatesave\\
+                \includegraphics{\polyfiletcourtbleu}
+                \\[0.4\baselineskip]
+%    \end{macrocode}
+%Ce qui suit affiche les auteurs, idem pour le |\hspace{0cm}|.
+%    \begin{macrocode}
+                \rmfamily\hspace{0cm}\polyauthorsave\\[\fill]
+%    \end{macrocode}
+%Enfin, le(s) logo(s) en bas de la page. On rabote la marge basse habituelle avec le |\vspace*{-0.5\margebas}|.
+%    \begin{macrocode}
+                $\;$\polylogosup{}
+                \vspace*{-0.5\margebas}
+            \end{center}
+            \thispagestyle{empty}
+            \clearpage
+        }
+    }
+}
+%    \end{macrocode}
+%
+%\paragraph{oneside} Règle les marges pour des documents recto uniquement. L'option est aussi reconnue depuis les options passées a |\documentclass|.
+%    \begin{macrocode}
+\DeclareOption{oneside}{
+    \AtEndOfPackage{
+        \geometry{left=\margecote,right=\margecote}
+    }
+}
+%    \end{macrocode}
+%
+%\paragraph{twoside} Règle les marges pour des documents recto-verso. L'option est aussi reconnue depuis les options passées a |\documentclass|. 
+%    \begin{macrocode}
+\DeclareOption{twoside}{
+    \AtEndOfPackage{
+        \geometry{inner=\margecoteinterieur,
+            outer=\margecoteexterieur}
+    }
+}
+%    \end{macrocode}
+%
+%\paragraph{sectionmark} Met le titre de la section en cours plutôt que le titre du document dans les en-têtes.
+%    \begin{macrocode}
+\DeclareOption{sectionmark}{
+    \AtEndOfPackage{
+%    \end{macrocode}
+%On redéfinit pour cela la commande des en-têtes intérieurs.
+%    \begin{macrocode}
+        \renewcommand{\enteteinterieur}[1]{
+%    \end{macrocode}
+%|\ifthesection|\marg{vrai}\marg{faux} exécute le code \meta{vrai} si une section courante a été définie au moment où le code est appelé, et faux sinon. Voir la documentation du package |titlesec|.
+%    \begin{macrocode}
+            \ifthesection{
+%    \end{macrocode}
+%S'il y a une section courante, on affiche son titre en en-tête intérieur.
+%    \begin{macrocode}
+                \raisebox{\decalageverticalentete}
+                    {\scshape\color{bleu303}
+                        \thesection{}.~\sectiontitle}
+            }{
+%    \end{macrocode}
+%Si pas de section courante définie, on ne met rien dans l'en-tête intérieur.
+%    \begin{macrocode}               
+            }
+        }
+    }
+}
+%    \end{macrocode}
+%
+%\paragraph{chaptermark} Met le titre de la section en cours plutôt que le titre du document dans les en-têtes. Le code est analogue à celui de l'option précédente.
+%    \begin{macrocode}
+\DeclareOption{chaptermark}{
+    \AtEndOfPackage{    
+        \renewcommand{\enteteinterieur}[1]{
+            \ifthechapter{
+                \raisebox{\decalageverticalentete}
+                     {\scshape\color{bleu303}
+                         \thechapter{}.~\chaptertitle}
+            }{
+
+            }
+        }
+    }
+}
+%    \end{macrocode}
+%
+%\paragraph{markboth} L'option est un mélange des deux options précédentes, voir la documentation utilisateur. On redéfinit alors |\enteteinterieurpair| et |\enteteinterieurimpair| pour distinguer les en-têtes des pages paires et impaires. Le code est un copier-coller de celui des deux options précédentes.
+%    \begin{macrocode}
+\DeclareOption{markboth}{
+    \AtEndOfPackage{
+        \renewcommand{\enteteinterieurimpair}{
+            \ifthesection{%Si la section a ete definie
+                \raisebox{\decalageverticalentete}
+                    {\scshape\color{bleu303}
+                        \thesection{}.~\sectiontitle}
+            }{
+
+            }
+        }
+        \renewcommand{\enteteinterieurpair}{
+            \ifthechapter{
+                \raisebox{\decalageverticalentete}
+                    {\scshape\color{bleu303}
+                        \thechapter{}.~\chaptertitle}
+            }{
+
+            }
+        }
+    }
+}
+%    \end{macrocode}
+%
+%\paragraph{pagenumber} Cette option modifie le pied central \emph{via} la commande |\piedcentre| pour y rajouter le nombre total de page grâce au label |LastPage| introduit par le package |lastpage|.
+%    \begin{macrocode}
+\DeclareOption{pagenumber}{
+    \AtEndOfPackage{
+        \RequirePackage{lastpage}
+        \renewcommand{\piedcentre}{
+            \setlength{\largeurfiletpiedcentre}
+                {2\largeurfiletpiedcentre}
+            \textcolor{bleu303}{\shortstack[c]{
+                \rule{\largeurfiletpiedcentre}{0.3mm}\\
+                \thepage/\pageref{LastPage}}}
+        }
+    }
+}
+%    \end{macrocode}
+%
+%\paragraph{Autres options} Toute option passée au package qui n'est pas dans la liste ci-avant est repassée au package |geometry| (différentes tailles de papier).
+%    \begin{macrocode}
+\DeclareOption*{
+    \PassOptionsToPackage{\CurrentOption}{geometry}
+}
+%    \end{macrocode}
+%Enfin, on exécute les options standards utilisées par la classe article.
+%    \begin{macrocode}
+\ExecuteOptions{a4paper,notitlepage,oneside}
+\ProcessOptions\relax
+%    \end{macrocode}
+%\subsection{Chargement des packages externes}
+%
+%Le package |polytechnique| utilise de nombreux autres packages afin d'effectuer la mise en page. Ces packages sont appelés avec la commande |\RequirePackage| par le code ci-dessous.
+%\begin{description}
+%\item[calc] Pour faire des operations sur les longueurs.
+%    \begin{macrocode}
+\RequirePackage{calc}
+%    \end{macrocode}
+%\item[color] Pour colorer les éléments du titre en accord avec la charte graphique.
+%    \begin{macrocode}
+\RequirePackage{color}
+%    \end{macrocode}
+%\item[geometry] Pour redéfinir les marges de manière pratique.
+%    \begin{macrocode}
+\RequirePackage{geometry}
+%    \end{macrocode} 
+%\item[graphicx] Pour insérer les images, en particulier les logos et les éléments graphiques.
+%    \begin{macrocode}
+\RequirePackage{graphicx}
+%    \end{macrocode}
+%\item[ifthen] Pour l'utilisation de la commande |\ifthenelse|\marg{condition}\marg{vrai}\marg{faux}.
+%    \begin{macrocode}
+\RequirePackage{ifthen}
+%    \end{macrocode}
+%\item[ifpdf] Pour détecter le mode de compilation du document.
+%    \begin{macrocode}
+\RequirePackage{ifpdf}
+%    \end{macrocode}
+%\item[lmodern] Pour les polices vectorielles.
+%    \begin{macrocode}
+\RequirePackage{lmodern}
+%    \end{macrocode}
+%\item[titlesec] Pour redéfinir les en-têtes et pieds de pages, ainsi que le format des titres de section.
+%    \begin{macrocode}
+\RequirePackage[pagestyles]{titlesec}
+%    \end{macrocode}
+%\end{description}
+%
+%\subsection{Couleurs}
+%
+%On définit des couleurs utilisées par le package définies par la charte graphique de l'École.
+%    \begin{macrocode}
+\definecolor{bleu303}{RGB}{0,62,92}
+\definecolor{rouge485}{RGB}{213,43,30}
+\definecolor{bleu315}{RGB}{0,104,128}
+%    \end{macrocode}
+%
+%\subsection{Logos et éléments graphiques}
+%
+%Les lignes suivantes servent à inclure les logos et éléments graphiques. Les fichiers correspondant doivent se trouver dans le même dossier que |polytechnique.sty|. |\ifpdf| exécute la première partie du code si le document est compilé avec |pdflatex|, et la deuxième si le document est compilé avec |latex|. Ceci permet d'utiliser des images vectorielles lorsque c'est possible.
+%    \begin{macrocode}
+\ifpdf
+    \newcommand{\polyfiletlongrouge}{ressources/filetlongrouge.pdf}
+    \newcommand{\polyfiletcourtbleuclair}{ressources/filetcourtbleuclair.pdf}
+    \newcommand{\polyfiletcourtbleu}{ressources/filetcourtbleu.pdf}
+    \newcommand{\polylogovert}{ressources/logovert.pdf}
+    \newcommand{\polylogohori}{ressources/logohori.pdf}
+    \newcommand{\polyarmes}{ressources/armes.pdf}
+\else
+    \newcommand{\polyfiletlongrouge}{ressources/filetlongrouge.eps}
+    \newcommand{\polyfiletcourtbleuclair}{ressources/filetcourtbleuclair.eps}
+    \newcommand{\polyfiletcourtbleu}{ressources/filetcourtbleu.eps}
+    \newcommand{\polylogovert}{ressources/logovert.eps}
+    \newcommand{\polylogohori}{ressources/logohori.eps}
+    \newcommand{\polyarmes}{ressources/armes.eps}
+\fi
+%    \end{macrocode}
+%
+%\subsection{Longeurs}
+%
+%Le package définit beaucoup de longueurs qui seront utilisées pour régler les marges, la taille des logos,la disposition des éléments sur la page de titre, les en-têtes...
+%
+%\subsubsection{Longueurs définies} On commence par définir quelques longueurs, choisies par la DIRCOM en accord avec la charte graphique.
+%
+%\paragraph{Marges}
+%\begin{macro}{\margehaut}
+%Longueur entre le haut de la page et le haut de la boîte de texte principal.
+%    \begin{macrocode}
+\newlength{\margehaut}
+\setlength{\margehaut}{40mm}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\hauteurentete}
+%Longueur entre le haut de l'en-tête et le haut de la boîte de texte principale.
+%    \begin{macrocode}
+\newlength{\hauteurentete}
+\setlength{\hauteurentete}{27mm}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\separationentente}
+%Longueur entre le bas de l'en-tête et le haut de la boîte de texte principale.
+%    \begin{macrocode}
+\newlength{\separationentete}
+\setlength{\separationentete}{12mm}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\margecote}
+%Longueur de la marge des cotés, entre les côtés de la page et les côtés de la boîte de texte principale. Longueur utilisée par l'option |oneside|.
+%    \begin{macrocode}
+\newlength{\margecote}
+\setlength{\margecote}{20mm}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\margecoteinterieur}
+%Longueur de la marge du côté intérieur. Longueur utilisée par l'option |twoside|.
+%    \begin{macrocode}
+\newlength{\margecoteinterieur}
+\setlength{\margecoteinterieur}{22.5mm}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\margecoteexterieur}
+%Longueur de la marge du côté extérieur. Longueur utilisée par l'option |twoside|.
+%    \begin{macrocode}
+\newlength{\margecoteexterieur}
+\setlength{\margecoteexterieur}{17.5mm}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\margebas}
+%Longueur entre le bas de la page et le bas de la boîte de texte principale.
+%    \begin{macrocode}
+\newlength{\margebas}
+\setlength{\margebas}{35mm}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\separationpied}
+%Longueur entre le bas de la boîte de texte principale et le haut du pied de page.
+%    \begin{macrocode}
+\newlength{\separationpied}
+\setlength{\separationpied}{17.5mm}
+%    \end{macrocode}
+%\end{macro}
+%\paragraph{Taille des logos}
+%\begin{macro}{\hauteurlogohori}
+%Taille du logo horizontal de l'X utilisé dans les en-têtes.
+%    \begin{macrocode}
+\newlength{\hauteurlogohori}
+\setlength{\hauteurlogohori}{15mm}
+%    \end{macrocode}
+%\end{macro}
+%\paragraph{Page de titre} Ces longueurs sont utilisées sur la page de titre de l'option |notitlepage| uniquement (sauf |\hauteurlogopage|).
+%\begin{macro}{\separationtitre}
+%Longueur entre le haut de la page de titre et le haut de la première ligne contenant le logo vertical de l'École, les auteurs et la date.
+%    \begin{macrocode}
+\newlength{\separationtitre}
+\setlength{\separationtitre}{15mm}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\epaisseurtrait}
+%Épaisseur des filets qui encadrent verticalement le titre.
+%    \begin{macrocode}
+\newlength{\epaisseurtrait}
+\setlength{\epaisseurtrait}{1pt}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\separationlignestitre}
+%Longueur qui sépare le titre du sous-titre en plus de l'interligne normal.
+%    \begin{macrocode}
+\newlength{\separationlignestitre}
+\setlength{\separationlignestitre}{3mm}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\separationtitrecorps}
+%Longueur entre le deuxième filet et le haut de la première ligne de texte après le titre.
+%    \begin{macrocode}
+\newlength{\separationtitrecorps}
+\setlength{\separationtitrecorps}{15mm}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\hauteurlogopage}
+%Sur la page de titre de l'option |titlepage|, hauteur de l'image des armes de l'École en arrière-plan.
+%    \begin{macrocode}
+\newlength{\hauteurlogopage}
+\setlength{\hauteurlogopage}{0.6\textheight}
+%    \end{macrocode}
+%\end{macro}
+%\paragraph{En-têtes et pieds de page}
+%\begin{macro}{\separationentetelogo}
+%Longueur entre le côté intérieur du logo en en-tête et le côté intérieur de la minipage en en-tête qui contient le titre du document. Cette longueur est inutile avec les options |sectionmark|, |chaptermark| et |markboth|.
+%    \begin{macrocode}
+\newlength{\separationentetelogo}
+\setlength{\separationentetelogo}{20mm}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\filetpiedcentre}
+%Largeur du filet au dessus du numéro de page dans le pied central.
+%    \begin{macrocode}
+\newlength{\largeurfiletpiedcentre}
+\setlength{\largeurfiletpiedcentre}{4mm}
+%    \end{macrocode}
+%\end{macro}
+%
+%\subsubsection{Longueur calculées}
+%
+%Les longueurs suivantes sont calculées à partir des longueurs précédentes.
+%
+%\paragraph{Taille des logos}
+%\begin{macro}{\largeurlogovert}
+%Selon la charte graphique, la largeur du logo vertical sur une page de titre est $y/7$ où $y$ est la largeur de la page.
+%    \begin{macrocode}
+\newlength{\largeurlogovert}
+\setlength{\largeurlogovert}{\paperwidth/\real{7}}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\hauteurlogovert}
+%1.361 est le ration hauteur/largeur du logo vertical de l'École.
+%    \begin{macrocode}
+\newlength{\hauteurlogovert}
+\setlength{\hauteurlogovert}{\largeurlogovert*\real{1.361}}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\largeurlogohori}
+%1.859 est le ration hauteur/largeur du logo vertical de l'École.
+%    \begin{macrocode}
+\newlength{\largeurlogohori}
+\setlength{\largeurlogohori}{\hauteurlogohori*\real{1.859}}
+%    \end{macrocode}
+%\end{macro}
+%\paragraph{Page de titre}
+%\begin{macro}{\distancetitrelogo}
+%Argument négatif d'un |\vspace| réglé pour que la distance verticale entre le haut de la page et le haut de la première ligne contenant le logo soit bien |\separationtitre|.
+%    \begin{macrocode}
+\newlength{\distancetitrelogo}
+\setlength{\distancetitrelogo}{\separationtitre-\margehaut}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\separationlogotrait}
+%Distance entre le bas du logo et le premier filet de la page de titre.
+%    \begin{macrocode}
+\newlength{\separationlogotrait}
+\setlength{\separationlogotrait}{-\baselineskip*2+10mm}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\largeurminipage}
+%Largeur des minipage contenant les auteurs et la date sur la page de titre.
+%    \begin{macrocode}
+\newlength{\largeurminipage}
+\setlength{\largeurminipage}{(\textwidth-\largeurlogovert)/\real{2}}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\distancetitrecorps}
+%Argument d'un |\vspace| réglé pour que la distance verticale entre le deuxième filet et le haut de la première ligne du texte soit bien |\separationtitrecorps|.
+%    \begin{macrocode}
+\newlength{\distancetitrecorps}
+\setlength{\distancetitrecorps}{\separationtitrecorps-\baselineskip*2}
+%    \end{macrocode}
+%\end{macro}
+%\paragraph{En-têtes et pieds de page}
+%\begin{macro}{\largeurtitreentete}
+%Largeur de la minipage contenant le titre du document dans les en-têtes.
+%    \begin{macrocode}
+\newlength{\largeurtitreentete}
+\setlength{\largeurtitreentete}{\textwidth-\largeurlogohori
+    -\separationentetelogo}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\decalageverticalentete}
+%Longeur ajustée pour que le titre ou la ligne d'en-tête intérieur soit alignée verticalement avec le « École polytechnique » du logo horizontal qui lui fait face. Le 2.6 remplit cette fonction.
+%    \begin{macrocode}
+\newlength{\decalageverticalentete}
+\setlength{\decalageverticalentete}{\hauteurlogohori/\real{2.6}}
+%    \end{macrocode}
+%\end{macro}
+%
+%\subsection{Marges,en-têteset pieds de page}
+%
+%On utilise les package |geometry| et |titlesec| pour les régler à l'aide des longueurs définies auparavant.  Les marges gauches et droites sont définies par les options |oneside| et |twoside|.
+%    \begin{macrocode}
+\geometry{
+    top=\margehaut,headheight=\hauteurentete,headsep=\separationentete,
+    bottom=\margebas,footskip=\separationpied
+}
+%    \end{macrocode}
+%On définit d'abord les contenus des differents en-têtes et pieds de page.
+%\begin{macro}{\piedcentre}
+%    \begin{macrocode}
+\newcommand{\piedcentre}{
+    \textcolor{bleu303}{\shortstack[c]
+        {\rule{\largeurfiletpiedcentre}{0.3mm}\\\thepage}}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\enteteinterieur}
+%L'argument sert à insérer |\flushright| dans le cas ou l'en-tête est sur une page impaire.
+%    \begin{macrocode}
+\newcommand{\enteteinterieur}[1]{
+    \raisebox{\decalageverticalentete}
+        {\begin{minipage}[b]{\largeurtitreentete}
+            \scshape#1\textcolor{bleu303}
+            \polytitresave
+        \end{minipage}}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\enteteexterieur}
+%    \begin{macrocode}
+\newcommand{\enteteexterieur}{
+    \includegraphics[height=\hauteurlogohori]{\polylogohori}
+}
+%    \end{macrocode}
+%\end{macro}
+%Spécifications supplémentaires pur pair/impair, redéfinies par l'option |markboth|.
+%\begin{macro}{\enteteinterieurpair}
+%    \begin{macrocode}
+\newcommand{\enteteinterieurpair}{
+    \enteteinterieur{}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\entetinterieurimpair}
+%    \begin{macrocode}
+\newcommand{\enteteinterieurimpair}{
+    \enteteinterieur{\flushright}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\entetes}
+%Comme l'en-tête contient le titre, on les active uniquement quand le titre est defini d'ou cette forme de commande qui sera placée dans la commande |title| redéfinie.
+%    \begin{macrocode}
+\newcommand{\entetes}{
+    \newpagestyle{polytechnique}{
+%    \end{macrocode}
+%On definit un nouveau style d'en-tetes. Voir la documentation du package |titlesec| pour la syntaxe.
+%    \begin{macrocode}
+    \sethead[\enteteinterieurpair]% left even
+            []% center even
+            [\enteteexterieur]% right even
+            {\enteteexterieur}% left odd
+            {}% center odd
+            {\enteteinterieurimpair}% right odd
+    \setfoot{}% left odd
+             {\piedcentre}% center odd
+             {}% right odd
+    }
+    \pagestyle{polytechnique}
+}
+%    \end{macrocode}
+%\end{macro}
+%On redéfinit ensuite le style de page par défaut de la page de titre et des titres de chapitres, |plain|, pour qu'il soit en accord avec le reste du document.
+%    \begin{macrocode}
+\renewpagestyle{plain}{
+    \sethead{}% left
+            {}% center
+            {}% right
+    \setfoot{}% left
+            {\piedcentre}% center
+            {}% right
+}
+%    \end{macrocode}
+%Puisque les en-têtes normaux utilisent le titre, tant que le titre n'a pas été défini avec |\title| on laisse les en-têtes normaux par défaut.
+%    \begin{macrocode}
+\pagestyle{plain}
+%    \end{macrocode}
+%
+%\subsection{Pages de titre}
+%Grace aux commandes suivantes, on peut faire |\title|\marg{titre} au lieu de |\renewcommand{\polytitre}|\marg{titre}.
+%
+%On commence par définir un booléen |subtitle| vrai si et seulement si l'utilisateur a définit un sous-titre par la commande |\subtitle|.
+%    \begin{macrocode}
+\newboolean{subtitle}\setboolean{subtitle}{false}
+%    \end{macrocode}
+%\begin{macro}{\polysoustitresave}
+%À voir comme une variable dans laquelle on stocke une valeur.
+%    \begin{macrocode}
+\newcommand{\polysoustitresave}{}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\subtitle}
+%Commande par laquelle l'utilisateur définit le sous-titre.
+%    \begin{macrocode}
+\newcommand*{\subtitle}[1]{
+    \renewcommand*{\polysoustitresave}{#1}
+%    \end{macrocode}
+%Si le sous-titre a éé défini, on met le booléen |subtitle| à vrai.
+%    \begin{macrocode}
+    \setboolean{subtitle}{true}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\polytitresave}
+%Idem que |\polysoustitresave|.
+%    \begin{macrocode}
+\newcommand{\polytitresave}{}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\title}
+%Commande utilisée par l'utilisateur pour définit le titre. Comme les en-tête dépendent du titre, on les définit une fois qu'on connaît le titre.
+%    \begin{macrocode}
+\renewcommand*{\title}[1]{
+    \renewcommand*{\polytitresave}{#1}
+    \entetes
+}
+%   \end{macrocode}
+%\end{macro}
+%\begin{macro}{\polyauthorsave}
+%Idem que |polysoustitresave| et |\polytitresave|.
+%    \begin{macrocode}
+\newcommand{\polyauthorsave}{}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\author}
+%    \begin{macrocode}
+\renewcommand*{\author}[1]{
+    \renewcommand*{\polyauthorsave}{#1}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\polydatesave}
+%|\today| est la date du jour dans la langue qu'il faut si |babel| est actif.
+%    \begin{macrocode}
+\newcommand{\polydatesave}{\today}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\date}
+%    \begin{macrocode}
+\renewcommand*{\date}[1]{
+    \renewcommand*{\polydatesave}{#1}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\polylogosup}
+%Logo(s) de bas de page pour l'option |titlepage|. C'est une variable de stockage initialisee par defaut au logo de l'École vertical.
+%    \begin{macrocode}
+\newcommand{\polylogosup}{
+\includegraphics[height=\hauteurlogovert]{\polylogovert}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\logo}
+%Commande utilisée par l'utilisateur pour définir un deuxième logo.
+%    \begin{macrocode}
+\newcommand{\logo}[1]{
+%    \end{macrocode}
+%On redefinit la variable |\polylogosup|.
+%    \begin{macrocode}
+    \renewcommand{\polylogosup}{
+        \includegraphics[height=1.5\hauteurlogohori]
+            {\polylogohori}
+        \hspace{0.05\textwidth}
+%    \end{macrocode}
+%Pour une certaine harmonie, on ne laisse pas à l'utilisateur le choix des dimensions du logo. Celles-ci sont déterminées en fonction des dimensions du logo horizontal de l'X pour que les deux logos aient des proportions similaires.
+%    \begin{macrocode}
+        \includegraphics[height=\hauteurlogovert,
+            width=1.5\largeurlogohori,
+            keepaspectratio]{#1}%
+    }
+}
+%    \end{macrocode}
+%\end{macro}
+%
+%\subsection{Divers}
+%
+%\begin{macro}{\MakeUppercaseWithNewline}
+%Permet de mettre plusieurs lignes en majuscules (pour le titre).
+%    \begin{macrocode}
+\newcommand{\MakeUppercaseWithNewline}[1]{
+      \begingroup
+        \let\SavedOrgNewline\\%
+        \DeclareRobustCommand{\\}{\SavedOrgNewline}%
+        \MakeUppercase{#1}%
+    \endgroup
+}
+%    \end{macrocode}
+%\end{macro}
+%\Finale
+%
+%\typeout{****************************************************}
+%\typeout{*                                                  *}
+%\typeout{* Pour finir l'installation, deplacez les fichiers *}
+%\typeout{* polytechnique.sty, les .pdf et les .eps dans le  *}
+%\typeout{* dossier ou se trouvent les packages de votre di- *}
+%\typeout{* tribution (si ce n'est pas deja fait).           *}
+%\typeout{*                                                  *}
+\PrintChanges
+\endinput
