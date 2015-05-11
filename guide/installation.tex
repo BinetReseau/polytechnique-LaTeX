@@ -1,0 +1,80 @@
+\documentclass[a4paper,12pt,twoside]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[french]{babel}
+\usepackage{lipsum,url,csquotes}
+\usepackage[hidelinks,hyperfootnotes=false]{hyperref}
+\usepackage[titlepage,fancysections,pagenumber]{polytechnique}
+
+
+\title{De la mise en page à l'École}
+\subtitle{Petit guide à l'installation de \textrm{\LaTeX}\\et du package \textup{\texttt{polytechnique v1.3.0}}}
+\author{Denis \bsc{Merigoux}}
+\logo{logo.pdf}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+Le binet TypographiX, refondé par la promotion X2013 pendant son tronc commun, s'est donné pour objectif de faciliter pour les élèves la création de documents respectant la nouvelle charte graphique de l'École, tout en développant l'usage du moteur typographique \LaTeX.
+
+En collaboration avec la Direction de la communication, le binet est fier de vous présenter le package \texttt{polytechnique}, qui met en page automatiquement le document \LaTeX{} qui l'incluent avec une présentation soignée reprenant les logotypes de l'X et les codes de la charte graphique.
+
+Ce document a pour objet de documenter l'utilisation de ce package mais avant tout de donner aux élèves la procédure nécessaire à l'installation de \LaTeX{} et l'inclusion de ce package dans leur documents. Pour ce qui est de l'utilisation du logiciel et de la marche à suivre pour produire son premier document, on pourra se référer avec profit à la \textbf{page LaTeX du WikiX} ou à d'autres tutoriels en ligne.
+
+\section{Installation de \rmfamily{\LaTeX}}
+
+\LaTeX est un logiciel libre et il en existe de multiples distributions, ainsi les solutions que je présente par la suite ne sont pas uniques. Néanmoins elles ont l'avantage de marcher...
+
+\subsection{Windows}
+
+\begin{enumerate}
+	\item Télécharge la dernière version de MiKTeX sur \url{http://miktex.org/download}.
+	\item Lance l'installation. \textbf{Attention !} Lorsqu'un menu déroulant te propose de choisir pour \emph{Install missing packages on-the-fly}, clique sur \emph{Yes} et non pas \emph{Ask me first} comme sélectionné par défaut.
+	\item Une fois l'installation terminée, cherche dans \enquote{Tous les programmes} l'utilitaire \emph{Update (Admin)}, puis lance-le. \textbf{Attention !} Si tu es sur le réseau de l'X, clique sur \emph{Connection settings} puis entre l'adresse du proxy (\texttt{kuzh.polytechnique.fr} port \texttt{8080}). Ensuite, choisis \emph{Nearest package repository}, clique sur \emph{Suivant} puis attends (ça peut durer 3 minutes). Quand la liste apparaît, coche tout et lance la mise à jour des packages.
+	\item Lance l'utilitaire \emph{Settings (Admin)} puis clique tour à tour sur les boutons \emph{Refresh FNDB} et \emph{Update formats}. Il faudra répéter cette dernière opération à chaque fois que vous installerez de nouveaux packages.
+\end{enumerate}
+
+Il faut ensuite installer un éditeur de code source, par exemple TeXmaker qui est disponible sur toutes les plate-formes.
+
+\subsection{Macintosh}
+
+Il suffit de télécharger et d'installer MacTeX. Pour mettre à jour ou installer des packages, il faut utiliser l'application \emph{Tex Live utility}, dont un tutoriel en français très bien fourni est disponible à l'adresse suivante :\url{http://www.cuk.ch/articles/4466}. Ne pas oublier de configurer les paramètres du proxy si tu es à l'X (\texttt{kuzh.polytechnique.fr:8080}).
+
+Il faut ensuite installer un éditeur de code source, par exemple TeXmaker qui est disponible sur toutes les plate-formes.
+Remarque, le site de la distribution contiens quelques recommandations pour ne pas avoir de surprises pendant une mise à jour majeur de OS X.
+
+\subsection{GNU/Linux}
+
+Le paquet à installer est \texttt{texlive-full} ou \texttt{texlive}. Tu auras peut-être aussi besoin d'installer d'autres paquets pour manipuler les fichiers produits par LaTex mais comme tu es sous Linux, on va supposer que tu sais chercher de l'aide en ligne. Il existe d'excellents éditeurs LaTeX sous GNU/Linux, par exemple Kile (pour KDE), TeXmaker ...
+
+\section{Installation du package}
+
+\subsection{Prérequis}
+
+Pour que le package puisse fonctionner, il faut que ta distribution LaTeX contienne les packages suivants : \texttt{ifthen}, \texttt{ifpdf}, \texttt{titlesec}, \texttt{graphicx}, \texttt{geometry}, \texttt{calc}, \texttt{lmodern} et \texttt{color}.
+
+La plupart sont présents par défaut dans les installations standards mais si vous avez à la compilation une erreur du type \verb|Error : file titlesec.sty not found|, c'est que tu n'as pas installé le package \texttt{titlesec}.
+
+
+\subsection{Installation}
+
+Après avoir téléchargé l'archive \texttt{polytechnique.zip}, extrais le dossier \texttt{polytechnique} vers un des répertoire où \LaTeX{} va chercher les packages \LaTeX{} :
+\begin{itemize}
+	\item sur Windows, c'est \verb|C:\Program Files\MiKTeX 2.9\tex\latex\| ;
+	\item sur Mac\footnote{Merci à Guillaume \bsc{Didier} pour ses conseils sous Mac.}, c'est \verb|Users/<user name>/Library/texmf/tex/latex/local/| pour l'installer uniquement pour soi (recommandé) ou \verb|/usr/local/texlive/texmf-local| pour l'installer pour tous les utilisateurs (nécessite les droits d'administrateurs) (\emph{il se peut que vous ayez à créer ces dossiers, et} \verb|/usr| \emph{et} \verb|/Users/<user name>/Library| \emph{sont cachés}); 
+	\item sur Linux, c'est \verb|$TEXMFHHOME/tex/latex/| avec \verb|$$TEXMFHOME| usuellement définie à \verb|~/texmf| mais dont tu peux connaître la valeur avec \verb|kpsewhich -var-value TEXMFHOME| (\emph{il se peut que vous ayez à créer ce dossier.)};
+\end{itemize}
+
+Une fois ceci fait, il faut rafraîchir la base de données des packages installés :
+\begin{itemize}
+	\item sur Windows, lance l'utilitaire \emph{Settings (Admin)} puis cliquez tour à tour sur les boutons \emph{Refresh FNDB} et \emph{Update formats} ;
+	\item sur Mac, ouvre un terminal et entre la commande \verb|mktexlsr| si tu l'as installé dans ta Bibliothèque (Library), ou \verb|sudo -H mktexlsr| si tu l'as installé pour tout les utilisateurs (\emph{la commande sudo peut être dangereuse, relisez deux fois vos commandes pour être sûr de ne pas avoir fait d'erreurs avant d'appuyer sur entrée}) ;
+	\item sur Linux, ouvre un terminal et entre la commande \verb|mktexlsr|.
+\end{itemize}
+
+
+\end{document}
