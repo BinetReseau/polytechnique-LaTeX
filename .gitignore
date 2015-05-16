@@ -1,6 +1,5 @@
-polytechnique.pdf
-guide/installation.pdf
-ressources/
+*.pdf
+*.eps
 *.aux
 *.fdb_latexmk
 *.fls

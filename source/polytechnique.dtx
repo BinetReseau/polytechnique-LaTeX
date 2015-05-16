@@ -531,21 +531,21 @@ LaTeX version 1999/12/01 or later.
 %Les lignes suivantes servent à inclure les logos et éléments graphiques. Les fichiers correspondant doivent se trouver dans le même dossier que |polytechnique.sty|. |\ifpdf| exécute la première partie du code si le document est compilé avec |pdflatex|, et la deuxième si le document est compilé avec |latex|. Ceci permet d'utiliser des images vectorielles lorsque c'est possible.
 %    \begin{macrocode}
 \ifpdf
-    \newcommand{\polyfiletlongrouge}{ressources/filetlongrouge.pdf}
+    \newcommand{\polyfiletlongrouge}{filetlongrouge.pdf}
     \newcommand{\polyfiletcourtbleuclair}
-        {ressources/filetcourtbleuclair.pdf}
-    \newcommand{\polyfiletcourtbleu}{ressources/filetcourtbleu.pdf}
-    \newcommand{\polylogovert}{ressources/logovert.pdf}
-    \newcommand{\polylogohori}{ressources/logohori.pdf}
-    \newcommand{\polyarmes}{ressources/armes.pdf}
+        {filetcourtbleuclair.pdf}
+    \newcommand{\polyfiletcourtbleu}{filetcourtbleu.pdf}
+    \newcommand{\polylogovert}{logovert.pdf}
+    \newcommand{\polylogohori}{logohori.pdf}
+    \newcommand{\polyarmes}{armes.pdf}
 \else
-    \newcommand{\polyfiletlongrouge}{ressources/filetlongrouge.eps}
+    \newcommand{\polyfiletlongrouge}{filetlongrouge.eps}
     \newcommand{\polyfiletcourtbleuclair}
-        {ressources/filetcourtbleuclair.eps}
-    \newcommand{\polyfiletcourtbleu}{ressources/filetcourtbleu.eps}
-    \newcommand{\polylogovert}{ressources/logovert.eps}
-    \newcommand{\polylogohori}{ressources/logohori.eps}
-    \newcommand{\polyarmes}{ressources/armes.eps}
+        {filetcourtbleuclair.eps}
+    \newcommand{\polyfiletcourtbleu}{filetcourtbleu.eps}
+    \newcommand{\polylogovert}{logovert.eps}
+    \newcommand{\polylogohori}{logohori.eps}
+    \newcommand{\polyarmes}{armes.eps}
 \fi
 %    \end{macrocode}
 %
