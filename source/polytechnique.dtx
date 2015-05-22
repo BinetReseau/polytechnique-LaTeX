@@ -71,7 +71,8 @@ LaTeX version 1999/12/01 or later.
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
-\usepackage[pagenumber,fancysections,sectionmark]{polytechnique}
+\usepackage[hidelinks]{hyperref}
+\usepackage[fancysections,titlepage,sectionmark]{polytechnique}
 \makeatletter
 \renewcommand{\index@prologue}{\section*{Index}%Redéfinit le texte avant l'index
                 %Commande issue de tex/latex/base/doc.sty
@@ -105,7 +106,8 @@ LaTeX version 1999/12/01 or later.
 %
 %\title{Le package \textsf{polytechnique}}
 %\subtitle{\fileversion{} datée du \filedate.}
-%\author{Denis Merigoux}
+%\author{Denis \textsc{Merigoux}}
+%\logo{typographix.pdf}
 %
 %\maketitle
 %
@@ -118,23 +120,23 @@ LaTeX version 1999/12/01 or later.
 %\renewcommand{\contentsname}{Sommaire}
 %\tableofcontents
 %\clearpage
-%\newgeometry{
-%    top=\margehaut,headheight=\hauteurentete,headsep=\separationentete,
-%    bottom=\margebas,footskip=\separationpied,left=\margecote,right=\margecote,includemp
-%}
 %\section{Utilisation}
 %
+%\subsection{Chargement du package}
 %Pour utiliser le package, il suffit d'inclure dans le préambule de son document la ligne :
 %\begin{verbatim}
 %    \usepackage{polytechnique}
 %\end{verbatim}
+%On se reportera à la section \ref{options} page \pageref{options} pour l'utilisation des options du package.
 %
-%Il faut également définir dans le préambule les métadonnées du document, avec deux nouveaux champs optionnels |\subtitle| et |\logo| :
+%\subsection{Métadonnées du document}
+%
+%La page de titre est gérée entièrement par le package. Pour la définir, il faut signaler dans le préambule les métadonnées du document qui apparaîtront sur la page de titre, avec deux nouveaux champs optionnels |\subtitle| et |\logo| par rapport au \LaTeX{} standard :
 %\begin{itemize}
-%\item \DescribeMacro{\subtitle}|\subtitle|\marg{sous-titre} où \meta{sous-titre} peut être sur plusieurs lignes séparées par des |\\| ;
-%\item \DescribeMacro{\logo}|\logo|\marg{chemin} où \meta{chemin} est le chemin relatif vers le fichier d'un logo supplémentaire (entreprise, laboratoire, etc.) ; si le logo est dans le même dossier que le |.tex|, \meta{chemin} est le nom du fichier.
+%\item |\subtitle|\marg{sous-titre} où \meta{sous-titre} peut être sur plusieurs lignes séparées par des |\\| ;
+%\item |\logo|\marg{chemin} où \meta{chemin} est le chemin relatif vers le fichier d'un logo supplémentaire (entreprise, laboratoire, etc.) ; si le logo est dans le même dossier que le |.tex|, \meta{chemin} est le nom du fichier.
 %\end{itemize}
-%Il est recommandé de recadrer au mieux l'image du logo pour qu'elle prenne les meilleures dimensions possibles sur la page. Le deuxième logo n'apparaîtra que si l'option |titlepage| est activée.
+%Il est recommandé de recadrer au mieux l'image du logo pour qu'elle prenne les meilleures dimensions possibles sur la page. Le deuxième logo apparaîtra sur les deux pages de titre différentes (option |titlepage| ou |notitlepage|) dont il modifiera la présentation en conséquence.
 %Cela donne dans son préambule :
 %\begin{verbatim}
 %    \title{Le titre}
@@ -144,13 +146,25 @@ LaTeX version 1999/12/01 or later.
 %    \date{La date, enlever la ligne pour avoir la date du jour}
 %    %\logo{Chemin relatif vers le logo}
 %\end{verbatim}
-%
+
 %Puis rajouter après |\begin{document}| la commande |\maketitle|. Les champs |\title|, |\subtitle|, |\author| et |\date| peuvent être sur plusieurs lignes, c'est par exemple utile pour une liste d'auteurs. On passera alors à la ligne avec la commande |\\|.
 %
-%Si un des champs est trop grand verticalement et nuit à la mise en page globale, on pourra réduire la taille des caractères à l'aide de |\large|, |\Large| ou |\normalsize| par exemple. On pourra aussi utiliser un tableau gagner en place horizontalement.
+%Si un des champs est trop grand verticalement et nuit à la mise en page globale, on pourra réduire la taille des caractères à l'aide de |\large|, |\Large| ou |\normalsize| par exemple. On pourra aussi utiliser un tableau pour |\author| afin de gagner en place horizontalement :
+%\begin{verbatim}
+%\author{
+%    \begin{tabular}{rlcrl}
+%    Coordinateur :&Jean Dupont&---&Tuteur :&Paul Martin
+%    \end{tabular}
+%    \\[\baselineskip]
+%    \begin{tabular}{cccc}
+%    Nom1&Nom2&Nom3\\%    Nom4&Nom5&Nom6
+%    \end{tabular}
+%}
+%\end{verbatim}
 %
 %\clearpage
 %\section{Options}
+%\label{options}
 %
 %\subsection{Options globales}
 %
@@ -189,6 +203,10 @@ LaTeX version 1999/12/01 or later.
 %    \PrintIndex
 %}
 %\clearpage
+%\newgeometry{
+%    top=\margehaut,headheight=\hauteurentete,headsep=\separationentete,
+%    bottom=\margebas,footskip=\separationpied,left=\margecote,right=\margecote,includemp
+%}
 %\section{Code source}
 %
 %\subsection{Déclaration des options}
@@ -246,61 +264,7 @@ LaTeX version 1999/12/01 or later.
 \DeclareOption{notitlepage}{
     \AtBeginDocument{
         \renewcommand*{\maketitle}{
-            \thispagestyle{plain}
-            \vspace*{\distancetitrelogo}
-%    \end{macrocode}
-% D'abord le bloc de gauche avec le nom des auteurs.
-%    \begin{macrocode}
-            \noindent
-            \begin{minipage}[b]{\largeurminipage}
-                \hspace{0cm}\polyauthorsave
-            \end{minipage}
-%    \end{macrocode}
-%La |minipage| permet les sauts de ligne pour avoir plusieurs auteurs, et |\hspace{0cm}| sert a ne pas faire une minipage vide si |\polyauthorsave={}|.
-%    \begin{macrocode}
-            \hspace*{\fill}
-%    \end{macrocode}
-%Les blocs sont séparés par des ressorts horizontaux. Vient ensuite le bloc central avec le logo de l'X.
-%    \begin{macrocode}
-            \includegraphics[width=\largeurlogovert]{\polylogovert}
-            \hspace*{\fill}
-%    \end{macrocode}
-%Et pour conclure la première ligne le bloc de droite qui contient la |\date|.
-%    \begin{macrocode}
-            \begin{minipage}[b]{\largeurminipage}
-                \flushright\hspace{0cm}\polydatesave
-            \end{minipage}
-%    \end{macrocode}
-%Le |\hspace{0cm}| sert a ne pas faire une minipage vide si |\polydatesave={}|.
-%    \begin{macrocode}
-            \\[\separationlogotrait]
-%    \end{macrocode}
-%Deux filets horizontaux, le titre et le sous-titre sont au milieu.
-%    \begin{macrocode}
-            \begin{center}
-                \textcolor{bleu303}{\rule{\textwidth}{\epaisseurtrait}}
-                \\
-                \color{bleu303}\Huge\scshape
-                \MakeUppercaseWithNewline{\polytitresave}
-%    \end{macrocode}
-%La ligne qui précède affiche le titre. La commande |\MakeUpperCaseWithNewLine| sera définie par la suite.
-%    \begin{macrocode}
-                \ifthenelse{\boolean{subtitle}}{
-%    \end{macrocode}
-%Le booléen |subtitle| est vrai si et seulement si le champ |\subtitle| a été initialisé. La clause qui suit s'exécute si il y a un sous-titre.
-%    \begin{macrocode}   
-                    \\[\separationlignestitre]
-                    \Large\upshape\polysoustitresave\\\normalsize
-                }{
-%    \end{macrocode}
-%Et maintenant, s'il n'y en a pas.
-%    \begin{macrocode}
-                    \\
-                    \normalsize
-                }
-                \textcolor{bleu303}{\rule{\textwidth}{\epaisseurtrait}}
-            \end{center}
-            \vspace*{\distancetitrecorps}
+            \notitlepagelayout{}
         }
     }
 }
@@ -320,43 +284,7 @@ LaTeX version 1999/12/01 or later.
 \DeclareOption{titlepage}{
     \AtBeginDocument{
         \renewcommand*{\maketitle}{
-%    \end{macrocode}
-%On met d'abord les armes de l'École en arrière-plan. On créé pour cela une boîte à laquelle on donne des dimensions virtuelles nulles pour ne pas empiéter sur les autres éléments. L'image se trouve dans cette boîte.
-%    \begin{macrocode}
-            \noindent\makebox[\textwidth][c]{%
-              \raisebox{-\totalheight}[0pt][0pt]{%
-            \includegraphics[height=\hauteurlogopage]{\polyarmes}}}
-%    \end{macrocode}
-%On passe maintenant au titre, séparé par un espace vertical du haut de la page. La commande |\MakeUpperCaseWithNewLine| permet de mettre plusieurs lignes à la suite en capitales.
-%    \begin{macrocode}
-            \vspace*{0.125\textheight}
-            \begin{center}
-                \Huge\sffamily\bfseries\color{bleu303}
-                \MakeUppercaseWithNewline{\polytitresave}\\
-%    \end{macrocode}
-%Ensuite, le sous-titre. Le |\hspace{0cm}| est là pour occuper la place, sa présence est indispensable pour gérer le cas où |\polysoustitresave={}|.
-%    \begin{macrocode}
-                \vspace*{0.2\textheight}
-                \LARGE\hspace{0cm}\polysoustitresave\\
-%    \end{macrocode}
-%Ce qui suit est la date, idem pour le |\hspace{0cm}|.
-%    \begin{macrocode}
-                \vspace*{0.15\textheight}
-                \Large\mdseries\hspace{0cm}\polydatesave\\
-                \includegraphics{\polyfiletcourtbleu}
-                \\[0.4\baselineskip]
-%    \end{macrocode}
-%Ce qui suit affiche les auteurs, idem pour le |\hspace{0cm}|.
-%    \begin{macrocode}
-                \rmfamily\hspace{0cm}\polyauthorsave\\[\fill]
-%    \end{macrocode}
-%Enfin, le(s) logo(s) en bas de la page. On rabote la marge basse habituelle avec le |\vspace*{-0.5\margebas}|.
-%    \begin{macrocode}
-                $\;$\polylogosup{}
-                \vspace*{-0.5\margebas}
-            \end{center}
-            \thispagestyle{empty}
-            \clearpage
+            \titlepagelayout{}
         }
     }
 }
@@ -801,7 +729,7 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\entetes}
-%Comme l'en-tête contient le titre, on les active uniquement quand le titre est defini d'ou cette forme de commande qui sera placée dans la commande |title| redéfinie.
+%Comme l'en-tête contient le titre, on les active uniquement quand le titre est défini d'où cette forme de commande qui sera placée dans la commande |title| redéfinie.
 %    \begin{macrocode}
 \newcommand{\entetes}{
     \newpagestyle{polytechnique}{
@@ -839,6 +767,8 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %
 %\subsection{Pages de titre}
+%
+%\subsubsection{Commandes générales}
 %Grace aux commandes suivantes, on peut faire |\title|\marg{titre} au lieu de |\renewcommand{\polytitre}|\marg{titre}.
 %
 %On commence par définir un booléen |subtitle| vrai si et seulement si l'utilisateur a définit un sous-titre par la commande |\subtitle|.
@@ -876,7 +806,7 @@ LaTeX version 1999/12/01 or later.
     \renewcommand*{\polytitresave}{#1}
     \entetes
 }
-%   \end{macrocode}
+%    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\polyauthorsave}
 %Idem que |polysoustitresave| et |\polytitresave|.
@@ -904,22 +834,15 @@ LaTeX version 1999/12/01 or later.
 }
 %    \end{macrocode}
 %\end{macro}
-%\begin{macro}{\polylogosup}
-%Logo(s) de bas de page pour l'option |titlepage|. C'est une variable de stockage initialisee par defaut au logo de l'École vertical.
-%    \begin{macrocode}
-\newcommand{\polylogosup}{
-\includegraphics[height=\hauteurlogovert]{\polylogovert}
-}
-%    \end{macrocode}
-%\end{macro}
+
 %\begin{macro}{\logo}
 %Commande utilisée par l'utilisateur pour définir un deuxième logo.
 %    \begin{macrocode}
 \newcommand{\logo}[1]{
 %    \end{macrocode}
-%On redefinit la variable |\polylogosup|.
+%On redefinit la variable |\titlepagebottomline| pour l'option |titlepage|.
 %    \begin{macrocode}
-    \renewcommand{\polylogosup}{
+    \renewcommand{\titlepagebottomline}{
         \includegraphics[height=1.5\hauteurlogohori]
             {\polylogohori}
         \hspace{0.05\textwidth}
@@ -930,10 +853,161 @@ LaTeX version 1999/12/01 or later.
             width=1.5\largeurlogohori,
             keepaspectratio]{#1}%
     }
+%    \end{macrocode}
+%On redéfinit ensuite la commande |\notitlepageupperline| pour l'option |notitlepage|.
+%    \begin{macrocode}
+    \renewcommand{\notitlepageupperline}{	
+        \noindent
+        \begin{minipage}{\textwidth}
+%    \end{macrocode}
+%Le système de |minipage| et de |\parbox| est fait de tel sorte que les deux logos soient alignés à gauche et à droite sur la première ligne et verticalement au centre ; la date et le titre sont centrés sur la largeur et la hauteur.
+%    \begin{macrocode}
+            \parbox{0.333\textwidth}
+                {\raisebox{-0.5\height}
+                    {\includegraphics[width=\largeurlogovert]
+                        {\polylogovert}
+                    }
+                }
+            \parbox{0.333\textwidth}
+                 {\centering\polydatesave{}\\
+                     \polyauthorsave{}\\
+                     \includegraphics{\polyfiletcourtbleu}
+                 }
+            \parbox{0.333\textwidth}
+                {\flushright\raisebox{-0.5\height}
+                    {\includegraphics[height=\hauteurlogovert,
+                        width=1.5\largeurlogohori,
+                        keepaspectratio]{#1}
+                    }
+                }
+         \end{minipage}
+    }
 }
 %    \end{macrocode}
 %\end{macro}
-%
+%\subsubsection{Option \texttt{notitlepage}}
+%\begin{macro}{\notitlepageupperline}
+%Cette commande contient la partie haute de la page de titre pour l'option |notitlepage|. Cette commande est redéfinie par l'utilisation de |\logo| par l'utilisateur pour ajouter un deuxième logo.
+%    \begin{macrocode}
+\newcommand{\notitlepageupperline}{
+    \noindent
+    \begin{minipage}[b]{\largeurminipage}
+        \hspace{0cm}\polyauthorsave
+    \end{minipage}
+%    \end{macrocode}
+%La |minipage| permet les sauts de ligne pour avoir plusieurs auteurs, et |\hspace{0cm}| sert a ne pas faire une minipage vide si |\polyauthorsave={}|.
+%    \begin{macrocode}
+    \hspace*{\fill}
+%    \end{macrocode}
+%Les blocs sont séparés par des ressorts horizontaux. Vient ensuite le bloc central avec le logo de l'X.
+%    \begin{macrocode}
+    \includegraphics[width=\largeurlogovert]{\polylogovert}
+    \hspace*{\fill}
+%    \end{macrocode}
+%Et pour conclure la première ligne le bloc de droite qui contient la |\date|.
+%    \begin{macrocode}
+    \begin{minipage}[b]{\largeurminipage}
+        \flushright\hspace{0cm}\polydatesave
+    \end{minipage}
+}
+%    \end{macrocode}
+%Le |\hspace{0cm}| sert a ne pas faire une minipage vide si |\polydatesave={}|.
+%\end{macro}
+%\begin{macro}{\notitlepagelayout}
+%Cette commande est une variable contenant la partie haute de la page de titre de l'option |notitlepage|. En effet, cette ligne diffère selon la présence ou l'absence d'un deuxième logo.
+% D'abord le bloc de gauche avec le nom des auteurs.
+%    \begin{macrocode}
+\newcommand{\notitlepagelayout}{
+\thispagestyle{plain}
+            \vspace*{\distancetitrelogo}
+            \notitlepageupperline{}
+            \\[\separationlogotrait]
+%    \end{macrocode}
+%Deux filets horizontaux, le titre et le sous-titre sont au milieu.
+%    \begin{macrocode}
+            \begin{center}
+                    \textcolor{bleu303}
+                        {\rule{\textwidth}{\epaisseurtrait}}
+                    \\
+                    \color{bleu303}\Huge\scshape
+                    \MakeUppercaseWithNewline{\polytitresave}
+%    \end{macrocode}
+%La ligne qui précède affiche le titre. La commande |\MakeUpperCaseWithNewLine| sera définie par la suite.
+%    \begin{macrocode}
+                \ifthenelse{\boolean{subtitle}}{
+%    \end{macrocode}
+%Le booléen |subtitle| est vrai si et seulement si le champ |\subtitle| a été initialisé. La clause qui suit s'exécute si il y a un sous-titre.
+%    \begin{macrocode}   
+                    \\[\separationlignestitre]
+                    \Large\upshape\polysoustitresave\\\normalsize
+                }{
+%    \end{macrocode}
+%Et maintenant, s'il n'y en a pas.
+%    \begin{macrocode}
+                    \\
+                    \normalsize
+                }
+                \textcolor{bleu303}
+                    {\rule{\textwidth}{\epaisseurtrait}}
+            \end{center}
+            \vspace*{\distancetitrecorps}
+%    \begin{macrocode}
+}
+%    \end{macrocode}
+%\end{macro}
+%\subsubsection{Option \texttt{titlepage}}
+%\begin{macro}{\titlepagebottomline}
+%Logo(s) de bas de page pour l'option |titlepage|. C'est une variable de stockage initialisee par defaut au logo de l'École vertical.  Cette commande est redéfinie par l'utilisation de |\logo| par l'utilisateur pour ajouter un deuxième logo.
+%    \begin{macrocode}
+\newcommand{\titlepagebottomline}{
+\includegraphics[height=\hauteurlogovert]{\polylogovert}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\titlepagelayout}
+%Cette commande définit le contenu de la page de garde avec l'option |titlepage|.
+%    \begin{macrocode}
+\newcommand{\titlepagelayout}{
+%    \end{macrocode}
+%On met d'abord les armes de l'École en arrière-plan. On créé pour cela une boîte à laquelle on donne des dimensions virtuelles nulles pour ne pas empiéter sur les autres éléments. L'image se trouve dans cette boîte.
+%    \begin{macrocode}
+        \noindent\makebox[\textwidth][c]{%
+          \raisebox{-\totalheight}[0pt][0pt]{%
+        \includegraphics[height=\hauteurlogopage]{\polyarmes}}}
+%    \end{macrocode}
+%On passe maintenant au titre, séparé par un espace vertical du haut de la page. La commande |\MakeUpperCaseWithNewLine| permet de mettre plusieurs lignes à la suite en capitales.
+%    \begin{macrocode}
+        \vspace*{0.125\textheight}
+        \begin{center}
+            \Huge\sffamily\bfseries\color{bleu303}
+            \MakeUppercaseWithNewline{\polytitresave}\\
+%    \end{macrocode}
+%Ensuite, le sous-titre. Le |\hspace{0cm}| est là pour occuper la place, sa présence est indispensable pour gérer le cas où |\polysoustitresave={}|.
+%    \begin{macrocode}
+            \vspace*{0.2\textheight}
+            \LARGE\hspace{0cm}\polysoustitresave\\
+%    \end{macrocode}
+%Ce qui suit est la date, idem pour le |\hspace{0cm}|.
+%    \begin{macrocode}
+            \vspace*{0.15\textheight}
+            \Large\mdseries\hspace{0cm}\polydatesave\\
+            \includegraphics{\polyfiletcourtbleu}
+            \\[0.4\baselineskip]
+%    \end{macrocode}
+%Ce qui suit affiche les auteurs, idem pour le |\hspace{0cm}|.
+%    \begin{macrocode}
+            \rmfamily\hspace{0cm}\polyauthorsave\\[\fill]
+%    \end{macrocode}
+%Enfin, le(s) logo(s) en bas de la page. On rabote la marge basse habituelle avec le |\vspace*{-0.5\margebas}|.
+%    \begin{macrocode}
+            $\;$\titlepagebottomline{}
+            \vspace*{-0.5\margebas}
+        \end{center}
+        \thispagestyle{empty}
+        \clearpage
+}
+%    \end{macrocode}
+%\end{macro}
 %\subsection{Divers}
 %
 %\begin{macro}{\MakeUppercaseWithNewline}
