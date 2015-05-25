@@ -62,19 +62,10 @@ La plupart sont présents par défaut dans les installations standards mais si v
 
 \subsection{Installation}
 
-Après avoir téléchargé l'archive \texttt{polytechnique.zip}, extrais le dossier \texttt{polytechnique} vers un des répertoire où \LaTeX{} va chercher les packages \LaTeX{} :
-\begin{itemize}
-	\item sur Windows, c'est \verb|C:\Program Files\MiKTeX 2.9\tex\latex\| ;
-	\item sur Mac\footnote{Merci à Guillaume \bsc{Didier} pour ses conseils sous Mac.}, c'est \verb|Users/<user name>/Library/texmf/tex/latex/local/| pour l'installer uniquement pour soi (recommandé) ou \verb|/usr/local/texlive/texmf-local| pour l'installer pour tous les utilisateurs (nécessite les droits d'administrateurs) (\emph{il se peut que vous ayez à créer ces dossiers, et} \verb|/usr| \emph{et} \verb|/Users/<user name>/Library| \emph{sont cachés}); 
-	\item sur Linux, c'est \verb|$TEXMFHHOME/tex/latex/| avec \verb|$$TEXMFHOME| usuellement définie à \verb|~/texmf| mais dont tu peux connaître la valeur avec \verb|kpsewhich -var-value TEXMFHOME| (\emph{il se peut que vous ayez à créer ce dossier.)};
-\end{itemize}
+\begin{description}
+\item[Windows] Lancer le script \texttt{makefile\_windows.bat}.
+\item[Linux ou Mac] Lancer le script \texttt{makefile\_unix.bat}.
 
-Une fois ceci fait, il faut rafraîchir la base de données des packages installés :
-\begin{itemize}
-	\item sur Windows, lance l'utilitaire \emph{Settings (Admin)} puis cliquez tour à tour sur les boutons \emph{Refresh FNDB} et \emph{Update formats} ;
-	\item sur Mac, ouvre un terminal et entre la commande \verb|mktexlsr| si tu l'as installé dans ta Bibliothèque (Library), ou \verb|sudo -H mktexlsr| si tu l'as installé pour tout les utilisateurs (\emph{la commande sudo peut être dangereuse, relisez deux fois vos commandes pour être sûr de ne pas avoir fait d'erreurs avant d'appuyer sur entrée}) ;
-	\item sur Linux, ouvre un terminal et entre la commande \verb|mktexlsr|.
-\end{itemize}
-
+\end{description}
 
 \end{document}
