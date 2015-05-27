@@ -1,8 +1,4 @@
 # polytechnique-LaTeX
-Code for the LaTeX package of École polytechnique
+Code du package LaTeX de l'École polytechnique.
 
-##Installation
-
-Pour Windows, exécuter `makefile_windows.bat`
-
-Pour Linux ou Mac, exécuter `makefile_unix.bat`
+Pour l'installation de LaTeX et du package, se reporter au fichier `guide/installation.pdf`.

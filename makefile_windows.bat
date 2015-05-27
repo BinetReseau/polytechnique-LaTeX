@@ -10,6 +10,7 @@ del *.ilg
 del *.ind
 del *.log
 del *.toc
+del *.out
 kpsewhich -var-value TEXMFMAIN > temp.txt
 set /p installdir=<temp.txt
 del temp.txt
@@ -20,7 +21,6 @@ md "%installdir%/doc/latex/polytechnique"
 copy polytechnique.dtx "%installdir%/source/latex/polytechnique"
 copy polytechnique.sty "%installdir%/tex/latex/polytechnique"
 copy polytechnique.pdf "%installdir%/doc/latex/polytechnique"
-del polytechnique.sty
 copy *.eps "%installdir%/source/latex/polytechnique/resources"
 copy *.pdf "%installdir%/source/latex/polytechnique/resources"
 copy *.eps "%installdir%/tex/latex/polytechnique"

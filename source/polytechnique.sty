@@ -1,0 +1,417 @@
+%%
+%% This is file `polytechnique.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% polytechnique.dtx  (with options: `package')
+%% This is a generated file.
+%% 
+%% Copyright (C) 2015 by Denis Merigoux
+%% 
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.2 of this license or (at your option) any later
+%% version. The latest version of this license is in:
+%% 
+%% http://www.latex-project.org/lppl.txt
+%% 
+%% and version 1.2 or later is part of all distributions of
+%% LaTeX version 1999/12/01 or later.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{polytechnique}
+ [2015/04/29 v1.3.0, standard scientific documents layout for Ecole polytechnique (Palaiseau,France).]
+%%\CharacterTable
+%% {Upper-case \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%% Lower-case \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%% Digits \0\1\2\3\4\5\6\7\8\9
+%% Exclamation \! Double quote \" Hash (number) \#
+%% Dollar \$ Percent \% Ampersand \&
+%% Acute accent \' Left paren \( Right paren \)
+%% Asterisk \* Plus \+ Comma \,
+%% Minus \- Point \. Solidus \/
+%% Colon \: Semicolon \; Less than \<
+%% Equals \= Greater than \> Question mark \?
+%% Commercial at \@ Left bracket \[ Backslash \\
+%% Right bracket \] Circumflex \^ Underscore \_
+%% Grave accent \` Left brace \{ Vertical bar \|
+%% Right brace \} Tilde \~}
+%%
+
+\DeclareOption{a4paper}{
+    \PassOptionsToPackage{a4paper}{geometry}
+}
+\DeclareOption{fancysections}{
+    \AtEndOfPackage{
+    \titleformat{\chapter}
+        [display]
+        {\Huge\bfseries\sffamily}
+        {\LARGE\chaptertitlename{} \thechapter}
+        {0em}
+        {}
+        []
+    \titleformat{\section}
+        [display]
+        {\color{rouge485}\LARGE\bfseries\sffamily\filcenter}
+        {\thesection}{0em}
+        {\MakeUppercase}
+        [\vspace*{-0.5\baselineskip}%
+            \includegraphics{\polyfiletlongrouge}]
+    \titleformat{\subsection}
+        [hang]
+        {\color{bleu315}\Large\scshape}
+        {\thesubsection}
+        {0.5em}
+        {}
+        [\vspace*{-0.3\baselineskip}%
+            \includegraphics{\polyfiletcourtbleuclair}]
+\titleformat{\subsubsection}
+    [block]
+    {\color{bleu303}\large\scshape}
+    {\thesubsubsection}
+    {0.5em}
+    {\textbullet{} }
+    []
+    }
+}
+\DeclareOption{notitlepage}{
+    \AtBeginDocument{
+        \renewcommand*{\maketitle}{
+            \notitlepagelayout{}
+        }
+    }
+}
+\DeclareOption{titlepage}{
+    \AtBeginDocument{
+        \renewcommand*{\maketitle}{
+            \titlepagelayout{}
+        }
+    }
+}
+\DeclareOption{oneside}{
+    \AtEndOfPackage{
+        \geometry{left=\margecote,right=\margecote}
+    }
+}
+\DeclareOption{twoside}{
+    \AtEndOfPackage{
+        \geometry{inner=\margecoteinterieur,
+            outer=\margecoteexterieur}
+    }
+}
+\DeclareOption{sectionmark}{
+    \AtEndOfPackage{
+        \renewcommand{\enteteinterieur}[1]{
+            \ifthesection{
+                \raisebox{\decalageverticalentete}
+                    {\scshape\color{bleu303}
+                        \thesection{}.~\sectiontitle}
+            }{
+            }
+        }
+    }
+}
+\DeclareOption{chaptermark}{
+    \AtEndOfPackage{
+        \renewcommand{\enteteinterieur}[1]{
+            \ifthechapter{
+                \raisebox{\decalageverticalentete}
+                     {\scshape\color{bleu303}
+                         \thechapter{}.~\chaptertitle}
+            }{
+
+            }
+        }
+    }
+}
+\DeclareOption{markboth}{
+    \AtEndOfPackage{
+        \renewcommand{\enteteinterieurimpair}{
+            \ifthesection{%Si la section a ete definie
+                \raisebox{\decalageverticalentete}
+                    {\scshape\color{bleu303}
+                        \thesection{}.~\sectiontitle}
+            }{
+
+            }
+        }
+        \renewcommand{\enteteinterieurpair}{
+            \ifthechapter{
+                \raisebox{\decalageverticalentete}
+                    {\scshape\color{bleu303}
+                        \thechapter{}.~\chaptertitle}
+            }{
+
+            }
+        }
+    }
+}
+\DeclareOption{pagenumber}{
+    \AtEndOfPackage{
+        \RequirePackage{lastpage}
+        \renewcommand{\piedcentre}{
+            \setlength{\largeurfiletpiedcentre}
+                {2\largeurfiletpiedcentre}
+            \textcolor{bleu303}{\shortstack[c]{
+                \rule{\largeurfiletpiedcentre}{0.3mm}\\
+                \thepage/\pageref{LastPage}}}
+        }
+    }
+}
+\DeclareOption*{
+    \PassOptionsToPackage{\CurrentOption}{geometry}
+}
+\ExecuteOptions{a4paper,notitlepage,oneside}
+\ProcessOptions\relax
+\RequirePackage{calc}
+\RequirePackage{color}
+\RequirePackage{geometry}
+\RequirePackage{graphicx}
+\RequirePackage{ifthen}
+\RequirePackage{ifpdf}
+\RequirePackage{lmodern}
+\RequirePackage[pagestyles]{titlesec}
+\definecolor{bleu303}{RGB}{0,62,92}
+\definecolor{rouge485}{RGB}{213,43,30}
+\definecolor{bleu315}{RGB}{0,104,128}
+\ifpdf
+    \newcommand{\polyfiletlongrouge}{filetlongrouge.pdf}
+    \newcommand{\polyfiletcourtbleuclair}
+        {filetcourtbleuclair.pdf}
+    \newcommand{\polyfiletcourtbleu}{filetcourtbleu.pdf}
+    \newcommand{\polylogovert}{logovert.pdf}
+    \newcommand{\polylogohori}{logohori.pdf}
+    \newcommand{\polyarmes}{armes.pdf}
+\else
+    \newcommand{\polyfiletlongrouge}{filetlongrouge.eps}
+    \newcommand{\polyfiletcourtbleuclair}
+        {filetcourtbleuclair.eps}
+    \newcommand{\polyfiletcourtbleu}{filetcourtbleu.eps}
+    \newcommand{\polylogovert}{logovert.eps}
+    \newcommand{\polylogohori}{logohori.eps}
+    \newcommand{\polyarmes}{armes.eps}
+\fi
+\newlength{\margehaut}
+\setlength{\margehaut}{40mm}
+\newlength{\hauteurentete}
+\setlength{\hauteurentete}{27mm}
+\newlength{\separationentete}
+\setlength{\separationentete}{12mm}
+\newlength{\margecote}
+\setlength{\margecote}{20mm}
+\newlength{\margecoteinterieur}
+\setlength{\margecoteinterieur}{22.5mm}
+\newlength{\margecoteexterieur}
+\setlength{\margecoteexterieur}{17.5mm}
+\newlength{\margebas}
+\setlength{\margebas}{35mm}
+\newlength{\separationpied}
+\setlength{\separationpied}{17.5mm}
+\newlength{\hauteurlogohori}
+\setlength{\hauteurlogohori}{15mm}
+\newlength{\separationtitre}
+\setlength{\separationtitre}{15mm}
+\newlength{\epaisseurtrait}
+\setlength{\epaisseurtrait}{1pt}
+\newlength{\separationlignestitre}
+\setlength{\separationlignestitre}{3mm}
+\newlength{\separationtitrecorps}
+\setlength{\separationtitrecorps}{15mm}
+\newlength{\hauteurlogopage}
+\setlength{\hauteurlogopage}{0.6\textheight}
+\newlength{\separationentetelogo}
+\setlength{\separationentetelogo}{20mm}
+\newlength{\largeurfiletpiedcentre}
+\setlength{\largeurfiletpiedcentre}{4mm}
+\newlength{\largeurlogovert}
+\setlength{\largeurlogovert}{\paperwidth/\real{7}}
+\newlength{\hauteurlogovert}
+\setlength{\hauteurlogovert}{\largeurlogovert*\real{1.361}}
+\newlength{\largeurlogohori}
+\setlength{\largeurlogohori}{\hauteurlogohori*\real{1.859}}
+\newlength{\distancetitrelogo}
+\setlength{\distancetitrelogo}{\separationtitre-\margehaut}
+\newlength{\separationlogotrait}
+\setlength{\separationlogotrait}{-\baselineskip*2+10mm}
+\newlength{\largeurminipage}
+\setlength{\largeurminipage}
+    {(\textwidth-\largeurlogovert)/\real{2}}
+\newlength{\distancetitrecorps}
+\setlength{\distancetitrecorps}
+    {\separationtitrecorps-\baselineskip*2}
+\newlength{\largeurtitreentete}
+\setlength{\largeurtitreentete}{\textwidth-\largeurlogohori
+    -\separationentetelogo}
+\newlength{\decalageverticalentete}
+\setlength{\decalageverticalentete}
+    {\hauteurlogohori/\real{2.6}}
+\geometry{
+    top=\margehaut,headheight=\hauteurentete,
+    headsep=\separationentete,
+    bottom=\margebas,footskip=\separationpied
+}
+\newcommand{\piedcentre}{
+    \textcolor{bleu303}{\shortstack[c]
+        {\rule{\largeurfiletpiedcentre}{0.3mm}\\\thepage}}
+}
+\newcommand{\enteteinterieur}[1]{
+    \raisebox{\decalageverticalentete}
+        {\begin{minipage}[b]{\largeurtitreentete}
+            \scshape#1\textcolor{bleu303}
+            \polytitresave
+        \end{minipage}}
+}
+\newcommand{\enteteexterieur}{
+    \includegraphics[height=\hauteurlogohori]{\polylogohori}
+}
+\newcommand{\enteteinterieurpair}{
+    \enteteinterieur{}
+}
+\newcommand{\enteteinterieurimpair}{
+    \enteteinterieur{\flushright}
+}
+\newcommand{\entetes}{
+    \newpagestyle{polytechnique}{
+    \sethead[\enteteinterieurpair]% left even
+            []% center even
+            [\enteteexterieur]% right even
+            {\enteteexterieur}% left odd
+            {}% center odd
+            {\enteteinterieurimpair}% right odd
+    \setfoot{}% left odd
+             {\piedcentre}% center odd
+             {}% right odd
+    }
+    \pagestyle{polytechnique}
+}
+\renewpagestyle{plain}{
+    \sethead{}% left
+            {}% center
+            {}% right
+    \setfoot{}% left
+            {\piedcentre}% center
+            {}% right
+}
+\pagestyle{plain}
+\newboolean{subtitle}\setboolean{subtitle}{false}
+\newcommand{\polysoustitresave}{}
+\newcommand*{\subtitle}[1]{
+    \renewcommand*{\polysoustitresave}{#1}
+    \setboolean{subtitle}{true}
+}
+\newcommand{\polytitresave}{}
+\renewcommand*{\title}[1]{
+    \renewcommand*{\polytitresave}{#1}
+    \entetes
+}
+\newcommand{\polyauthorsave}{}
+\renewcommand*{\author}[1]{
+    \renewcommand*{\polyauthorsave}{#1}
+}
+\newcommand{\polydatesave}{\today}
+\renewcommand*{\date}[1]{
+    \renewcommand*{\polydatesave}{#1}
+}
+
+\newcommand{\logo}[1]{
+    \renewcommand{\titlepagebottomline}{
+        \includegraphics[height=1.5\hauteurlogohori]
+            {\polylogohori}
+        \hspace{0.05\textwidth}
+        \includegraphics[height=\hauteurlogovert,
+            width=1.5\largeurlogohori,
+            keepaspectratio]{#1}%
+    }
+    \renewcommand{\notitlepageupperline}{
+        \noindent
+        \begin{minipage}{\textwidth}
+            \parbox{0.333\textwidth}
+                {\raisebox{-0.5\height}
+                    {\includegraphics[width=\largeurlogovert]
+                        {\polylogovert}
+                    }
+                }
+            \parbox{0.333\textwidth}
+                 {\centering\polydatesave{}\\
+                     \polyauthorsave{}\\
+                     \includegraphics{\polyfiletcourtbleu}
+                 }
+            \parbox{0.333\textwidth}
+                {\flushright\raisebox{-0.5\height}
+                    {\includegraphics[height=\hauteurlogovert,
+                        width=1.5\largeurlogohori,
+                        keepaspectratio]{#1}
+                    }
+                }
+         \end{minipage}
+    }
+}
+\newcommand{\notitlepageupperline}{
+    \noindent
+    \begin{minipage}[b]{\largeurminipage}
+        \hspace{0cm}\polyauthorsave
+    \end{minipage}
+    \hspace*{\fill}
+    \includegraphics[width=\largeurlogovert]{\polylogovert}
+    \hspace*{\fill}
+    \begin{minipage}[b]{\largeurminipage}
+        \flushright\hspace{0cm}\polydatesave
+    \end{minipage}
+}
+\newcommand{\notitlepagelayout}{
+\thispagestyle{plain}
+            \vspace*{\distancetitrelogo}
+            \notitlepageupperline{}
+            \\[\separationlogotrait]
+            \begin{center}
+                    \textcolor{bleu303}
+                        {\rule{\textwidth}{\epaisseurtrait}}
+                    \\
+                    \color{bleu303}\Huge\scshape
+                    \MakeUppercaseWithNewline{\polytitresave}
+                \ifthenelse{\boolean{subtitle}}{
+                    \\[\separationlignestitre]
+                    \Large\upshape\polysoustitresave\\\normalsize
+                }{
+                    \\
+                    \normalsize
+                }
+                \textcolor{bleu303}
+                    {\rule{\textwidth}{\epaisseurtrait}}
+            \end{center}
+            \vspace*{\distancetitrecorps}
+}
+\newcommand{\titlepagebottomline}{
+\includegraphics[height=\hauteurlogovert]{\polylogovert}
+}
+\newcommand{\titlepagelayout}{
+        \noindent\makebox[\textwidth][c]{%
+          \raisebox{-\totalheight}[0pt][0pt]{%
+        \includegraphics[height=\hauteurlogopage]{\polyarmes}}}
+        \vspace*{0.125\textheight}
+        \begin{center}
+            \Huge\sffamily\bfseries\color{bleu303}
+            \MakeUppercaseWithNewline{\polytitresave}\\
+            \vspace*{0.2\textheight}
+            \LARGE\hspace{0cm}\polysoustitresave\\
+            \vspace*{0.15\textheight}
+            \Large\mdseries\hspace{0cm}\polydatesave\\
+            \includegraphics{\polyfiletcourtbleu}
+            \\[0.4\baselineskip]
+            \rmfamily\hspace{0cm}\polyauthorsave\\[\fill]
+            $\;$\titlepagebottomline{}
+            \vspace*{-0.5\margebas}
+        \end{center}
+        \thispagestyle{empty}
+        \clearpage
+}
+\newcommand{\MakeUppercaseWithNewline}[1]{
+      \begingroup
+        \let\SavedOrgNewline\\%
+        \DeclareRobustCommand{\\}{\SavedOrgNewline}%
+        \MakeUppercase{#1}%
+    \endgroup
+}
+\endinput
+%%
+%% End of file `polytechnique.sty'.

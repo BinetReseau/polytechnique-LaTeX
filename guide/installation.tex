@@ -9,7 +9,7 @@
 
 
 \title{De la mise en page à l'École}
-\subtitle{Petit guide à l'installation de \textrm{\LaTeX}\\et du package \textup{\texttt{polytechnique v1.3.0}}}
+\subtitle{Petit guide à l'installation de \textrm{\LaTeX}\\et du package \textup{\texttt{polytechnique v1.3.2}}}
 \author{Denis \bsc{Merigoux}}
 \logo{logo.pdf}
 
@@ -42,10 +42,9 @@ Il faut ensuite installer un éditeur de code source, par exemple TeXmaker qui e
 
 \subsection{Macintosh}
 
-Il suffit de télécharger et d'installer MacTeX. Pour mettre à jour ou installer des packages, il faut utiliser l'application \emph{Tex Live utility}, dont un tutoriel en français très bien fourni est disponible à l'adresse suivante :\url{http://www.cuk.ch/articles/4466}. Ne pas oublier de configurer les paramètres du proxy si tu es à l'X (\texttt{kuzh.polytechnique.fr:8080}).
+Il suffit de télécharger et d'installer MacTeX depuis \url{https://tug.org/mactex/}. 
 
 Il faut ensuite installer un éditeur de code source, par exemple TeXmaker qui est disponible sur toutes les plate-formes.
-Remarque, le site de la distribution contiens quelques recommandations pour ne pas avoir de surprises pendant une mise à jour majeur de OS X.
 
 \subsection{GNU/Linux}
 
@@ -55,17 +54,71 @@ Le paquet à installer est \texttt{texlive-full} ou \texttt{texlive}. Tu auras p
 
 \subsection{Prérequis}
 
+\subsubsection{Packages requis}
+
 Pour que le package puisse fonctionner, il faut que ta distribution LaTeX contienne les packages suivants : \texttt{ifthen}, \texttt{ifpdf}, \texttt{titlesec}, \texttt{graphicx}, \texttt{geometry}, \texttt{calc}, \texttt{lmodern} et \texttt{color}.
 
 La plupart sont présents par défaut dans les installations standards mais si vous avez à la compilation une erreur du type \verb|Error : file titlesec.sty not found|, c'est que tu n'as pas installé le package \texttt{titlesec}.
 
+\subsubsection{Installer les packages manquants}
 
-\subsection{Installation}
+La méthode décrite ici est générale et s'applique à chaque fois qu'il faut installer un package manquant.
 
+\paragraph{Windows} Dans tous les programmes (ou \emph{via} la fonction rechercher dans Windows 8) lancer l'utilitaire \emph{Package Manager (Admin)}. La liste des packages LaTeX disponibles se charge après un temps de latence. 
+\begin{itemize}
+	\item Si tu es sur le réseau de l'X,  clique sur \emph{Repository}, puis \emph{Change package repository}. Coche la case \emph{Packages shall be downloaded from the Internet} puis clique sur \emph{Connections settings}. Une petite fenêtre appraît, coche \emph{Use a proxy server}. Dans le champ \emph{Adress} entre \texttt{kuzh.polytechnique.fr} et dans le champ \emph{Port} entre \texttt{8080}.
+	\item Si tu es sur un réseau sans proxy, ignore cette étape.
+\end{itemize}
+Sélectionne le ou les packages à installer dans la liste (tu peux rechercher leur nom) et clique sur le petit \texttt{+} en haut à droite. L'installation devrait se lancer normalement. Enfin, lance l'utilitaire \emph{Settings (Admin)} depuis \emph{Tous les programmes} et clique sur \emph{Refresh FNDB}.
+
+\paragraph{Mac} Pour mettre à jour ou installer des packages, il faut utiliser l'application \emph{Tex Live utility}, dont un tutoriel en français très bien fourni est disponible à l'adresse suivante : \url{http://www.cuk.ch/articles/4466}. Voici des instructions succintes : dans le dossier \emph{Applications/TeX}, lancer l'utilitaire \emph{TeX Live Utility}. Dans l'onglet \emph{Manage Packages}, sélectionner le package à installer et cliquer sur le bouton \emph{Install}.
+
+\paragraph{Linux} Dans un terminal, exécuter la commande 
+\begin{verbatim}
+tlmgr install <nom du package>
+\end{verbatim}
+
+
+\subsection{Installation du package \texttt{polytechnique}}
+
+\subsubsection{Méthode automatique}
+
+Extraire le dossier \texttt{polytechnique-LaTeX} à la racine de l'archive quelque part sur son ordinateur. Entrer dans le dossier et effectuer l'action suivante :
 \begin{description}
-\item[Windows] Lancer le script \texttt{makefile\_windows.bat}.
-\item[Linux ou Mac] Lancer le script \texttt{makefile\_unix.bat}.
-
+\item[Windows] double-cliquer sur \texttt{makefile\_windows.bat} ;
+\item[Linux ou Mac] ouvrir un terminal dans le dossier et y entrer la commande
+\begin{verbatim}
+bash makefile_unix.sh
+\end{verbatim}
 \end{description}
+Après exécution du script, le message affiché sur la console devrait être :
+\begin{verbatim}
+************************************************
+* Le package a ete installe ! La documentation *
+* se trouve a l'emplacement suivant :          *
+<chemin qui dépend de votre ordinateur>
+* Les fichiers sources et resources a          *
+* l'endroit suivant :                          *
+<chemin qui dépend de votre ordinateur>
+* Et le .sty a l'endroit suivant :             *
+<chemin qui dépend de votre ordinateur>
+* Bonne utilisation !                          *
+************************************************
+\end{verbatim}
+
+Si ce message ne s'affiche pas, se reporter à la méthode manuelle.
+\subsubsection{Méthode manuelle}
+
+Il faut chercher où se trouve le répertoire de ton installation LaTeX. Pour cela (et quelque soit ton système d'exploitation), ouvre une ligne de commandes et tape :
+\begin{verbatim}
+kpsewhich -var-value TEXMFMAIN
+\end{verbatim}
+Rends-toi alors dans le répertoire indiqué que l'on nommera par la suite \emph{INSTALL}. Dans une autre fenêtre de ton explorateur de fichiers, extrais l'archive téléchargée et ouvre le dossier \emph{source}. Il suffit ensuite de copier tous les fichiers \texttt{.pdf}, \texttt{.eps} et \texttt{polytechnique.sty} vers le dossier \emph{INSTALL/tex/latex/polytechnique}. 
+
+De cette manière, l'installation n'est pas complète mais le package marchera très bien en utilisation. Il te manquera par contre les fichiers source commentés si tu veux le modifier.
+
+\subsection{Documentation}
+
+La documentation du package ets le fichier \texttt{polytechnique.pdf} qui se trouve entre autres. dans le dossier \emph{source} de l'archive extraite.
 
 \end{document}

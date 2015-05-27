@@ -6,14 +6,15 @@ if [ "$(whoami)" != "root" ]; then
   exit 1
 fi
 
+cd source
 pdflatex polytechnique.dtx >> /dev/null
 makeindex -q -s gind.ist -o polytechnique.ind polytechnique.idx >> /dev/null
 pdflatex polytechnique.dtx >> /dev/null
-rm *.aux *.glo *.idx *.ilg *.ind *.log *.toc >> /dev/null
+rm *.aux *.glo *.idx *.ilg *.ind *.log *.toc *.out >> /dev/null
 chemindist=$(kpsewhich -var-value TEXMFMAIN)
 chemintex=${chemindist}/tex/latex/polytechnique
 cheminsource=${chemindist}/source/latex/polytechnique
-cheminsourceresources=${chemindist}/source/latex/polytechnique/resources
+cheminsourceresources=${chemindist}/source/latex/polytechnique
 chemindoc=${chemindist}/doc/latex/polytechnique
 mkdir ${chemintex}
 mkdir ${cheminsource}
@@ -22,8 +23,6 @@ mkdir ${chemindoc}
 cp polytechnique.dtx ${cheminsource}
 cp polytechnique.sty ${chemintex}
 cp polytechnique.pdf ${chemindoc}
-rm -f polytechnique.sty
-cd resources
 cp *.eps ${cheminsourceresources}
 cp *.eps ${chemintex}
 cp *.pdf ${cheminsourceresources}
