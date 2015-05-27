@@ -75,17 +75,13 @@
     }
 }
 \DeclareOption{notitlepage}{
-    \AtBeginDocument{
         \renewcommand*{\maketitle}{
             \notitlepagelayout{}
-        }
     }
 }
 \DeclareOption{titlepage}{
-    \AtBeginDocument{
         \renewcommand*{\maketitle}{
             \titlepagelayout{}
-        }
     }
 }
 \DeclareOption{oneside}{
@@ -161,8 +157,8 @@
 \DeclareOption*{
     \PassOptionsToPackage{\CurrentOption}{geometry}
 }
-\ExecuteOptions{a4paper,notitlepage,oneside}
-\ProcessOptions\relax
+\ExecuteOptions{a4paper,notitlepage}
+\ProcessOptions*
 \RequirePackage{calc}
 \RequirePackage{color}
 \RequirePackage{geometry}
@@ -315,35 +311,44 @@
 
 \newcommand{\logo}[1]{
     \renewcommand{\titlepagebottomline}{
-        \includegraphics[height=1.5\hauteurlogohori]
-            {\polylogohori}
-        \hspace{0.05\textwidth}
-        \includegraphics[height=\hauteurlogovert,
-            width=1.5\largeurlogohori,
-            keepaspectratio]{#1}%
+     \begin{minipage}{5\largeurlogohori}
+         \centering
+         \raisebox{-0.5\height}{
+                \includegraphics[width=1.5\largeurlogohori]
+                    {\polylogohori}
+            }
+            \hspace{0.25\largeurlogohori}
+            \raisebox{-0.5\height}{
+                \includegraphics[height=\hauteurlogovert,
+                    width=1.5\largeurlogohori,
+                    keepaspectratio]{#1}
+            }
+        \end{minipage}
     }
     \renewcommand{\notitlepageupperline}{
-        \noindent
+        \noindent%
         \begin{minipage}{\textwidth}
-            \parbox{0.333\textwidth}
-                {\raisebox{-0.5\height}
+            \centering
+\begin{minipage}{0.33\textwidth}
+                \raisebox{-0.5\height}
                     {\includegraphics[width=\largeurlogovert]
                         {\polylogovert}
                     }
-                }
-            \parbox{0.333\textwidth}
-                 {\centering\polydatesave{}\\
-                     \polyauthorsave{}\\
-                     \includegraphics{\polyfiletcourtbleu}
-                 }
-            \parbox{0.333\textwidth}
-                {\flushright\raisebox{-0.5\height}
+            \end{minipage}%
+            %    \end{macrocode}
+            \begin{minipage}{0.33\textwidth}
+                \centering\polydatesave{}\\
+                \polyauthorsave{}\\
+                \includegraphics{\polyfiletcourtbleu}
+            \end{minipage}%
+            \begin{minipage}{0.33\textwidth}
+                    \flushright\raisebox{-0.5\height}
                     {\includegraphics[height=\hauteurlogovert,
-                        width=1.5\largeurlogohori,
+                        width=1.75\largeurlogohori,
                         keepaspectratio]{#1}
                     }
-                }
-         \end{minipage}
+            \end{minipage}
+        \end{minipage}
     }
 }
 \newcommand{\notitlepageupperline}{

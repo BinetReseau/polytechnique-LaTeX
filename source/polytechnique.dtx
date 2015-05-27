@@ -178,8 +178,6 @@ LaTeX version 1999/12/01 or later.
 %\begin{description}
 %\item[oneside]  C'est le comportement par défaut, les en-têtes et les marges seront les mêmes pour toutes les pages.
 %\item[twoside]  Rend la marge intérieur plus grande que la marge extérieure et transforme les en-têtes gauche/droite en en-têtes intérieurs/extérieurs.
-%\item[notitlepage]  Comportement par défaut pour la classe |article|. |\maketitle| produit son résultat sur un quart de page environ.
-%\item[titlepage]  Comportement par défaut pour les classes |report| et |book|. 
 %\item[a4paper]  Signifie à \LaTeX{} que le format de la feuille est A4. À inclure systématiquement pour éviter les mauvaises surprises.
 %\end{description}
 %
@@ -191,6 +189,8 @@ LaTeX version 1999/12/01 or later.
 %\end{center}
 %En voici la liste :
 %\begin{description}
+%\item[notitlepage]  Comportement par défaut pour la classe |article|. |\maketitle| produit son résultat sur un quart de page environ.
+%\item[titlepage]  Comportement par défaut pour les classes |report| et |book|. Produit une belle page de couverture avec les armes en arrière-plan.
 %\item[fancysections]  Redéfinit les commandes |\chapter|, |\section|, |\subsection| et |\subsubsection| avec un style conforme à la charte graphique de l'École. Donne un aspect moins formel au document.
 %\item[pagenumber]  Change la numérotation des pages dans le pied de page. Si l'option est activée, elle deviendra \meta{page en cours}/\meta{nombre total de pages}.
 %\item[sectionmark]  Affiche en en-tête intérieur le titre de la section courante plutôt que le titre du document.
@@ -263,10 +263,8 @@ LaTeX version 1999/12/01 or later.
 %Cette option activée par défaut produit un titre avec logo vertical de l'X, auteur et date sur la première lignes, puis le titre et le sous-titre entre filets horizontaux. L'option est aussi reconnues depuis les options globales passées à |\documentclass|.
 %    \begin{macrocode}
 \DeclareOption{notitlepage}{
-    \AtBeginDocument{
         \renewcommand*{\maketitle}{
             \notitlepagelayout{}
-        }
     }
 }
 %    \end{macrocode}
@@ -283,10 +281,8 @@ LaTeX version 1999/12/01 or later.
 %\end{itemize}
 %    \begin{macrocode}
 \DeclareOption{titlepage}{
-    \AtBeginDocument{
         \renewcommand*{\maketitle}{
             \titlepagelayout{}
-        }
     }
 }
 %    \end{macrocode}
@@ -405,8 +401,8 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %Enfin, on exécute les options standards utilisées par la classe article.
 %    \begin{macrocode}
-\ExecuteOptions{a4paper,notitlepage,oneside}
-\ProcessOptions\relax
+\ExecuteOptions{a4paper,notitlepage}
+\ProcessOptions*
 %    \end{macrocode}
 %\subsection{Chargement des packages externes}
 %
@@ -844,44 +840,58 @@ LaTeX version 1999/12/01 or later.
 %On redefinit la variable |\titlepagebottomline| pour l'option |titlepage|.
 %    \begin{macrocode}
     \renewcommand{\titlepagebottomline}{
-        \includegraphics[height=1.5\hauteurlogohori]
-            {\polylogohori}
-        \hspace{0.05\textwidth}
+    	\begin{minipage}{5\largeurlogohori}
+    	    \centering
+    	    \raisebox{-0.5\height}{
+                \includegraphics[width=1.5\largeurlogohori]
+                    {\polylogohori}
+            }
+            \hspace{0.25\largeurlogohori}
 %    \end{macrocode}
 %Pour une certaine harmonie, on ne laisse pas à l'utilisateur le choix des dimensions du logo. Celles-ci sont déterminées en fonction des dimensions du logo horizontal de l'X pour que les deux logos aient des proportions similaires.
 %    \begin{macrocode}
-        \includegraphics[height=\hauteurlogovert,
-            width=1.5\largeurlogohori,
-            keepaspectratio]{#1}%
+            \raisebox{-0.5\height}{
+                \includegraphics[height=\hauteurlogovert,
+                    width=1.5\largeurlogohori,
+                    keepaspectratio]{#1}
+            }
+        \end{minipage}
     }
 %    \end{macrocode}
 %On redéfinit ensuite la commande |\notitlepageupperline| pour l'option |notitlepage|.
 %    \begin{macrocode}
     \renewcommand{\notitlepageupperline}{	
-        \noindent
+        \noindent%
         \begin{minipage}{\textwidth}
+            \centering
 %    \end{macrocode}
 %Le système de |minipage| et de |\parbox| est fait de tel sorte que les deux logos soient alignés à gauche et à droite sur la première ligne et verticalement au centre ; la date et le titre sont centrés sur la largeur et la hauteur.
 %    \begin{macrocode}
-            \parbox{0.333\textwidth}
-                {\raisebox{-0.5\height}
+		\begin{minipage}{0.33\textwidth}
+                \raisebox{-0.5\height}
+%    \end{macrocode}
+%Les logos sont cntrés verticalement grâce au |\raisebox|. |\height| contient la hauteur de la |minipage| en cours.
+%    \begin{macrocode}
                     {\includegraphics[width=\largeurlogovert]
                         {\polylogovert}
                     }
-                }
-            \parbox{0.333\textwidth}
-                 {\centering\polydatesave{}\\
-                     \polyauthorsave{}\\
-                     \includegraphics{\polyfiletcourtbleu}
-                 }
-            \parbox{0.333\textwidth}
-                {\flushright\raisebox{-0.5\height}
+            \end{minipage}%
+            %    \end{macrocode}
+%Le |%| qui suit le |\end{minipage}| est en fait très important. La ligne est divisée en 3 minipage de largeur |0.33\textwidth|, ce qui couvre exactement la largeur de la page. Néanmoins un retour à la ligne dans le code correspond à un espace sur la sortie, ce qui augmente la largeur de la ligne et la fait déborder : le logo de droite se retrouve sur la ligne suivante, ce qui n'est pas voulu. Le |%| sert à annuler l'effet espace du retour à la ligne dans le code.
+%    \begin{macrocode}
+            \begin{minipage}{0.33\textwidth}
+                \centering\polydatesave{}\\
+                \polyauthorsave{}\\
+                \includegraphics{\polyfiletcourtbleu}
+            \end{minipage}%
+            \begin{minipage}{0.33\textwidth}
+                    \flushright\raisebox{-0.5\height}
                     {\includegraphics[height=\hauteurlogovert,
-                        width=1.5\largeurlogohori,
+                        width=1.75\largeurlogohori,
                         keepaspectratio]{#1}
                     }
-                }
-         \end{minipage}
+            \end{minipage} 
+        \end{minipage}
     }
 }
 %    \end{macrocode}
