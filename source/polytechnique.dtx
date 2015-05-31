@@ -643,7 +643,7 @@ LaTeX version 1999/12/01 or later.
 %    \begin{macrocode}
 \newlength{\largeurminipage}
 \setlength{\largeurminipage}
-    {(\textwidth-\largeurlogovert)/\real{2}}
+    {(\textwidth-\largeurlogovert-0.5cm)/\real{2}}
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\distancetitrecorps}
@@ -904,7 +904,7 @@ LaTeX version 1999/12/01 or later.
     \noindent
     \begin{minipage}[b]{\largeurminipage}
         \hspace{0cm}\polyauthorsave
-    \end{minipage}
+    \end{minipage}%
 %    \end{macrocode}
 %La |minipage| permet les sauts de ligne pour avoir plusieurs auteurs, et |\hspace{0cm}| sert a ne pas faire une minipage vide si |\polyauthorsave={}|.
 %    \begin{macrocode}
@@ -913,13 +913,13 @@ LaTeX version 1999/12/01 or later.
 %Les blocs sont séparés par des ressorts horizontaux. Vient ensuite le bloc central avec le logo de l'X.
 %    \begin{macrocode}
     \includegraphics[width=\largeurlogovert]{\polylogovert}
-    \hspace*{\fill}
+    \hspace*{\fill}%
 %    \end{macrocode}
 %Et pour conclure la première ligne le bloc de droite qui contient la |\date|.
 %    \begin{macrocode}
     \begin{minipage}[b]{\largeurminipage}
         \flushright\hspace{0cm}\polydatesave
-    \end{minipage}
+    \end{minipage}%
 }
 %    \end{macrocode}
 %Le |\hspace{0cm}| sert a ne pas faire une minipage vide si |\polydatesave={}|.

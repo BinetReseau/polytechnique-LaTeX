@@ -231,7 +231,7 @@
 \setlength{\separationlogotrait}{-\baselineskip*2+10mm}
 \newlength{\largeurminipage}
 \setlength{\largeurminipage}
-    {(\textwidth-\largeurlogovert)/\real{2}}
+    {(\textwidth-\largeurlogovert-0.5cm)/\real{2}}
 \newlength{\distancetitrecorps}
 \setlength{\distancetitrecorps}
     {\separationtitrecorps-\baselineskip*2}
@@ -355,13 +355,13 @@
     \noindent
     \begin{minipage}[b]{\largeurminipage}
         \hspace{0cm}\polyauthorsave
-    \end{minipage}
+    \end{minipage}%
     \hspace*{\fill}
     \includegraphics[width=\largeurlogovert]{\polylogovert}
-    \hspace*{\fill}
+    \hspace*{\fill}%
     \begin{minipage}[b]{\largeurminipage}
         \flushright\hspace{0cm}\polydatesave
-    \end{minipage}
+    \end{minipage}%
 }
 \newcommand{\notitlepagelayout}{
 \thispagestyle{plain}

@@ -11,7 +11,7 @@ del *.ind
 del *.log
 del *.toc
 del *.out
-kpsewhich -var-value TEXMFMAIN > temp.txt
+kpsewhich -var-value TEXMFLOCAL > temp.txt
 set /p installdir=<temp.txt
 del temp.txt
 md "%installdir%/tex/latex/polytechnique"
