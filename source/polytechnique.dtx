@@ -260,7 +260,7 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %
 %\paragraph{notitlepage}
-%Cette option activée par défaut produit un titre avec logo vertical de l'X, auteur et date sur la première lignes, puis le titre et le sous-titre entre filets horizontaux. L'option est aussi reconnues depuis les options globales passées à |\documentclass|.
+%Cette option activée par défaut produit un titre avec logo vertical de l'X, auteur et date sur la première lignes, puis le titre et le sous-titre entre filets horizontaux.
 %    \begin{macrocode}
 \DeclareOption{notitlepage}{
         \renewcommand*{\maketitle}{
@@ -270,7 +270,7 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %
 %\paragraph{titlepage}
-%Option qui active une page de garde où le titre prend toute la page. L'option est aussi reconnue depuis les options passées a |\documentclass|. La page de garde comporte :
+%Option qui active une page de garde où le titre prend toute la page. La page de garde comporte :
 %\begin{itemize}
 %\item les armes de l'École en arrière-plan ;
 %\item le titre en capitales bleues ;
@@ -291,7 +291,7 @@ LaTeX version 1999/12/01 or later.
 %    \begin{macrocode}
 \DeclareOption{oneside}{
     \AtEndOfPackage{
-        \geometry{left=\margecote,right=\margecote}
+        \geometry{inner=\margecote,outer=\margecote}
     }
 }
 %    \end{macrocode}
@@ -311,9 +311,9 @@ LaTeX version 1999/12/01 or later.
 \DeclareOption{sectionmark}{
     \AtEndOfPackage{
 %    \end{macrocode}
-%On redéfinit pour cela la commande des en-têtes intérieurs.
+%On redéfinit pour cela la commande des en-têtes extérieurs.
 %    \begin{macrocode}
-        \renewcommand{\enteteinterieur}[1]{
+        \renewcommand{\enteteexterieur}[1]{
 %    \end{macrocode}
 %|\ifthesection|\marg{vrai}\marg{faux} exécute le code \meta{vrai} si une section courante a été définie au moment où le code est appelé, et faux sinon. Voir la documentation du package |titlesec|.
 %    \begin{macrocode}
@@ -338,7 +338,7 @@ LaTeX version 1999/12/01 or later.
 %    \begin{macrocode}
 \DeclareOption{chaptermark}{
     \AtEndOfPackage{    
-        \renewcommand{\enteteinterieur}[1]{
+        \renewcommand{\enteteexterieur}[1]{
             \ifthechapter{
                 \raisebox{\decalageverticalentete}
                      {\scshape\color{bleu303}
@@ -351,11 +351,11 @@ LaTeX version 1999/12/01 or later.
 }
 %    \end{macrocode}
 %
-%\paragraph{markboth} L'option est un mélange des deux options précédentes, voir la documentation utilisateur. On redéfinit alors |\enteteinterieurpair| et |\enteteinterieurimpair| pour distinguer les en-têtes des pages paires et impaires. Le code est un copier-coller de celui des deux options précédentes.
+%\paragraph{markboth} L'option est un mélange des deux options précédentes, voir la documentation utilisateur. On redéfinit alors |\enteteexterieurpair| et |\enteteexterieurimpair| pour distinguer les en-têtes des pages paires et impaires. Le code est un copier-coller de celui des deux options précédentes.
 %    \begin{macrocode}
 \DeclareOption{markboth}{
     \AtEndOfPackage{
-        \renewcommand{\enteteinterieurimpair}{
+        \renewcommand{\enteteexterieurimpair}{
             \ifthesection{%Si la section a ete definie
                 \raisebox{\decalageverticalentete}
                     {\scshape\color{bleu303}
@@ -364,7 +364,7 @@ LaTeX version 1999/12/01 or later.
 
             }
         }
-        \renewcommand{\enteteinterieurpair}{
+        \renewcommand{\enteteexterieurpair}{
             \ifthechapter{
                 \raisebox{\decalageverticalentete}
                     {\scshape\color{bleu303}
@@ -401,46 +401,22 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %Enfin, on exécute les options standards utilisées par la classe article.
 %    \begin{macrocode}
-\ExecuteOptions{a4paper,notitlepage}
+\ExecuteOptions{a4paper,notitlepage,oneside}
 \ProcessOptions*
 %    \end{macrocode}
 %\subsection{Chargement des packages externes}
 %
 %Le package |polytechnique| utilise de nombreux autres packages afin d'effectuer la mise en page. Ces packages sont appelés avec la commande |\RequirePackage| par le code ci-dessous.
-%\begin{description}
-%\item[calc] Pour faire des operations sur les longueurs.
 %    \begin{macrocode}
 \RequirePackage{calc}
-%    \end{macrocode}
-%\item[color] Pour colorer les éléments du titre en accord avec la charte graphique.
-%    \begin{macrocode}
 \RequirePackage{color}
-%    \end{macrocode}
-%\item[geometry] Pour redéfinir les marges de manière pratique.
-%    \begin{macrocode}
 \RequirePackage{geometry}
-%    \end{macrocode} 
-%\item[graphicx] Pour insérer les images, en particulier les logos et les éléments graphiques.
-%    \begin{macrocode}
 \RequirePackage{graphicx}
-%    \end{macrocode}
-%\item[ifthen] Pour l'utilisation de la commande |\ifthenelse| \marg{condition} \marg{vrai} \marg{faux}.
-%    \begin{macrocode}
 \RequirePackage{ifthen}
-%    \end{macrocode}
-%\item[ifpdf] Pour détecter le mode de compilation du document.
-%    \begin{macrocode}
 \RequirePackage{ifpdf}
-%    \end{macrocode}
-%\item[lmodern] Pour les polices vectorielles.
-%    \begin{macrocode}
 \RequirePackage{lmodern}
-%    \end{macrocode}
-%\item[titlesec] Pour redéfinir les en-têtes et pieds de pages, ainsi que le format des titres de section.
-%    \begin{macrocode}
 \RequirePackage[pagestyles]{titlesec}
 %    \end{macrocode}
-%\end{description}
 %
 %\subsection{Couleurs}
 %
@@ -691,10 +667,10 @@ LaTeX version 1999/12/01 or later.
 }
 %    \end{macrocode}
 %\end{macro}
-%\begin{macro}{\enteteinterieur}
+%\begin{macro}{\enteteexterieur}
 %L'argument sert à insérer |\flushright| dans le cas ou l'en-tête est sur une page impaire.
 %    \begin{macrocode}
-\newcommand{\enteteinterieur}[1]{
+\newcommand{\enteteexterieur}[1]{
     \raisebox{\decalageverticalentete}
         {\begin{minipage}[b]{\largeurtitreentete}
             \scshape#1\textcolor{bleu303}
@@ -703,25 +679,25 @@ LaTeX version 1999/12/01 or later.
 }
 %    \end{macrocode}
 %\end{macro}
-%\begin{macro}{\enteteexterieur}
+%\begin{macro}{\enteteinterieur}
 %    \begin{macrocode}
-\newcommand{\enteteexterieur}{
+\newcommand{\enteteinterieur}{
     \includegraphics[height=\hauteurlogohori]{\polylogohori}
 }
 %    \end{macrocode}
 %\end{macro}
 %Spécifications supplémentaires pur pair/impair, redéfinies par l'option |markboth|.
-%\begin{macro}{\enteteinterieurpair}
+%\begin{macro}{\enteteexterieurpair}
 %    \begin{macrocode}
-\newcommand{\enteteinterieurpair}{
-    \enteteinterieur{}
+\newcommand{\enteteexterieurpair}{
+    \enteteexterieur{\flushright}
 }
 %    \end{macrocode}
 %\end{macro}
-%\begin{macro}{\entetinterieurimpair}
+%\begin{macro}{\enteteexterieurimpair}
 %    \begin{macrocode}
-\newcommand{\enteteinterieurimpair}{
-    \enteteinterieur{\flushright}
+\newcommand{\enteteexterieurimpair}{
+    \enteteexterieur{}
 }
 %    \end{macrocode}
 %\end{macro}
@@ -733,12 +709,12 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %On definit un nouveau style d'en-tetes. Voir la documentation du package |titlesec| pour la syntaxe.
 %    \begin{macrocode}
-    \sethead[\enteteinterieurpair]% left even
+    \sethead[\enteteinterieur]% left even
             []% center even
-            [\enteteexterieur]% right even
-            {\enteteexterieur}% left odd
+            [\enteteexterieurpair]% right even
+            {\enteteexterieurimpair}% left odd
             {}% center odd
-            {\enteteinterieurimpair}% right odd
+            {\enteteinterieur}% right odd
     \setfoot{}% left odd
              {\piedcentre}% center odd
              {}% right odd

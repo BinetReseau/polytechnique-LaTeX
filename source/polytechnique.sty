@@ -20,7 +20,7 @@
 %% LaTeX version 1999/12/01 or later.
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{polytechnique}
- [2015/04/29 v1.3.0, standard scientific documents layout for Ecole polytechnique (Palaiseau,France).]
+ [2015/05/28 v1.3.2, standard scientific documents layout for Ecole polytechnique (Palaiseau,France).]
 %%\CharacterTable
 %% {Upper-case \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %% Lower-case \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -37,7 +37,6 @@
 %% Grave accent \` Left brace \{ Vertical bar \|
 %% Right brace \} Tilde \~}
 %%
-
 \DeclareOption{a4paper}{
     \PassOptionsToPackage{a4paper}{geometry}
 }
@@ -86,7 +85,7 @@
 }
 \DeclareOption{oneside}{
     \AtEndOfPackage{
-        \geometry{left=\margecote,right=\margecote}
+        \geometry{inner=\margecote,outer=\margecote}
     }
 }
 \DeclareOption{twoside}{
@@ -97,7 +96,7 @@
 }
 \DeclareOption{sectionmark}{
     \AtEndOfPackage{
-        \renewcommand{\enteteinterieur}[1]{
+        \renewcommand{\enteteexterieur}[1]{
             \ifthesection{
                 \raisebox{\decalageverticalentete}
                     {\scshape\color{bleu303}
@@ -109,7 +108,7 @@
 }
 \DeclareOption{chaptermark}{
     \AtEndOfPackage{
-        \renewcommand{\enteteinterieur}[1]{
+        \renewcommand{\enteteexterieur}[1]{
             \ifthechapter{
                 \raisebox{\decalageverticalentete}
                      {\scshape\color{bleu303}
@@ -122,7 +121,7 @@
 }
 \DeclareOption{markboth}{
     \AtEndOfPackage{
-        \renewcommand{\enteteinterieurimpair}{
+        \renewcommand{\enteteexterieurimpair}{
             \ifthesection{%Si la section a ete definie
                 \raisebox{\decalageverticalentete}
                     {\scshape\color{bleu303}
@@ -131,7 +130,7 @@
 
             }
         }
-        \renewcommand{\enteteinterieurpair}{
+        \renewcommand{\enteteexterieurpair}{
             \ifthechapter{
                 \raisebox{\decalageverticalentete}
                     {\scshape\color{bleu303}
@@ -157,7 +156,7 @@
 \DeclareOption*{
     \PassOptionsToPackage{\CurrentOption}{geometry}
 }
-\ExecuteOptions{a4paper,notitlepage}
+\ExecuteOptions{a4paper,notitlepage,oneside}
 \ProcessOptions*
 \RequirePackage{calc}
 \RequirePackage{color}
@@ -250,30 +249,30 @@
     \textcolor{bleu303}{\shortstack[c]
         {\rule{\largeurfiletpiedcentre}{0.3mm}\\\thepage}}
 }
-\newcommand{\enteteinterieur}[1]{
+\newcommand{\enteteexterieur}[1]{
     \raisebox{\decalageverticalentete}
         {\begin{minipage}[b]{\largeurtitreentete}
             \scshape#1\textcolor{bleu303}
             \polytitresave
         \end{minipage}}
 }
-\newcommand{\enteteexterieur}{
+\newcommand{\enteteinterieur}{
     \includegraphics[height=\hauteurlogohori]{\polylogohori}
 }
-\newcommand{\enteteinterieurpair}{
-    \enteteinterieur{}
+\newcommand{\enteteexterieurpair}{
+    \enteteexterieur{\flushright}
 }
-\newcommand{\enteteinterieurimpair}{
-    \enteteinterieur{\flushright}
+\newcommand{\enteteexterieurimpair}{
+    \enteteexterieur{}
 }
 \newcommand{\entetes}{
     \newpagestyle{polytechnique}{
-    \sethead[\enteteinterieurpair]% left even
+    \sethead[\enteteinterieur]% left even
             []% center even
-            [\enteteexterieur]% right even
-            {\enteteexterieur}% left odd
+            [\enteteexterieurpair]% right even
+            {\enteteexterieurimpair}% left odd
             {}% center odd
-            {\enteteinterieurimpair}% right odd
+            {\enteteinterieur}% right odd
     \setfoot{}% left odd
              {\piedcentre}% center odd
              {}% right odd
