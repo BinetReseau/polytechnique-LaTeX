@@ -15,6 +15,7 @@ kpsewhich -var-value TEXMFLOCAL > temp.txt
 set /p installdir=<temp.txt
 del temp.txt
 md "%installdir%/tex/latex/polytechnique"
+md "%installdir%/tex/latex/polytechnique/resources
 md "%installdir%/source/latex/polytechnique"
 md "%installdir%/source/latex/polytechnique/resources"
 md "%installdir%/doc/latex/polytechnique"
@@ -23,8 +24,8 @@ copy polytechnique.sty "%installdir%/tex/latex/polytechnique"
 copy polytechnique.pdf "%installdir%/doc/latex/polytechnique"
 copy *.eps "%installdir%/source/latex/polytechnique/resources"
 copy *.pdf "%installdir%/source/latex/polytechnique/resources"
-copy *.eps "%installdir%/tex/latex/polytechnique"
-copy *.pdf "%installdir%/tex/latex/polytechnique"
+copy *.eps "%installdir%/tex/latex/polytechnique/resources"
+copy *.pdf "%installdir%/tex/latex/polytechnique/resources"
 echo ************************************************
 echo * La base de donnees des packages est en train *
 echo * d'etre mise a jour. Cela peut prendre un peu *
