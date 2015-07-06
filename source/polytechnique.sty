@@ -20,7 +20,7 @@
 %% LaTeX version 1999/12/01 or later.
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{polytechnique}
- [2015/05/28 v1.3.2, standard scientific documents layout for Ecole polytechnique (Palaiseau,France).]
+ [2015/07/04 v1.3.3, standard scientific documents layout for Ecole polytechnique (Palaiseau,France).]
 %%\CharacterTable
 %% {Upper-case \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
 %% Lower-case \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
@@ -170,21 +170,31 @@
 \definecolor{rouge485}{RGB}{213,43,30}
 \definecolor{bleu315}{RGB}{0,104,128}
 \ifpdf
-    \newcommand{\polyfiletlongrouge}{filetlongrouge.pdf}
+    \newcommand{\polyfiletlongrouge}
+    {polytechnique-filetlongrouge.pdf}
     \newcommand{\polyfiletcourtbleuclair}
-        {filetcourtbleuclair.pdf}
-    \newcommand{\polyfiletcourtbleu}{filetcourtbleu.pdf}
-    \newcommand{\polylogovert}{logovert.pdf}
-    \newcommand{\polylogohori}{logohori.pdf}
-    \newcommand{\polyarmes}{armes.pdf}
+        {polytechnique-filetcourtbleuclair.pdf}
+    \newcommand{\polyfiletcourtbleu}
+    {polytechnique-filetcourtbleu.pdf}
+    \newcommand{\polylogovert}
+    {polytechnique-logovert.pdf}
+    \newcommand{\polylogohori}
+    {polytechnique-logohori.pdf}
+    \newcommand{\polyarmes}
+    {polytechnique-armes.pdf}
 \else
-    \newcommand{\polyfiletlongrouge}{filetlongrouge.eps}
+    \newcommand{\polyfiletlongrouge}
+    {polytechnique-filetlongrouge.eps}
     \newcommand{\polyfiletcourtbleuclair}
-        {filetcourtbleuclair.eps}
-    \newcommand{\polyfiletcourtbleu}{filetcourtbleu.eps}
-    \newcommand{\polylogovert}{logovert.eps}
-    \newcommand{\polylogohori}{logohori.eps}
-    \newcommand{\polyarmes}{armes.eps}
+        {polytechnique-filetcourtbleuclair.eps}
+    \newcommand{\polyfiletcourtbleu}
+    {polytechnique-filetcourtbleu.eps}
+    \newcommand{\polylogovert}
+    {polytechnique-logovert.eps}
+    \newcommand{\polylogohori}
+    {polytechnique-logohori.eps}
+    \newcommand{\polyarmes}
+    {polytechnique-armes.eps}
 \fi
 \newlength{\margehaut}
 \setlength{\margehaut}{40mm}
