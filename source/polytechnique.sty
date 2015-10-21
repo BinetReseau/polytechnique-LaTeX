@@ -300,7 +300,8 @@
 \pagestyle{plain}
 \newboolean{subtitle}\setboolean{subtitle}{false}
 \newcommand{\polysoustitresave}{}
-\newcommand*{\subtitle}[1]{
+\def\subtitle{}
+\renewcommand*{\subtitle}[1]{
     \renewcommand*{\polysoustitresave}{#1}
     \setboolean{subtitle}{true}
 }
