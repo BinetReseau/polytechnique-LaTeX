@@ -769,7 +769,8 @@ LaTeX version 1999/12/01 or later.
 %\begin{macro}{\subtitle}
 %Commande par laquelle l'utilisateur définit le sous-titre.
 %    \begin{macrocode}
-\newcommand*{\subtitle}[1]{
+\def\subtitle{}
+\renewcommand*{\subtitle}[1]{
     \renewcommand*{\polysoustitresave}{#1}
 %    \end{macrocode}
 %Si le sous-titre a éé défini, on met le booléen |subtitle| à vrai.
