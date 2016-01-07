@@ -735,12 +735,12 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %On definit un nouveau style d'en-tetes. Voir la documentation du package |titlesec| pour la syntaxe.
 %    \begin{macrocode}
-    \sethead[\enteteinterieur]% left even
+    \sethead[\enteteinterieurpair]% left even
             []% center even
             [\enteteexterieurpair]% right even
             {\enteteexterieurimpair}% left odd
             {}% center odd
-            {\enteteinterieur}% right odd
+            {\enteteinterieurimpair}% right odd
     \setfoot{}% left odd
              {\piedcentre}% center odd
              {}% right odd
