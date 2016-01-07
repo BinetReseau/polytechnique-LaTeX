@@ -266,14 +266,20 @@
             \polytitresave
         \end{minipage}}
 }
-\newcommand{\enteteinterieur}{
-    \includegraphics[height=\hauteurlogohori]{\polylogohori}
+\newcommand{\enteteinterieur}[1]{
+    \includegraphics[height=\hauteurlogohori]{#1}
 }
 \newcommand{\enteteexterieurpair}{
     \enteteexterieur{\flushright}
 }
 \newcommand{\enteteexterieurimpair}{
     \enteteexterieur{}
+}
+\newcommand{\enteteinterieurpair}{
+    \enteteinterieur{\polylogohori}
+}
+\newcommand{\enteteinterieurimpair}{
+    \enteteinterieur{\polylogohori}
 }
 \newcommand{\entetes}{
     \newpagestyle{polytechnique}{
@@ -320,6 +326,9 @@
 }
 
 \newcommand{\logo}[1]{
+    \renewcommand{\enteteinterieurimpair}{
+        \enteteinterieur{#1}
+    }
     \renewcommand{\titlepagebottomline}{
      \begin{minipage}{5\largeurlogohori}
          \centering

@@ -693,8 +693,8 @@ LaTeX version 1999/12/01 or later.
 %\end{macro}
 %\begin{macro}{\enteteinterieur}
 %    \begin{macrocode}
-\newcommand{\enteteinterieur}{
-    \includegraphics[height=\hauteurlogohori]{\polylogohori}
+\newcommand{\enteteinterieur}[1]{
+    \includegraphics[height=\hauteurlogohori]{#1}
 }
 %    \end{macrocode}
 %\end{macro}
@@ -710,6 +710,20 @@ LaTeX version 1999/12/01 or later.
 %    \begin{macrocode}
 \newcommand{\enteteexterieurimpair}{
     \enteteexterieur{}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\enteteinterieurpair}
+%    \begin{macrocode}
+\newcommand{\enteteexterieurpair}{
+    \enteteinterieur{\polylogohori}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\enteteinterieurimpair}
+%    \begin{macrocode}
+\newcommand{\enteteexterieurimpair}{
+    \enteteinterieur{\polylogohori}
 }
 %    \end{macrocode}
 %\end{macro}
@@ -826,6 +840,12 @@ LaTeX version 1999/12/01 or later.
 %    \begin{macrocode}
 \newcommand{\logo}[1]{
 %    \end{macrocode}
+%On redefinit la variable |\enteteinterieurimpair| pour les en-têtes.
+%    \begin{macrocode}
+    \renewcommand{\enteteinterieurimpair}{
+        \enteteinterieur{#1}
+    }
+%    \end{macrocode}
 %On redefinit la variable |\titlepagebottomline| pour l'option |titlepage|.
 %    \begin{macrocode}
     \renewcommand{\titlepagebottomline}{
@@ -856,7 +876,7 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %Le système de |minipage| et de |\parbox| est fait de tel sorte que les deux logos soient alignés à gauche et à droite sur la première ligne et verticalement au centre ; la date et le titre sont centrés sur la largeur et la hauteur.
 %    \begin{macrocode}
-		\begin{minipage}{0.33\textwidth}
+            \begin{minipage}{0.33\textwidth}
                 \raisebox{-0.5\height}
 %    \end{macrocode}
 %Les logos sont cntrés verticalement grâce au |\raisebox|. |\height| contient la hauteur de la |minipage| en cours.
