@@ -109,7 +109,7 @@ LaTeX version 1999/12/01 or later.
 %\title{Le package \textsf{polytechnique}}
 %\subtitle{\fileversion{} datée du \filedate.}
 %\author{Denis \textsc{Merigoux}}
-%\logo{typographix.pdf}
+%\logo[headers]{typographix.pdf}
 %
 %\maketitle
 %
@@ -133,20 +133,21 @@ LaTeX version 1999/12/01 or later.
 %
 %\subsection{Métadonnées du document}
 %
-%La page de titre est gérée entièrement par le package. Pour la définir, il faut signaler dans le préambule les métadonnées du document qui apparaîtront sur la page de titre, avec deux nouveaux champs optionnels |\subtitle| et |\logo| par rapport au \LaTeX{} standard :
+%La page de titre est gérée entièrement par le package. Pour la définir, il faut signaler dans le préambule les métadonnées du document qui apparaîtront sur la page de titre, avec deux nouveaux champs optionnels |\subtitle| et |\logo| par rapport au \LaTeX{} standard, et une modification de |\title|~:
 %\begin{itemize}
 %\item |\subtitle|\marg{sous-titre} où \meta{sous-titre} peut être sur plusieurs lignes séparées par des |\\| ;
-%\item |\logo|\marg{chemin} où \meta{chemin} est le chemin relatif vers le fichier d'un logo supplémentaire (entreprise, laboratoire, etc.) ; si le logo est dans le même dossier que le |.tex|, \meta{chemin} est le nom du fichier.
+%\item |\logo|\marg{chemin} où \meta{chemin} est le chemin relatif vers le fichier d'un logo supplémentaire (entreprise, laboratoire, etc.) ; si le logo est dans le même dossier que le |.tex|, \meta{chemin} est le nom du fichier. Si l'on écrit un document en recto-verso (voir section \ref{globaloptions} page \pageref{globaloptions}), on peut mettre ce logo dans les en-têtes en ajoutant l'option \emph{headers}~: |\logo|[\emph{headers}]\marg{chemin}.
+%\item |\title|\oarg{titre court}\marg{titre} où \emph{titre court} est facultatif. Il permet, si votre vrai titre est long et ne vous plaît pas dans les en-têtes, de mettre un titre court en en-tête.
 %\end{itemize}
 %Il est recommandé de recadrer au mieux l'image du logo pour qu'elle prenne les meilleures dimensions possibles sur la page. Le deuxième logo apparaîtra sur les deux pages de titre différentes (option |titlepage| ou |notitlepage|) dont il modifiera la présentation en conséquence.
 %Cela donne dans son préambule :
 %\begin{verbatim}
-%    \title{Le titre}
+%    \title[Le titre court (optionnel)]{Le titre}
 %    \subtitle{Le sous-titre (optionnel, enlever cette ligne sinon)}
 %    \author{L'auteur Prénom \textsc{Nom}
-%         (si plusieurs séparer par des \\)}
+%            (si plusieurs séparer par des \\)}
 %    \date{La date, enlever la ligne pour avoir la date du jour}
-%    %\logo{Chemin relatif vers le logo}
+%    %\logo[headers]{Chemin relatif vers le logo}
 %\end{verbatim}
 %
 %Puis rajouter après |\begin{document}| la commande |\maketitle|. Les champs |\title|, |\subtitle|, |\author| et |\date| peuvent être sur plusieurs lignes, c'est par exemple utile pour une liste d'auteurs. On passera alors à la ligne avec la commande |\\|.
@@ -169,7 +170,7 @@ LaTeX version 1999/12/01 or later.
 %\section{Options}
 %\label{options}
 %
-%\subsection{Options globales}
+%\subsection{Options globales}\label{globaloptions}
 %
 %Ces options peuvent être indiquées directement dans la déclaration de la classe du document, suivant la syntaxe habituelle : |\documentclass|\oarg{options globales}\marg{classe du document}. \meta{options globales} est une liste d'options séparées par des virgules, selon la syntaxe habituelle. Par exemple :
 %\begin{verbatim}
