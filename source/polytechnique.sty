@@ -263,7 +263,7 @@
     \raisebox{\decalageverticalentete}
         {\begin{minipage}[b]{\largeurtitreentete}
             \scshape#1\textcolor{bleu303}
-            \polytitresave
+            \polytitrecourtsave
         \end{minipage}}
 }
 \newcommand{\enteteinterieur}[1]{
@@ -312,8 +312,14 @@
     \setboolean{subtitle}{true}
 }
 \newcommand{\polytitresave}{}
-\renewcommand*{\title}[1]{
-    \renewcommand*{\polytitresave}{#1}
+\newcommand{\polytitrecourtsave}{}
+\renewcommand*{\title}[2][{}]{
+    \renewcommand*{\polytitresave}{#2}
+    \ifthenelse{\equal{#1}{}{}}{
+        \renewcommand*{\polytitrecourtsave}{#2}
+    }{
+        \renewcommand*{\polytitrecourtsave}{#1}
+    }
     \entetes
 }
 \newcommand{\polyauthorsave}{}
