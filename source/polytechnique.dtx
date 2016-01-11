@@ -806,14 +806,14 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\title}
-%Commande utilisée par l'utilisateur pour définit le titre. Comme les en-tête dépendent du titre, on les définit une fois qu'on connaît le titre.
+%Commande utilisée par l'utilisateur pour définir le titre. Comme les en-tête dépendent du titre, on les définit une fois qu'on connaît le titre.
 %    \begin{macrocode}
 \renewcommand*{\title}[2][{}]{
     \renewcommand*{\polytitresave}{#2}
     \ifthenelse{\equal{#1}{}}{
         \renewcommand*{\polytitrecourtsave}{#2}
     }{
-        \renewcommand*{\polytitrecourtsave}{#1}v
+        \renewcommand*{\polytitrecourtsave}{#1}
     }
     \entetes
 }
