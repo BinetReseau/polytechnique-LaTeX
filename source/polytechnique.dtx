@@ -843,13 +843,15 @@ LaTeX version 1999/12/01 or later.
 %\begin{macro}{\logo}
 %Commande utilisée par l'utilisateur pour définir un deuxième logo.
 %    \begin{macrocode}
-\newcommand{\logo}[1]{
+\newcommand{\logo}[2][{}]{
 %    \end{macrocode}
-%On redefinit la variable |\enteteinterieurimpair| pour les en-têtes.
+%On redefinit la variable |\enteteinterieurimpair| pour les en-têtes si l'utilisateur le souhaite.
 %    \begin{macrocode}
-    \renewcommand{\enteteinterieurimpair}{
-        \enteteinterieur{#1}
-    }
+    \ifthenelse{\equal{#1}{headers}}{
+        \renewcommand{\enteteinterieurimpair}{
+            \enteteinterieur{#2}
+        }
+    }{}
 %    \end{macrocode}
 %On redefinit la variable |\titlepagebottomline| pour l'option |titlepage|.
 %    \begin{macrocode}
@@ -867,7 +869,7 @@ LaTeX version 1999/12/01 or later.
             \raisebox{-0.5\height}{
                 \includegraphics[height=\hauteurlogovert,
                     width=1.5\largeurlogohori,
-                    keepaspectratio]{#1}
+                    keepaspectratio]{#2}
             }
         \end{minipage}
     }
@@ -902,7 +904,7 @@ LaTeX version 1999/12/01 or later.
                     \flushright\raisebox{-0.5\height}
                     {\includegraphics[height=\hauteurlogovert,
                         width=1.75\largeurlogohori,
-                        keepaspectratio]{#1}
+                        keepaspectratio]{#2}
                     }
             \end{minipage} 
         \end{minipage}

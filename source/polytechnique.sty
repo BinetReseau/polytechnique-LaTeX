@@ -331,10 +331,12 @@
     \renewcommand*{\polydatesave}{#1}
 }
 
-\newcommand{\logo}[1]{
-    \renewcommand{\enteteinterieurimpair}{
-        \enteteinterieur{#1}
-    }
+\newcommand{\logo}[2][{}]{
+    \ifthenelse{\equal{#1}{headers}}{
+        \renewcommand{\enteteinterieurimpair}{
+            \enteteinterieur{#2}
+        }
+    }{}
     \renewcommand{\titlepagebottomline}{
      \begin{minipage}{5\largeurlogohori}
          \centering
@@ -346,7 +348,7 @@
             \raisebox{-0.5\height}{
                 \includegraphics[height=\hauteurlogovert,
                     width=1.5\largeurlogohori,
-                    keepaspectratio]{#1}
+                    keepaspectratio]{#2}
             }
         \end{minipage}
     }
@@ -370,7 +372,7 @@
                     \flushright\raisebox{-0.5\height}
                     {\includegraphics[height=\hauteurlogovert,
                         width=1.75\largeurlogohori,
-                        keepaspectratio]{#1}
+                        keepaspectratio]{#2}
                     }
             \end{minipage}
         \end{minipage}
