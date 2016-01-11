@@ -715,14 +715,14 @@ LaTeX version 1999/12/01 or later.
 %\end{macro}
 %\begin{macro}{\enteteinterieurpair}
 %    \begin{macrocode}
-\newcommand{\enteteexterieurpair}{
+\newcommand{\enteteinterieurpair}{
     \enteteinterieur{\polylogohori}
 }
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\enteteinterieurimpair}
 %    \begin{macrocode}
-\newcommand{\enteteexterieurimpair}{
+\newcommand{\enteteinterieurimpair}{
     \enteteinterieur{\polylogohori}
 }
 %    \end{macrocode}
@@ -787,7 +787,7 @@ LaTeX version 1999/12/01 or later.
 \renewcommand*{\subtitle}[1]{
     \renewcommand*{\polysoustitresave}{#1}
 %    \end{macrocode}
-%Si le sous-titre a éé défini, on met le booléen |subtitle| à vrai.
+%Si le sous-titre a été défini, on met le booléen |subtitle| à vrai.
 %    \begin{macrocode}
     \setboolean{subtitle}{true}
 }
@@ -797,6 +797,12 @@ LaTeX version 1999/12/01 or later.
 %Idem que |\polysoustitresave|.
 %    \begin{macrocode}
 \newcommand{\polytitresave}{}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\polytitrecourtsave}
+%Idem que |\polysoustitresave|.
+%    \begin{macrocode}
+\newcommand{\polytitrecourtsave}{}
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\title}

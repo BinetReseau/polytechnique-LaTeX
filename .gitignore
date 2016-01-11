@@ -7,3 +7,6 @@
 source/polytechnique.pdf
 guide/installation.pdf
 *.zip
+*.glo
+*.idx
+*.toc
