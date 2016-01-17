@@ -88,6 +88,7 @@ LaTeX version 1999/12/01 or later.
 %</driver>
 % \fi
 %
+% %\changes{v1.3.4}{2016/01/12}{Correction de bugs, ajout du logo en en-tête, ajout du titre court en en-tête, compatibilité avec d'autres classes}
 %\changes{v1.3.3}{2015/07/04}{Correction de bugs, inversion des en-têtes exterieur/interieur}
 %\changes{v1.3.2}{2015/05/27}{Code réorganisé et installation facilitée}
 %\changes{v1.3.0}{2015/04/29}{Ajout des options oneside, twoside, sectionmark, chaptermark, markboth, pagenumber}
@@ -108,8 +109,9 @@ LaTeX version 1999/12/01 or later.
 %
 %\title{Le package \textsf{polytechnique}}
 %\subtitle{\fileversion{} datée du \filedate.}
-%\author{Denis \textsc{Merigoux}}
-%\logo{typographix.pdf}
+%\author{Denis \textsc{Merigoux} \\
+%        Clément \textsc{Durand}}
+%\logo[headers]{typographix.pdf}
 %
 %\maketitle
 %
@@ -133,20 +135,21 @@ LaTeX version 1999/12/01 or later.
 %
 %\subsection{Métadonnées du document}
 %
-%La page de titre est gérée entièrement par le package. Pour la définir, il faut signaler dans le préambule les métadonnées du document qui apparaîtront sur la page de titre, avec deux nouveaux champs optionnels |\subtitle| et |\logo| par rapport au \LaTeX{} standard :
+%La page de titre est gérée entièrement par le package. Pour la définir, il faut signaler dans le préambule les métadonnées du document qui apparaîtront sur la page de titre, avec deux nouveaux champs optionnels |\subtitle| et |\logo| par rapport au \LaTeX{} standard, et une modification de |\title|~:
 %\begin{itemize}
 %\item |\subtitle|\marg{sous-titre} où \meta{sous-titre} peut être sur plusieurs lignes séparées par des |\\| ;
-%\item |\logo|\marg{chemin} où \meta{chemin} est le chemin relatif vers le fichier d'un logo supplémentaire (entreprise, laboratoire, etc.) ; si le logo est dans le même dossier que le |.tex|, \meta{chemin} est le nom du fichier.
+%\item |\logo|\marg{chemin} où \meta{chemin} est le chemin relatif vers le fichier d'un logo supplémentaire (entreprise, laboratoire, etc.) ; si le logo est dans le même dossier que le |.tex|, \meta{chemin} est le nom du fichier. Si l'on écrit un document en recto-verso (voir section \ref{globaloptions} page \pageref{globaloptions}), on peut mettre ce logo dans les en-têtes en ajoutant l'option \emph{headers}~: |\logo|[\emph{headers}]\marg{chemin}.
+%\item |\title|\oarg{titre court}\marg{titre} où \emph{titre court} est facultatif. Il permet, si votre vrai titre est long et ne vous plaît pas dans les en-têtes, de mettre un titre court en en-tête.
 %\end{itemize}
 %Il est recommandé de recadrer au mieux l'image du logo pour qu'elle prenne les meilleures dimensions possibles sur la page. Le deuxième logo apparaîtra sur les deux pages de titre différentes (option |titlepage| ou |notitlepage|) dont il modifiera la présentation en conséquence.
 %Cela donne dans son préambule :
 %\begin{verbatim}
-%    \title{Le titre}
+%    \title[Le titre court (optionnel)]{Le titre}
 %    \subtitle{Le sous-titre (optionnel, enlever cette ligne sinon)}
 %    \author{L'auteur Prénom \textsc{Nom}
-%         (si plusieurs séparer par des \\)}
+%            (si plusieurs séparer par des \\)}
 %    \date{La date, enlever la ligne pour avoir la date du jour}
-%    %\logo{Chemin relatif vers le logo}
+%    %\logo[headers]{Chemin relatif vers le logo}
 %\end{verbatim}
 %
 %Puis rajouter après |\begin{document}| la commande |\maketitle|. Les champs |\title|, |\subtitle|, |\author| et |\date| peuvent être sur plusieurs lignes, c'est par exemple utile pour une liste d'auteurs. On passera alors à la ligne avec la commande |\\|.
@@ -158,8 +161,9 @@ LaTeX version 1999/12/01 or later.
 %    Coordinateur :&Jean Dupont&---&Tuteur :&Paul Martin
 %    \end{tabular}
 %    \\[\baselineskip]
-%    \begin{tabular}{cccc}
-%    Nom1&Nom2&Nom3\\%    Nom4&Nom5&Nom6
+%    \begin{tabular}{ccc}
+%    Nom1&Nom2&Nom3\\
+%    Nom4&Nom5&Nom6
 %    \end{tabular}
 %}
 %\end{verbatim}
@@ -169,7 +173,7 @@ LaTeX version 1999/12/01 or later.
 %\section{Options}
 %\label{options}
 %
-%\subsection{Options globales}
+%\subsection{Options globales}\label{globaloptions}
 %
 %Ces options peuvent être indiquées directement dans la déclaration de la classe du document, suivant la syntaxe habituelle : |\documentclass|\oarg{options globales}\marg{classe du document}. \meta{options globales} est une liste d'options séparées par des virgules, selon la syntaxe habituelle. Par exemple :
 %\begin{verbatim}
@@ -686,15 +690,15 @@ LaTeX version 1999/12/01 or later.
     \raisebox{\decalageverticalentete}
         {\begin{minipage}[b]{\largeurtitreentete}
             \scshape#1\textcolor{bleu303}
-            \polytitresave
+            \polytitrecourtsave
         \end{minipage}}
 }
 %    \end{macrocode}
 %\end{macro}
 %\begin{macro}{\enteteinterieur}
 %    \begin{macrocode}
-\newcommand{\enteteinterieur}{
-    \includegraphics[height=\hauteurlogohori]{\polylogohori}
+\newcommand{\enteteinterieur}[1]{
+    \includegraphics[height=\hauteurlogohori]{#1}
 }
 %    \end{macrocode}
 %\end{macro}
@@ -713,6 +717,20 @@ LaTeX version 1999/12/01 or later.
 }
 %    \end{macrocode}
 %\end{macro}
+%\begin{macro}{\enteteinterieurpair}
+%    \begin{macrocode}
+\newcommand{\enteteinterieurpair}{
+    \enteteinterieur{\polylogohori}
+}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\enteteinterieurimpair}
+%    \begin{macrocode}
+\newcommand{\enteteinterieurimpair}{
+    \enteteinterieur{\polylogohori}
+}
+%    \end{macrocode}
+%\end{macro}
 %\begin{macro}{\entetes}
 %Comme l'en-tête contient le titre, on les active uniquement quand le titre est défini d'où cette forme de commande qui sera placée dans la commande |title| redéfinie.
 %    \begin{macrocode}
@@ -721,12 +739,12 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %On definit un nouveau style d'en-tetes. Voir la documentation du package |titlesec| pour la syntaxe.
 %    \begin{macrocode}
-    \sethead[\enteteinterieur]% left even
+    \sethead[\enteteinterieurpair]% left even
             []% center even
             [\enteteexterieurpair]% right even
             {\enteteexterieurimpair}% left odd
             {}% center odd
-            {\enteteinterieur}% right odd
+            {\enteteinterieurimpair}% right odd
     \setfoot{}% left odd
              {\piedcentre}% center odd
              {}% right odd
@@ -773,7 +791,7 @@ LaTeX version 1999/12/01 or later.
 \renewcommand*{\subtitle}[1]{
     \renewcommand*{\polysoustitresave}{#1}
 %    \end{macrocode}
-%Si le sous-titre a éé défini, on met le booléen |subtitle| à vrai.
+%Si le sous-titre a été défini, on met le booléen |subtitle| à vrai.
 %    \begin{macrocode}
     \setboolean{subtitle}{true}
 }
@@ -785,11 +803,22 @@ LaTeX version 1999/12/01 or later.
 \newcommand{\polytitresave}{}
 %    \end{macrocode}
 %\end{macro}
-%\begin{macro}{\title}
-%Commande utilisée par l'utilisateur pour définit le titre. Comme les en-tête dépendent du titre, on les définit une fois qu'on connaît le titre.
+%\begin{macro}{\polytitrecourtsave}
+%Idem que |\polysoustitresave|.
 %    \begin{macrocode}
-\renewcommand*{\title}[1]{
-    \renewcommand*{\polytitresave}{#1}
+\newcommand{\polytitrecourtsave}{}
+%    \end{macrocode}
+%\end{macro}
+%\begin{macro}{\title}
+%Commande utilisée par l'utilisateur pour définir le titre. Comme les en-tête dépendent du titre, on les définit une fois qu'on connaît le titre.
+%    \begin{macrocode}
+\renewcommand*{\title}[2][{}]{
+    \renewcommand*{\polytitresave}{#2}
+    \ifthenelse{\equal{#1}{}}{
+        \renewcommand*{\polytitrecourtsave}{#2}
+    }{
+        \renewcommand*{\polytitrecourtsave}{#1}
+    }
     \entetes
 }
 %    \end{macrocode}
@@ -824,7 +853,15 @@ LaTeX version 1999/12/01 or later.
 %\begin{macro}{\logo}
 %Commande utilisée par l'utilisateur pour définir un deuxième logo.
 %    \begin{macrocode}
-\newcommand{\logo}[1]{
+\newcommand{\logo}[2][{}]{
+%    \end{macrocode}
+%On redefinit la variable |\enteteinterieurimpair| pour les en-têtes si l'utilisateur le souhaite.
+%    \begin{macrocode}
+    \ifthenelse{\equal{#1}{headers}}{
+        \renewcommand{\enteteinterieurimpair}{
+            \enteteinterieur{#2}
+        }
+    }{}
 %    \end{macrocode}
 %On redefinit la variable |\titlepagebottomline| pour l'option |titlepage|.
 %    \begin{macrocode}
@@ -842,7 +879,7 @@ LaTeX version 1999/12/01 or later.
             \raisebox{-0.5\height}{
                 \includegraphics[height=\hauteurlogovert,
                     width=1.5\largeurlogohori,
-                    keepaspectratio]{#1}
+                    keepaspectratio]{#2}
             }
         \end{minipage}
     }
@@ -856,7 +893,7 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %Le système de |minipage| et de |\parbox| est fait de tel sorte que les deux logos soient alignés à gauche et à droite sur la première ligne et verticalement au centre ; la date et le titre sont centrés sur la largeur et la hauteur.
 %    \begin{macrocode}
-		\begin{minipage}{0.33\textwidth}
+            \begin{minipage}{0.33\textwidth}
                 \raisebox{-0.5\height}
 %    \end{macrocode}
 %Les logos sont cntrés verticalement grâce au |\raisebox|. |\height| contient la hauteur de la |minipage| en cours.
@@ -877,7 +914,7 @@ LaTeX version 1999/12/01 or later.
                     \flushright\raisebox{-0.5\height}
                     {\includegraphics[height=\hauteurlogovert,
                         width=1.75\largeurlogohori,
-                        keepaspectratio]{#1}
+                        keepaspectratio]{#2}
                     }
             \end{minipage} 
         \end{minipage}

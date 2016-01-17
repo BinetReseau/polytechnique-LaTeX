@@ -106,7 +106,7 @@ Après exécution du script, le message affiché sur la console devrait être :
 ************************************************
 \end{verbatim}
 
-Si ce message ne s'affiche pas, se reporter à la méthode manuelle.
+Si ce message ne s'affiche pas ou si l'installation semble ne pas fonctionner quand vous essayez d'utiliser le package, se reporter à la méthode manuelle.
 \subsubsection{Méthode manuelle}
 
 Il faut chercher où se trouve le répertoire de ton installation LaTeX. Pour cela (et quelque soit ton système d'exploitation), ouvre une ligne de commandes et tape :
@@ -115,12 +115,12 @@ kpsewhich -var-value TEXMFMAIN
 \end{verbatim}
 Rends-toi alors dans le répertoire indiqué que l'on nommera par la suite \emph{INSTALL}. Dans une autre fenêtre de ton explorateur de fichiers, extrais l'archive téléchargée et ouvre le dossier \emph{source}. Il suffit ensuite de copier tous les fichiers \texttt{.pdf}, \texttt{.eps} et \texttt{polytechnique.sty} vers le dossier \emph{INSTALL/tex/latex/polytechnique}. 
 
-Il te faut enfin mettre à jour la la liste de package de ta distribution. Pour Mac ou Linux, ouvre un terminal et entre \texttt{sudo texhash}. Pour Windows, ouvre dans tous les programmes l'utilitaire \emph{Settings (Admin)} et clique sur \emph{Refresh FNDB}.
+Il te faut enfin mettre à jour la la liste de package de ta distribution. Pour Linux, ouvre un terminal et entre \texttt{sudo texhash}. Pour Mac, ouvre un terminal et entre \texttt{sudo mktexlsr}. Pour Windows, ouvre dans tous les programmes l'utilitaire \emph{Settings (Admin)} et clique sur \emph{Refresh FNDB}.
 
 De cette manière, l'installation n'est pas complète mais le package marchera très bien en utilisation. Il te manquera par contre les fichiers source commentés si tu veux le modifier.
 
 \subsection{Documentation}
 
-La documentation du package ets le fichier \texttt{polytechnique.pdf} qui se trouve entre autres. dans le dossier \emph{source} de l'archive extraite.
+La documentation du package est le fichier \texttt{polytechnique.pdf} qui se trouve entre autres dans le dossier \emph{source} de l'archive extraite.
 
 \end{document}

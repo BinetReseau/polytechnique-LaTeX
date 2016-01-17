@@ -263,11 +263,11 @@
     \raisebox{\decalageverticalentete}
         {\begin{minipage}[b]{\largeurtitreentete}
             \scshape#1\textcolor{bleu303}
-            \polytitresave
+            \polytitrecourtsave
         \end{minipage}}
 }
-\newcommand{\enteteinterieur}{
-    \includegraphics[height=\hauteurlogohori]{\polylogohori}
+\newcommand{\enteteinterieur}[1]{
+    \includegraphics[height=\hauteurlogohori]{#1}
 }
 \newcommand{\enteteexterieurpair}{
     \enteteexterieur{\flushright}
@@ -275,14 +275,20 @@
 \newcommand{\enteteexterieurimpair}{
     \enteteexterieur{}
 }
+\newcommand{\enteteinterieurpair}{
+    \enteteinterieur{\polylogohori}
+}
+\newcommand{\enteteinterieurimpair}{
+    \enteteinterieur{\polylogohori}
+}
 \newcommand{\entetes}{
     \newpagestyle{polytechnique}{
-    \sethead[\enteteinterieur]% left even
+    \sethead[\enteteinterieurpair]% left even
             []% center even
             [\enteteexterieurpair]% right even
             {\enteteexterieurimpair}% left odd
             {}% center odd
-            {\enteteinterieur}% right odd
+            {\enteteinterieurimpair}% right odd
     \setfoot{}% left odd
              {\piedcentre}% center odd
              {}% right odd
@@ -306,8 +312,14 @@
     \setboolean{subtitle}{true}
 }
 \newcommand{\polytitresave}{}
-\renewcommand*{\title}[1]{
-    \renewcommand*{\polytitresave}{#1}
+\newcommand{\polytitrecourtsave}{}
+\renewcommand*{\title}[2][{}]{
+    \renewcommand*{\polytitresave}{#2}
+    \ifthenelse{\equal{#1}{}}{
+        \renewcommand*{\polytitrecourtsave}{#2}
+    }{
+        \renewcommand*{\polytitrecourtsave}{#1}
+    }
     \entetes
 }
 \newcommand{\polyauthorsave}{}
@@ -319,7 +331,12 @@
     \renewcommand*{\polydatesave}{#1}
 }
 
-\newcommand{\logo}[1]{
+\newcommand{\logo}[2][{}]{
+    \ifthenelse{\equal{#1}{headers}}{
+        \renewcommand{\enteteinterieurimpair}{
+            \enteteinterieur{#2}
+        }
+    }{}
     \renewcommand{\titlepagebottomline}{
      \begin{minipage}{5\largeurlogohori}
          \centering
@@ -331,7 +348,7 @@
             \raisebox{-0.5\height}{
                 \includegraphics[height=\hauteurlogovert,
                     width=1.5\largeurlogohori,
-                    keepaspectratio]{#1}
+                    keepaspectratio]{#2}
             }
         \end{minipage}
     }
@@ -339,7 +356,7 @@
         \noindent%
         \begin{minipage}{\textwidth}
             \centering
-\begin{minipage}{0.33\textwidth}
+            \begin{minipage}{0.33\textwidth}
                 \raisebox{-0.5\height}
                     {\includegraphics[width=\largeurlogovert]
                         {\polylogovert}
@@ -355,7 +372,7 @@
                     \flushright\raisebox{-0.5\height}
                     {\includegraphics[height=\hauteurlogovert,
                         width=1.75\largeurlogohori,
-                        keepaspectratio]{#1}
+                        keepaspectratio]{#2}
                     }
             \end{minipage}
         \end{minipage}
