@@ -244,7 +244,7 @@ LaTeX version 1999/12/01 or later.
         {\color{rouge485}\LARGE\bfseries\sffamily\filcenter}
         {\thesection}
         {0em}
-        {\MakeUppercase}
+        {\MakeUppercaseWithNewline}
         [\vspace*{-0.5\baselineskip}%
             \includegraphics{\polyfiletlongrouge}]
     \titleformat{\subsection}
@@ -970,7 +970,7 @@ LaTeX version 1999/12/01 or later.
                     \color{bleu303}\Huge\scshape
                     \MakeUppercaseWithNewline{\polytitresave}
 %    \end{macrocode}
-%La ligne qui précède affiche le titre. La commande |\MakeUpperCaseWithNewLine| sera définie par la suite.
+%La ligne qui précède affiche le titre. La commande |\MakeUpperCaseWithNewline| sera définie par la suite.
 %    \begin{macrocode}
                 \ifthenelse{\boolean{subtitle}}{
 %    \end{macrocode}
@@ -1013,7 +1013,7 @@ LaTeX version 1999/12/01 or later.
           \raisebox{-\totalheight}[0pt][0pt]{%
         \includegraphics[height=\hauteurlogopage]{\polyarmes}}}
 %    \end{macrocode}
-%On passe maintenant au titre, séparé par un espace vertical du haut de la page. La commande |\MakeUpperCaseWithNewLine| permet de mettre plusieurs lignes à la suite en capitales.
+%On passe maintenant au titre, séparé par un espace vertical du haut de la page. La commande |\MakeUpperCaseWithNewline| permet de mettre plusieurs lignes à la suite en capitales.
 %    \begin{macrocode}
         \vspace*{0.125\textheight}
         \begin{center}
