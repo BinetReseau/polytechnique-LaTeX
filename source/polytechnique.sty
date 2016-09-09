@@ -99,7 +99,6 @@
     \AtEndOfPackage{
         \renewcommand{\enteteexterieur}[1]{
             \ifthesection{
-                \raisebox{\decalageverticalentete}
                     {\scshape\color{bleu303}
                         \thesection{}.~\sectiontitle}
             }{
@@ -111,7 +110,6 @@
     \AtEndOfPackage{
         \renewcommand{\enteteexterieur}[1]{
             \ifthechapter{
-                \raisebox{\decalageverticalentete}
                      {\scshape\color{bleu303}
                          \thechapter{}.~\chaptertitle}
             }{
@@ -124,7 +122,6 @@
     \AtEndOfPackage{
         \renewcommand{\enteteexterieurimpair}{
             \ifthesection{%Si la section a ete definie
-                \raisebox{\decalageverticalentete}
                     {\scshape\color{bleu303}
                         \thesection{}.~\sectiontitle}
             }{
@@ -133,7 +130,6 @@
         }
         \renewcommand{\enteteexterieurpair}{
             \ifthechapter{
-                \raisebox{\decalageverticalentete}
                     {\scshape\color{bleu303}
                         \thechapter{}.~\chaptertitle}
             }{
@@ -261,14 +257,13 @@
         {\rule{\largeurfiletpiedcentre}{0.3mm}\\\thepage}}
 }
 \newcommand{\enteteexterieur}[1]{
-    \raisebox{\decalageverticalentete}
         {\begin{minipage}[b]{\largeurtitreentete}
             \scshape#1\textcolor{bleu303}
             \polytitrecourtsave
         \end{minipage}}
 }
 \newcommand{\enteteinterieur}[1]{
-    \includegraphics[height=\hauteurlogohori]{#1}
+    \includegraphics[height=\hauteurlogohori,width=2\largeurlogohori,keepaspectratio]{#1}
 }
 \newcommand{\enteteexterieurpair}{
     \enteteexterieur{\flushright}
@@ -284,12 +279,12 @@
 }
 \newcommand{\entetes}{
     \newpagestyle{polytechnique}{
-    \sethead[\enteteinterieurpair]% left even
+    \sethead[\raisebox{.5\hauteurlogohori}{\raisebox{-0.5\height}{\enteteinterieurpair}}]% left even
             []% center even
-            [\enteteexterieurpair]% right even
-            {\enteteexterieurimpair}% left odd
+            [\raisebox{.5\hauteurlogohori}{\raisebox{-0.5\height}{\enteteexterieurpair}}]% right even
+            {\raisebox{.5\hauteurlogohori}{\raisebox{-0.5\height}{\enteteexterieurimpair}}}% left odd
             {}% center odd
-            {\enteteinterieurimpair}% right odd
+            {\raisebox{.5\hauteurlogohori}{\raisebox{-0.5\height}{\enteteinterieurimpair}}}% right odd
     \setfoot{}% left odd
              {\piedcentre}% center odd
              {}% right odd

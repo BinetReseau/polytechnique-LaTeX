@@ -11,3 +11,5 @@ guide/installation.pdf
 *.idx
 *.toc
 *.dvi
+*.ind
+*.ilg

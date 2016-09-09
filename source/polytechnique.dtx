@@ -328,7 +328,6 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %S'il y a une section courante, on affiche son titre en en-tête intérieur.
 %    \begin{macrocode}
-                \raisebox{\decalageverticalentete}
                     {\scshape\color{bleu303}
                         \thesection{}.~\sectiontitle}
             }{
@@ -347,7 +346,6 @@ LaTeX version 1999/12/01 or later.
     \AtEndOfPackage{    
         \renewcommand{\enteteexterieur}[1]{
             \ifthechapter{
-                \raisebox{\decalageverticalentete}
                      {\scshape\color{bleu303}
                          \thechapter{}.~\chaptertitle}
             }{
@@ -364,7 +362,6 @@ LaTeX version 1999/12/01 or later.
     \AtEndOfPackage{
         \renewcommand{\enteteexterieurimpair}{
             \ifthesection{%Si la section a ete definie
-                \raisebox{\decalageverticalentete}
                     {\scshape\color{bleu303}
                         \thesection{}.~\sectiontitle}
             }{
@@ -373,7 +370,6 @@ LaTeX version 1999/12/01 or later.
         }
         \renewcommand{\enteteexterieurpair}{
             \ifthechapter{
-                \raisebox{\decalageverticalentete}
                     {\scshape\color{bleu303}
                         \thechapter{}.~\chaptertitle}
             }{
@@ -688,7 +684,6 @@ LaTeX version 1999/12/01 or later.
 %L'argument sert à insérer |\flushright| dans le cas ou l'en-tête est sur une page impaire.
 %    \begin{macrocode}
 \newcommand{\enteteexterieur}[1]{
-    \raisebox{\decalageverticalentete}
         {\begin{minipage}[b]{\largeurtitreentete}
             \scshape#1\textcolor{bleu303}
             \polytitrecourtsave
@@ -699,7 +694,7 @@ LaTeX version 1999/12/01 or later.
 %\begin{macro}{\enteteinterieur}
 %    \begin{macrocode}
 \newcommand{\enteteinterieur}[1]{
-    \includegraphics[height=\hauteurlogohori]{#1}
+    \includegraphics[height=\hauteurlogohori,width=2\largeurlogohori,keepaspectratio]{#1}
 }
 %    \end{macrocode}
 %\end{macro}
@@ -740,12 +735,12 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %On definit un nouveau style d'en-tetes. Voir la documentation du package |titlesec| pour la syntaxe.
 %    \begin{macrocode}
-    \sethead[\enteteinterieurpair]% left even
+    \sethead[\raisebox{.5\hauteurlogohori}{\raisebox{-0.5\height}{\enteteinterieurpair}}]% left even
             []% center even
-            [\enteteexterieurpair]% right even
-            {\enteteexterieurimpair}% left odd
+            [\raisebox{.5\hauteurlogohori}{\raisebox{-0.5\height}{\enteteexterieurpair}}]% right even
+            {\raisebox{.5\hauteurlogohori}{\raisebox{-0.5\height}{\enteteexterieurimpair}}}% left odd
             {}% center odd
-            {\enteteinterieurimpair}% right odd
+            {\raisebox{.5\hauteurlogohori}{\raisebox{-0.5\height}{\enteteinterieurimpair}}}% right odd
     \setfoot{}% left odd
              {\piedcentre}% center odd
              {}% right odd
