@@ -43,6 +43,7 @@ install: package clean
 	$(call say,copying files to $(POLYPKGDIR))
 	@cp -r . $(POLYPKGDIR)
 	@rm -f $(POLYPKGDIR)/Makefile
+	@texhash || mktexlsr
 	$(call installed,$(POLYPKGDIR))
 
 clean:
