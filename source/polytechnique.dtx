@@ -412,7 +412,7 @@ LaTeX version 1999/12/01 or later.
 %Le package |polytechnique| utilise de nombreux autres packages afin d'effectuer la mise en page. Ces packages sont appelés avec la commande |\RequirePackage| par le code ci-dessous.
 %    \begin{macrocode}
 \RequirePackage{calc}
-\RequirePackage{color}
+\RequirePackage{xcolor}
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 \RequirePackage{ifthen}
@@ -426,6 +426,7 @@ LaTeX version 1999/12/01 or later.
 %On définit des couleurs utilisées par le package définies par la charte graphique de l'École.
 %    \begin{macrocode}
 \definecolor{bleu303}{RGB}{0,62,92}
+\colorlet{bleu303pale}{bleu303!20!white}
 \definecolor{rouge485}{RGB}{213,43,30}
 \definecolor{bleu315}{RGB}{0,104,128}
 %    \end{macrocode}
@@ -437,10 +438,10 @@ LaTeX version 1999/12/01 or later.
 \ifpdf
     \newcommand{\polyfiletlongrouge}
 	    {polytechnique-filetlongrouge.pdf}
-    \newcommand{\polyfiletcourtbleuclair}
-        {polytechnique-filetcourtbleuclair.pdf}
-    \newcommand{\polyfiletcourtbleu}
-	    {polytechnique-filetcourtbleu.pdf}
+    \newcommand{\polyfiletcourt}
+        {polytechnique-filetcourt.pdf}
+    \let\polyfiletcourtbleuclair\polyfiletcourt
+    \let\polyfiletcourtbleu\polyfiletcourt
     \newcommand{\polylogovert}
 	    {polytechnique-logovert.pdf}
     \newcommand{\polylogohori}
@@ -693,8 +694,11 @@ LaTeX version 1999/12/01 or later.
 %\end{macro}
 %\begin{macro}{\enteteinterieur}
 %    \begin{macrocode}
-\newcommand{\enteteinterieur}[1]{
-    \includegraphics[height=\hauteurlogohori,width=2\largeurlogohori,keepaspectratio]{#1}
+\newcommand{\enteteinterieur}[2][bleu303]{
+    {%
+        \color{#1}%
+        \includegraphics[height=\hauteurlogohori,width=2\largeurlogohori,keepaspectratio]{#2}%
+    }%
 }
 %    \end{macrocode}
 %\end{macro}
@@ -865,6 +869,7 @@ LaTeX version 1999/12/01 or later.
     	\begin{minipage}{5\largeurlogohori}
     	    \centering
     	    \raisebox{-0.5\height}{
+                \color{bleu303}
                 \includegraphics[width=1.5\largeurlogohori]
                     {\polylogohori}
             }
@@ -894,25 +899,28 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %Les logos sont cntrés verticalement grâce au |\raisebox|. |\height| contient la hauteur de la |minipage| en cours.
 %    \begin{macrocode}
-                    {\includegraphics[width=\largeurlogovert]
+                    {\color{bleu303}%
+                        \includegraphics[width=\largeurlogovert]
                         {\polylogovert}
                     }
             \end{minipage}%
             %    \end{macrocode}
-%Le |%| qui suit le |\end{minipage}| est en fait très important. La ligne est divisée en 3 minipage de largeur |0.33\textwidth|, ce qui couvre exactement la largeur de la page. Néanmoins un retour à la ligne dans le code correspond à un espace sur la sortie, ce qui augmente la largeur de la ligne et la fait déborder : le logo de droite se retrouve sur la ligne suivante, ce qui n'est pas voulu. Le |%| sert à annuler l'effet espace du retour à la ligne dans le code.
+%Le |%| qui suit le |\end{minipage}| est en fait très important. La ligne est divisée en 3 minipages de largeur |0.33\textwidth|, ce qui couvre exactement la largeur de la page. Néanmoins un retour à la ligne dans le code correspond à un espace sur la sortie, ce qui augmente la largeur de la ligne et la fait déborder : le logo de droite se retrouve sur la ligne suivante, ce qui n'est pas voulu. Le |%| sert à annuler l'effet espace du retour à la ligne dans le code.
 %    \begin{macrocode}
             \begin{minipage}{0.33\textwidth}
+                \color{bleu303}%
                 \centering\polydatesave{}\\
                 \polyauthorsave{}\\
                 \includegraphics{\polyfiletcourtbleu}
             \end{minipage}%
             \begin{minipage}{0.33\textwidth}
+                    \color{bleu303}%
                     \flushright\raisebox{-0.5\height}
                     {\includegraphics[height=\hauteurlogovert,
                         width=1.75\largeurlogohori,
                         keepaspectratio]{#2}
                     }
-            \end{minipage} 
+            \end{minipage}
         \end{minipage}
     }
 }
@@ -1006,7 +1014,8 @@ LaTeX version 1999/12/01 or later.
 %    \begin{macrocode}
         \noindent\makebox[\textwidth][c]{%
           \raisebox{-\totalheight}[0pt][0pt]{%
-        \includegraphics[height=\hauteurlogopage]{\polyarmes}}}
+            \color{bleu303pale}%
+            \includegraphics[height=\hauteurlogopage]{\polyarmes}}}
 %    \end{macrocode}
 %On passe maintenant au titre, séparé par un espace vertical du haut de la page. La commande |\MakeUpperCaseWithNewline| permet de mettre plusieurs lignes à la suite en capitales.
 %    \begin{macrocode}

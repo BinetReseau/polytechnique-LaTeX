@@ -156,7 +156,7 @@
 \ExecuteOptions{a4paper,notitlepage,oneside}
 \ProcessOptions*
 \RequirePackage{calc}
-\RequirePackage{color}
+\RequirePackage{xcolor}
 \RequirePackage{geometry}
 \RequirePackage{graphicx}
 \RequirePackage{ifthen}
@@ -164,15 +164,16 @@
 \RequirePackage{lmodern}
 \RequirePackage[pagestyles]{titlesec}
 \definecolor{bleu303}{RGB}{0,62,92}
+\colorlet{bleu303pale}{bleu303!20!white}
 \definecolor{rouge485}{RGB}{213,43,30}
 \definecolor{bleu315}{RGB}{0,104,128}
 \ifpdf
     \newcommand{\polyfiletlongrouge}
     {polytechnique-filetlongrouge.pdf}
-    \newcommand{\polyfiletcourtbleuclair}
-        {polytechnique-filetcourtbleuclair.pdf}
-    \newcommand{\polyfiletcourtbleu}
-    {polytechnique-filetcourtbleu.pdf}
+    \newcommand{\polyfiletcourt}
+        {polytechnique-filetcourt.pdf}
+    \let\polyfiletcourtbleuclair\polyfiletcourt
+    \let\polyfiletcourtbleu\polyfiletcourt
     \newcommand{\polylogovert}
     {polytechnique-logovert.pdf}
     \newcommand{\polylogohori}
@@ -262,8 +263,11 @@
             \polytitrecourtsave
         \end{minipage}}
 }
-\newcommand{\enteteinterieur}[1]{
-    \includegraphics[height=\hauteurlogohori,width=2\largeurlogohori,keepaspectratio]{#1}
+\newcommand{\enteteinterieur}[2][bleu303]{
+    {%
+        \color{#1}%
+        \includegraphics[height=\hauteurlogohori,width=2\largeurlogohori,keepaspectratio]{#2}%
+    }%
 }
 \newcommand{\enteteexterieurpair}{
     \enteteexterieur{\flushright}
@@ -337,6 +341,7 @@
      \begin{minipage}{5\largeurlogohori}
          \centering
          \raisebox{-0.5\height}{
+                \color{bleu303}
                 \includegraphics[width=1.5\largeurlogohori]
                     {\polylogohori}
             }
@@ -354,17 +359,20 @@
             \centering
             \begin{minipage}{0.33\textwidth}
                 \raisebox{-0.5\height}
-                    {\includegraphics[width=\largeurlogovert]
+                    {\color{bleu303}%
+                        \includegraphics[width=\largeurlogovert]
                         {\polylogovert}
                     }
             \end{minipage}%
             %    \end{macrocode}
             \begin{minipage}{0.33\textwidth}
+                \color{bleu303}%
                 \centering\polydatesave{}\\
                 \polyauthorsave{}\\
                 \includegraphics{\polyfiletcourtbleu}
             \end{minipage}%
             \begin{minipage}{0.33\textwidth}
+                    \color{bleu303}%
                     \flushright\raisebox{-0.5\height}
                     {\includegraphics[height=\hauteurlogovert,
                         width=1.75\largeurlogohori,
@@ -415,7 +423,8 @@
 \newcommand{\titlepagelayout}{
         \noindent\makebox[\textwidth][c]{%
           \raisebox{-\totalheight}[0pt][0pt]{%
-        \includegraphics[height=\hauteurlogopage]{\polyarmes}}}
+            \color{bleu303pale}%
+            \includegraphics[height=\hauteurlogopage]{\polyarmes}}}
         \vspace*{0.125\textheight}
         \begin{center}
             \Huge\sffamily\bfseries\color{bleu303}
