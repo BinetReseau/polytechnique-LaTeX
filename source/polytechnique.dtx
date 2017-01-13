@@ -943,13 +943,14 @@ LaTeX version 1999/12/01 or later.
 %    \end{macrocode}
 %Les blocs sont séparés par des ressorts horizontaux. Vient ensuite le bloc central avec le logo de l'X.
 %    \begin{macrocode}
-    \color{bleu303}%
-    \includegraphics[width=\largeurlogovert]{\polylogovert}
+    {\color{bleu303}%
+    \includegraphics[width=\largeurlogovert]{\polylogovert}}
     \hspace*{\fill}%
 %    \end{macrocode}
 %Et pour conclure la première ligne le bloc de droite qui contient la |\date|.
 %    \begin{macrocode}
     \begin{minipage}[b]{\largeurminipage}
+      \color{bleu303}%
         \flushright\hspace{0cm}\polydatesave
     \end{minipage}%
 }
