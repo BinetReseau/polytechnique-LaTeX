@@ -150,6 +150,11 @@
         }
     }
 }
+\newif\ifgrandesmarges
+\grandesmargesfalse
+\DeclareOption{enmanquedinspiration}{
+    \grandesmargestrue
+}
 \DeclareOption*{
     \PassOptionsToPackage{\CurrentOption}{geometry}
 }
@@ -220,6 +225,13 @@
 \setlength{\separationlignestitre}{3mm}
 \newlength{\separationtitrecorps}
 \setlength{\separationtitrecorps}{15mm}
+\ifgrandesmarges
+\setlength\margecote{1.5\margecote}
+\setlength\margehaut{1.2\margehaut}
+\setlength\margebas{1.2\margebas}
+\setlength\margecoteinterieur{1.5\margecoteinterieur}
+\setlength\margecoteexterieur{1.5\margecoteexterieur}
+\fi
 \newlength{\hauteurlogopage}
 \setlength{\hauteurlogopage}{0.6\textheight}
 \newlength{\separationentetelogo}

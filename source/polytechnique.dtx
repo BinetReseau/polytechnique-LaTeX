@@ -396,6 +396,14 @@ LaTeX version 1999/12/01 or later.
 }
 %    \end{macrocode}
 %
+%\paragraph{Grandes marges} Pour les documents trop denses avec les marges standard.
+%    \begin{macrocode}
+\newif\ifgrandesmarges
+\grandesmargesfalse
+\DeclareOption{enmanquedinspiration}{
+    \grandesmargestrue
+}
+%    \end{macrocode}
 %\paragraph{Autres options} Toute option passée au package qui n'est pas dans la liste ci-avant est repassée au package |geometry| (différentes tailles de papier).
 %    \begin{macrocode}
 \DeclareOption*{
@@ -564,6 +572,15 @@ LaTeX version 1999/12/01 or later.
 \setlength{\separationtitrecorps}{15mm}
 %    \end{macrocode}
 %\end{macro}
+%    \begin{macrocode}
+\ifgrandesmarges
+\setlength\margecote{1.5\margecote}
+\setlength\margehaut{1.2\margehaut}
+\setlength\margebas{1.2\margebas}
+\setlength\margecoteinterieur{1.5\margecoteinterieur}
+\setlength\margecoteexterieur{1.5\margecoteexterieur}
+\fi
+%    \end{macrocode}
 %\begin{macro}{\hauteurlogopage}
 %Sur la page de titre de l'option |titlepage|, hauteur de l'image des armes de l'École en arrière-plan.
 %    \begin{macrocode}
