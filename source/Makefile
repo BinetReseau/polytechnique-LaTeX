@@ -24,7 +24,7 @@ MAKEINDEX:=makeindex -q -s gind.ist -o
 OUTPUT:=>/dev/null 2>&1
 PKGDIR:=$(shell kpsewhich --show-path=ls-R | tr : '\n' | grep texmf | grep local | head -n1)
 POLYPKGDIR:=$(PKGDIR)/tex/latex/polytechnique
-DTXFILES:=$(shell find -name '*.dtx')
+DTXFILES:=$(shell find . -name '*.dtx')
 GENFILES:=$(patsubst %.dtx,%.pdf,$(DTXFILES)) $(patsubst %.dtx,%.sty,$(DTXFILES))
 
 all: package
