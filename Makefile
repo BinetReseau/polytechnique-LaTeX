@@ -1,7 +1,7 @@
 .PHONY:all %.all install %.install clean %.clean cleandist %.cleandist release
 
 SUBMAKE:=make -s -C
-SUBMAKABLE:=$(shell find -mindepth 2 -name '[Mm]akefile' | sed 's%^./%%;s%/[^/]*%%')
+SUBMAKABLE:=$(shell find . -mindepth 2 -name '[Mm]akefile' | sed 's%^./%%;s%/[^/]*%%')
 define submake
 	@tput setaf 3
 	@echo make[$1] $2
